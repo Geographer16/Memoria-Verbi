@@ -132,8 +132,7 @@ button:focus-visible{outline:2px solid var(--a1);outline-offset:2px}
 .syns{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin-top:16px}
 .syns span{font-size:13.5px;font-weight:600;padding:5px 10px;border-radius:9px;background:rgba(0,0,0,.25);border:1px solid var(--line)}
 .syns span.hl{background:#fff;color:#140f24}
-.fbtns{display:grid;grid-template-columns:1fr .78fr 1fr;gap:8px}
-.big.skip{background:rgba(255,255,255,.05);color:var(--mute)}
+.fbtns{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .fcount{position:absolute;top:13px;right:14px;display:flex;gap:6px;font-size:12px;font-weight:800}
 .fcount span{padding:4px 8px;border-radius:8px}
 .fcount .k,.fsess .k,.cnt .k{background:rgba(62,224,161,.14);color:#9ff5d2}
@@ -141,7 +140,7 @@ button:focus-visible{outline:2px solid var(--a1);outline-offset:2px}
 .fcount.new{padding:4px 8px;border-radius:8px;background:rgba(255,255,255,.07);color:var(--mute)}
 .fsess,.cnt{display:flex;gap:6px}
 .fsess i,.cnt i{font-style:normal;font-weight:800;font-size:12px;padding:3px 8px;border-radius:8px;background:rgba(255,255,255,.06)}
-.fsum{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:0 0 16px}
+.fsum{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin:0 0 16px}
 .fsum div{padding:12px 6px;border-radius:14px;background:rgba(255,255,255,.05);border:1px solid var(--line)}
 .fsum b{display:block;font-size:24px;font-weight:800}
 .fsum span{font-size:11px;color:var(--mute);font-weight:700;text-transform:uppercase;letter-spacing:.06em}
@@ -207,6 +206,12 @@ kbd{font-family:var(--ui);font-size:10px;padding:2px 5px;border-radius:5px;backg
 .foot{margin-top:40px;text-align:center;font-size:12px;color:var(--mute)}
 .foot button{color:var(--mute);text-decoration:underline;font-size:12px}
 .foot button.armed{color:var(--bad);font-weight:800}
+.fbar{display:none;align-items:center;gap:8px;margin-bottom:12px}
+.fbar .logo{width:34px;height:34px;font-size:17px;border-radius:11px;flex:0 0 auto;box-shadow:none}
+.fscope{flex:1;min-width:0;display:flex;justify-content:space-between;align-items:center;gap:8px;padding:9px 12px;border-radius:12px;background:var(--panel);border:1px solid var(--line);font-size:13px;color:var(--mute);text-align:left}
+.fscope span:first-child{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fscope b{color:var(--text)}
+.fstreak{flex:0 0 auto;font-weight:800;font-size:13px;padding:9px 10px;border-radius:12px;background:var(--panel);border:1px solid var(--line)}
 .scopetoggle{width:100%;display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;background:rgba(0,0,0,.2);border:1px solid var(--line);font-size:13px;color:var(--mute);text-align:left}
 .scopetoggle b{color:var(--text)}
 .chev{transition:transform .25s;font-size:14px;color:var(--text)}
@@ -246,6 +251,11 @@ kbd{font-family:var(--ui);font-size:10px;padding:2px 5px;border-radius:5px;backg
   .tchip{width:calc((100% - 6*5px)/7);height:40px;font-size:14px}
   .scopebar{flex-direction:column;align-items:stretch}
   .scopeact{justify-content:space-between}
+  body.study .top,body.study #scope{display:none}
+  body.study.showscope #scope{display:block;margin-bottom:12px}
+  body.study.showscope .scopetoggle{display:none}
+  body.study.showscope .scopebody{margin-top:0}
+  body.study .fbar{display:flex}
   .tabs{position:fixed;left:0;right:0;bottom:0;margin:0;z-index:20;display:grid;grid-template-columns:repeat(6,1fr);gap:2px;
     padding:6px calc(6px + env(safe-area-inset-right)) calc(6px + env(safe-area-inset-bottom)) calc(6px + env(safe-area-inset-left));
     background:rgba(14,12,26,.94);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-top:1px solid var(--line);overflow:visible}
@@ -271,7 +281,6 @@ kbd{font-family:var(--ui);font-size:10px;padding:2px 5px;border-radius:5px;backg
   .bigword{font-size:clamp(30px,10vw,46px)}
   .swipehint{display:block}
   .big{padding:15px 8px;font-size:14px}
-  .fbtns .big{padding:15px 4px;font-size:13.5px}
   kbd{display:none}
   .qcard{padding:22px 14px;border-radius:20px}
   .opt{padding:14px 12px;font-size:15px;min-height:54px}
@@ -293,6 +302,7 @@ kbd{font-family:var(--ui);font-size:10px;padding:2px 5px;border-radius:5px;backg
     </div>
     <div class="stats" id="stats"></div>
   </div>
+  <div class="fbar" id="fbar"></div>
   <section class="panel" id="scope"></section>
   <nav class="tabs" id="tabs"></nav>
   <main id="view"></main>
@@ -697,6 +707,7 @@ function speak(t){
 function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('show');clearTimeout(t._h);t._h=setTimeout(()=>t.classList.remove('show'),1600)}
 
 function drawStats(){
+  if($('#fbar'))drawFbar();
   const learned=items.filter(i=>mast(i)>=3).length;
   const acc=sessionAll?Math.round(sessionOk/sessionAll*100)+'%':'—';
   $('#stats').innerHTML=`
@@ -751,7 +762,7 @@ function drawTabs(){
   $('#tabs').innerHTML=MODES.map(([m,i,l,sh])=>`<button class="tab ${S.mode===m?'on':''}" onclick="setMode('${m}')"><em>${i}</em><span class="f">${l}</span><span class="s">${sh}</span></button>`).join('');
 }
 function render(){
-  document.body.className=S.type;
+  document.body.className=S.type+(S.mode!=='list'?' study':'')+(scopeSheet?' showscope':'');
   drawStats();drawScope();drawTabs();drawFoot();
   ({list:viewList,flash:viewFlash,meaning:()=>viewQuiz('meaning'),syn:()=>viewQuiz('syn'),odd:()=>viewQuiz('odd'),build:viewBuild})[S.mode]();
 }
@@ -761,7 +772,16 @@ function soloT(id){sel=new Set([id]);saveS();render()}
 function selAll(){sel=new Set(tests.filter(x=>S.type==='mix'||x.type===S.type).map(x=>x.id));saveS();render()}
 function selNone(){sel=new Set();saveS();render()}
 function setWeak(v){S.weak=v;saveS();render()}
-function setMode(m){if(S.mode===m){toView();return}S.mode=m;if(isMobile()&&m!=='list')S.scopeOpen=false;saveS();render();toView()}
+let scopeSheet=false;
+function setMode(m){if(S.mode===m){toView();return}S.mode=m;scopeSheet=false;if(isMobile()&&m!=='list')S.scopeOpen=false;saveS();render();toView()}
+function toggleSheet(){scopeSheet=!scopeSheet;S.scopeOpen=scopeSheet;saveS();render();if(scopeSheet)window.scrollTo({top:0,behavior:'smooth'})}
+function drawFbar(){
+  const {its}=scope();
+  const lab=S.type==='mix'?'Toplu':S.type==='adj'?'Adjectives':'Verbs';
+  $('#fbar').innerHTML=`<div class="logo">M</div>
+    <button class="fscope" onclick="toggleSheet()"><span><b>${lab}</b> · ${sel.size} test · ${its.length} kelime</span><span class="chev ${scopeSheet?'up':''}">▾</span></button>
+    <span class="fstreak">🔥 ${streak}</span>`;
+}
 function emptyState(){
   if(!sel.size) return `<div class="empty"><b>Hiç test seçili değil</b>Yukarıdan çalışmak istediğin testleri seç.</div>`;
   if(S.weak) return `<div class="empty"><b>Zayıf kelimen yok 🎉</b>Bu kapsamda yanlış yaptığın kelime kalmadı. Filtreyi kapatıp devam et.</div>`;
@@ -806,7 +826,7 @@ function viewFlash(){if(!F||F.sig!==sigOf()+S.dir) newDeck();drawFlash()}
 function newDeck(list){
   const {gs,its}=scope();
   if(!list) list=S.dir==='en'?shuffle(its.slice()):shuffle((S.weak?gs.filter(g=>its.some(i=>i.g===g)):gs).slice());
-  F={sig:sigOf()+S.dir,deck:list,i:0,flip:false,know:0,again:0,skip:0,uniq:list.length,unk:new Set(),seen:new Set()};
+  F={sig:sigOf()+S.dir,deck:list,i:0,flip:false,know:0,again:0,uniq:list.length,unk:new Set(),seen:new Set()};
 }
 const fkey=c=>c.items?'grp|'+c.id:c.key;
 function fstat(c,create){const k=fkey(c);if(!P[k]&&create)P[k]={c:0,w:0,s:0};return P[k]||{}}
@@ -828,7 +848,7 @@ function drawFlash(){
     const label=c=>c.items?esc(c.tr):`<b>${esc(c.w)}</b> <span style="color:var(--mute)">· ${esc(c.g.tr)}</span>`;
     $('#view').innerHTML=`<div class="stage">${head}<div class="panel sum"><div class="ring" style="--v:${pct}"><div>${pct}%</div></div>
       <h2>Deste bitti!</h2><p>${F.uniq} kart</p>
-      <div class="fsum"><div class="k"><b>${F.know}</b><span>Biliyorum</span></div><div class="u"><b>${F.again}</b><span>Bilmiyorum</span></div><div><b>${F.skip}</b><span>Geçildi</span></div></div>
+      <div class="fsum"><div class="k"><b>${F.know}</b><span>I know</span></div><div class="u"><b>${F.again}</b><span>I don't know</span></div></div>
       <div class="row"><button class="big primary" onclick="newDeck();drawFlash()">Yeni deste</button>
       ${F.unk.size?`<button class="big again" onclick="newDeck(shuffle([...F.unk]));drawFlash()">Bilmediklerimi tekrar et (${F.unk.size})</button>`:''}</div>
       ${hard.length?`<div class="missed"><div class="qsub" style="text-align:left">En çok zorlandıkların (tüm zamanlar)</div>${hard.map(c=>{const st=fstat(c);
@@ -852,14 +872,13 @@ function drawFlash(){
       <div class="syns">${c.items.map(x=>`<span>${esc(x.w)}</span>`).join('')}</div>`;
   }
   $('#view').innerHTML=`<div class="stage">${head}
-    <div class="meta"><span>Kart <b>${done+1}</b> / ${total}</span><span class="fsess"><i class="k">✓ ${F.know}</i><i class="u">✗ ${F.again}</i><i>⏭ ${F.skip}</i></span></div>
+    <div class="meta"><span>Kart <b>${done+1}</b> / ${total}</span><span class="fsess"><i class="k">✓ ${F.know}</i><i class="u">✗ ${F.again}</i></span></div>
     <div class="bar"><i style="width:${done/total*100}%"></i></div>
     <div class="flash ${F.flip?'flipped':''}" id="fc" onclick="if(!this._sw)flip()"><div class="fin"><div class="face front">${front}</div><div class="face back">${back}</div></div></div>
-    <div class="swipehint">Dokun: çevir · ← sola: bilmiyorum · sağa: biliyorum →</div>
+    <div class="swipehint">Dokun: çevir · ← sola: I don't know · sağa: I know →</div>
     <div class="fbtns">
-      <button class="big again" onclick="grade(false)">✗ Bilmiyorum<kbd>←</kbd></button>
-      <button class="big skip" onclick="skipCard()">Sıradaki ⏭<kbd>↓</kbd></button>
-      <button class="big know" onclick="grade(true)">✓ Biliyorum<kbd>→</kbd></button>
+      <button class="big again" onclick="grade(false)">✗ I don't know<kbd>←</kbd></button>
+      <button class="big know" onclick="grade(true)">✓ I know<kbd>→</kbd></button>
     </div></div>`;
   bindSwipe();
 }
@@ -873,7 +892,6 @@ function grade(ok){
   else{F.again++;F.unk.add(c);F.deck.splice(Math.min(F.deck.length,F.i+3+(Math.random()*3|0)),0,c)}
   F.i++;F.flip=false;drawFlash();
 }
-function skipCard(){F.skip++;F.i++;F.flip=false;drawFlash()}
 function bindSwipe(){
   const el=$('#fc');if(!el)return;
   let x0=0,y0=0,dx=0,down=false,horiz=null;
@@ -1042,8 +1060,7 @@ document.addEventListener('keydown',e=>{
   if(S.mode==='flash'&&F&&F.i<F.deck.length){
     if(e.code==='Space'||e.key==='Enter'){e.preventDefault();flip()}
     else if(e.key==='ArrowLeft'||e.key==='1')grade(false);
-    else if(e.key==='ArrowRight'||e.key==='3')grade(true);
-    else if(e.key==='ArrowDown'||e.key==='2'||e.key==='n'){e.preventDefault();skipCard()}
+    else if(e.key==='ArrowRight'||e.key==='2')grade(true);
   }else if(['meaning','syn','odd'].includes(S.mode)&&Q&&Q.cur&&Q.i<QN){
     const n=parseInt(e.key);
     if(n>=1&&n<=Q.cur.opts.length)answer(n-1);
