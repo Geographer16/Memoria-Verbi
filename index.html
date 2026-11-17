@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0b0a16">
+<title>Kelime Atölyesi — Adjective & Verb Eş Anlamlıları</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700;9..144,800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0b0a16;--panel:rgba(255,255,255,.045);--panel2:rgba(255,255,255,.07);--line:rgba(255,255,255,.09);
+  --text:#eeedf7;--mute:#9b98b6;--a1:#b794ff;--a2:#ff7ab6;--ok:#3ee0a1;--bad:#ff6b81;--warn:#ffc35c;
+  --r:18px;--disp:'Fraunces',Georgia,serif;--ui:'Manrope',system-ui,-apple-system,Segoe UI,sans-serif;
+}
+body.verb{--a1:#4fe0c4;--a2:#5aa8ff}
+body.mix{--a1:#9d8cff;--a2:#4fe0c4}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{
+  font-family:var(--ui);color:var(--text);min-height:100vh;
+  background:var(--bg);
+  -webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%;
+  overscroll-behavior-y:none;
+}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:
+    radial-gradient(1100px 620px at 8% -12%, color-mix(in srgb,var(--a1) 26%,transparent),transparent 62%),
+    radial-gradient(900px 560px at 105% 0%, color-mix(in srgb,var(--a2) 18%,transparent),transparent 60%),
+    radial-gradient(700px 500px at 50% 120%, color-mix(in srgb,var(--a1) 10%,transparent),transparent 70%);
+}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+button:focus-visible{outline:2px solid var(--a1);outline-offset:2px}
+.wrap{max-width:1160px;margin:0 auto;padding:calc(22px + env(safe-area-inset-top)) calc(18px + env(safe-area-inset-right)) 80px calc(18px + env(safe-area-inset-left))}
+.top{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:18px}
+.brand{display:flex;align-items:center;gap:12px}
+.logo{width:44px;height:44px;border-radius:14px;display:grid;place-items:center;font-family:var(--disp);font-weight:800;font-size:22px;
+  background:linear-gradient(135deg,var(--a1),var(--a2));color:#140f24;box-shadow:0 8px 30px -8px var(--a1)}
+.brand h1{font-family:var(--disp);font-weight:700;font-size:26px;margin:0;letter-spacing:-.02em}
+.brand p{margin:2px 0 0;color:var(--mute);font-size:13px}
+.stats{display:flex;gap:10px;flex-wrap:wrap}
+.stat{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:8px 14px;min-width:96px}
+.stat b{display:block;font-size:18px;font-weight:800}
+.stat span{font-size:11px;color:var(--mute);text-transform:uppercase;letter-spacing:.08em}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:16px;backdrop-filter:blur(14px)}
+.seg{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;background:rgba(0,0,0,.25);padding:5px;border-radius:14px;margin-bottom:14px}
+.seg button{padding:10px 8px;border-radius:10px;text-align:center;transition:.2s;color:var(--mute)}
+.seg button b{display:block;font-weight:800;font-size:15px;color:var(--text)}
+.seg button small{font-size:11px}
+.seg button.on{background:linear-gradient(135deg,color-mix(in srgb,var(--a1) 38%,transparent),color-mix(in srgb,var(--a2) 26%,transparent));box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--a1) 60%,transparent)}
+.chiprow{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:8px}
+.rowlab{font-size:10px;font-weight:800;letter-spacing:.14em;color:var(--mute);width:42px}
+.tchip{position:relative;width:40px;height:40px;border-radius:11px;background:rgba(255,255,255,.04);border:1px solid var(--line);font-weight:800;font-size:14px;color:var(--mute);overflow:hidden;transition:.15s}
+.tchip:hover{border-color:color-mix(in srgb,var(--a1) 60%,transparent);color:var(--text)}
+.tchip.on{background:color-mix(in srgb,var(--a1) 22%,transparent);border-color:color-mix(in srgb,var(--a1) 70%,transparent);color:var(--text)}
+.tchip i{position:absolute;left:0;bottom:0;height:3px;width:calc(var(--p)*100%);background:var(--ok)}
+.scopebar{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-top:10px;padding-top:12px;border-top:1px solid var(--line)}
+.scopeact{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.mini{font-size:12px;font-weight:700;padding:7px 11px;border-radius:9px;background:rgba(255,255,255,.06);border:1px solid var(--line)}
+.mini:hover{background:rgba(255,255,255,.1)}
+.sw{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:700;cursor:pointer;user-select:none}
+.sw input{display:none}
+.sw span{width:34px;height:20px;border-radius:20px;background:rgba(255,255,255,.12);position:relative;transition:.2s}
+.sw span::after{content:"";position:absolute;top:3px;left:3px;width:14px;height:14px;border-radius:50%;background:#fff;transition:.2s}
+.sw input:checked+span{background:var(--warn)}
+.sw input:checked+span::after{left:17px}
+.hint{font-size:11px;color:var(--mute);margin-top:4px}
+.tabs{display:flex;gap:6px;margin:18px 0;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:0 0 auto;padding:10px 16px;border-radius:12px;font-weight:700;font-size:14px;color:var(--mute);border:1px solid transparent;transition:.15s;white-space:nowrap}
+.tab:hover{color:var(--text);background:var(--panel)}
+.tab.on{color:var(--text);background:var(--panel2);border-color:var(--line);box-shadow:0 0 0 1px color-mix(in srgb,var(--a1) 35%,transparent) inset}
+.tab em{font-style:normal;margin-right:6px}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px;position:sticky;top:0;z-index:6;padding:10px 0 8px;padding-top:calc(10px + env(safe-area-inset-top));background:linear-gradient(var(--bg) 78%,transparent)}
+.search{flex:1 1 260px;position:relative}
+.search input{width:100%;font-size:16px;padding:12px 14px 12px 40px;border-radius:12px;border:1px solid var(--line);background:rgba(0,0,0,.25);color:var(--text);font:inherit;outline:none}
+.search input:focus{border-color:color-mix(in srgb,var(--a1) 70%,transparent)}
+.search::before{content:"⌕";position:absolute;left:14px;top:50%;transform:translateY(-52%);color:var(--mute);font-size:20px}
+.toggles{display:flex;gap:6px}
+.tg{padding:10px 13px;border-radius:12px;border:1px solid var(--line);font-size:13px;font-weight:700;color:var(--mute);background:rgba(0,0,0,.2)}
+.tg.on{color:#140f24;background:var(--warn);border-color:var(--warn)}
+.th{display:flex;align-items:center;gap:10px;font-family:var(--disp);font-weight:700;font-size:21px;margin:26px 0 12px;letter-spacing:-.01em}
+.th:first-child{margin-top:4px}
+.tbadge{font-family:var(--ui);font-size:10px;font-weight:800;letter-spacing:.12em;padding:4px 7px;border-radius:7px;background:#b794ff33;color:#d5c2ff}
+.tbadge.verb{background:#4fe0c433;color:#a6f3e3}
+.ggrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(265px,1fr));gap:12px}
+.gcard{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:14px;transition:.2s;position:relative;overflow:hidden}
+.gcard::before{content:"";position:absolute;inset:0 0 auto 0;height:3px;background:linear-gradient(90deg,var(--a1),var(--a2));opacity:.65}
+.gcard:hover{border-color:rgba(255,255,255,.18);transform:translateY(-2px)}
+.gcard header{display:flex;align-items:flex-start;gap:10px;margin-bottom:11px}
+.gl{flex:0 0 auto;width:28px;height:28px;border-radius:9px;display:grid;place-items:center;font-weight:800;font-size:13px;background:linear-gradient(135deg,var(--a1),var(--a2));color:#140f24}
+.gl.sm{width:22px;height:22px;font-size:11px;border-radius:7px}
+.gcard h4{margin:3px 0 0;font-size:13.5px;font-weight:800;letter-spacing:.03em;line-height:1.35;flex:1}
+.gc{font-size:11px;color:var(--mute);font-weight:700;margin-top:5px}
+.wl{display:flex;flex-wrap:wrap;gap:6px}
+.wchip{font-size:13.5px;font-weight:600;padding:6px 10px 6px 20px;border-radius:9px;background:rgba(255,255,255,.055);border:1px solid var(--line);position:relative;transition:.15s;text-align:left}
+.wchip::before{content:"";position:absolute;left:8px;top:50%;width:6px;height:6px;margin-top:-3px;border-radius:50%;background:rgba(255,255,255,.22)}
+.wchip.m1::before{background:var(--warn)}
+.wchip.m2::before{background:var(--ok);box-shadow:0 0 8px var(--ok)}
+.wchip:hover{background:rgba(255,255,255,.1)}
+.wchip sup{color:var(--warn);margin-left:1px}
+.wchip.hit{background:color-mix(in srgb,var(--a1) 30%,transparent);border-color:var(--a1)}
+.cover{filter:blur(6px);user-select:none;cursor:pointer}
+.cover:hover{filter:blur(4px)}
+.note{font-size:12px;color:#ffdba0;margin-top:9px;padding:7px 10px;border-radius:9px;background:rgba(255,195,92,.08);border:1px dashed rgba(255,195,92,.3)}
+.note b{color:var(--warn)}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--mute);margin:-4px 0 12px}
+.legend i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;background:rgba(255,255,255,.22)}
+.stage{max-width:760px;margin:0 auto}
+.bar{height:6px;border-radius:6px;background:rgba(255,255,255,.08);overflow:hidden;margin-bottom:14px}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--a1),var(--a2));transition:width .35s}
+.meta{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--mute);margin-bottom:10px;gap:10px;flex-wrap:wrap}
+.meta b{color:var(--text)}
+.flash{perspective:1400px;cursor:pointer;margin-bottom:16px;touch-action:pan-y;user-select:none;-webkit-user-select:none;transition:transform .22s ease}
+.flash.sw-ok .face{box-shadow:0 0 0 2px var(--ok),0 20px 50px -20px var(--ok)}
+.flash.sw-no .face{box-shadow:0 0 0 2px var(--bad),0 20px 50px -20px var(--bad)}
+.swipehint{display:none;text-align:center;font-size:12px;color:var(--mute);margin:-6px 0 12px}
+.fin{position:relative;height:min(340px,56vh);min-height:250px;transition:transform .55s cubic-bezier(.2,.8,.2,1);transform-style:preserve-3d}
+.flash.flipped .fin{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;border-radius:24px;backface-visibility:hidden;-webkit-backface-visibility:hidden;padding:26px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;border:1px solid var(--line);overflow:auto}
+.front{background:linear-gradient(160deg,rgba(255,255,255,.08),rgba(255,255,255,.02)),var(--bg);box-shadow:0 30px 60px -30px color-mix(in srgb,var(--a1) 60%,transparent)}
+.back{transform:rotateY(180deg);background:linear-gradient(160deg,color-mix(in srgb,var(--a1) 22%,transparent),color-mix(in srgb,var(--a2) 14%,transparent)),var(--bg)}
+.ftag{position:absolute;top:16px;left:18px;font-size:11px;font-weight:800;letter-spacing:.12em;color:var(--mute)}
+.fhint{position:absolute;bottom:14px;font-size:12px;color:var(--mute)}
+.bigword{font-family:var(--disp);font-size:clamp(34px,7vw,58px);font-weight:700;letter-spacing:-.02em;line-height:1.05}
+.bigtr{font-size:clamp(18px,3.4vw,26px);font-weight:800;letter-spacing:.03em;line-height:1.3}
+.speak{margin-top:14px;width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.08);border:1px solid var(--line);font-size:18px}
+.speak:hover{background:rgba(255,255,255,.15)}
+.syns{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin-top:16px}
+.syns span{font-size:13.5px;font-weight:600;padding:5px 10px;border-radius:9px;background:rgba(0,0,0,.25);border:1px solid var(--line)}
+.syns span.hl{background:#fff;color:#140f24}
+.fbtns{display:grid;grid-template-columns:1fr .78fr 1fr;gap:8px}
+.big.skip{background:rgba(255,255,255,.05);color:var(--mute)}
+.fcount{position:absolute;top:13px;right:14px;display:flex;gap:6px;font-size:12px;font-weight:800}
+.fcount span{padding:4px 8px;border-radius:8px}
+.fcount .k,.fsess .k,.cnt .k{background:rgba(62,224,161,.14);color:#9ff5d2}
+.fcount .u,.fsess .u,.cnt .u{background:rgba(255,107,129,.14);color:#ffb3c0}
+.fcount.new{padding:4px 8px;border-radius:8px;background:rgba(255,255,255,.07);color:var(--mute)}
+.fsess,.cnt{display:flex;gap:6px}
+.fsess i,.cnt i{font-style:normal;font-weight:800;font-size:12px;padding:3px 8px;border-radius:8px;background:rgba(255,255,255,.06)}
+.fsum{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:0 0 16px}
+.fsum div{padding:12px 6px;border-radius:14px;background:rgba(255,255,255,.05);border:1px solid var(--line)}
+.fsum b{display:block;font-size:24px;font-weight:800}
+.fsum span{font-size:11px;color:var(--mute);font-weight:700;text-transform:uppercase;letter-spacing:.06em}
+.fsum .k b{color:var(--ok)}.fsum .u b{color:var(--bad)}
+.hrow{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;background:rgba(0,0,0,.22);border:1px solid var(--line);font-size:13.5px}
+.big{padding:15px;border-radius:15px;font-weight:800;font-size:15px;border:1px solid var(--line);transition:.15s}
+.big.again{background:rgba(255,107,129,.12);border-color:rgba(255,107,129,.4);color:#ffb3c0}
+.big.know{background:rgba(62,224,161,.12);border-color:rgba(62,224,161,.4);color:#9ff5d2}
+.big:hover{transform:translateY(-1px);filter:brightness(1.2)}
+.big.primary{background:linear-gradient(135deg,var(--a1),var(--a2));color:#140f24;border:0}
+kbd{font-family:var(--ui);font-size:10px;padding:2px 5px;border-radius:5px;background:rgba(255,255,255,.1);margin-left:6px;opacity:.7}
+.qcard{background:var(--panel);border:1px solid var(--line);border-radius:24px;padding:28px 22px;text-align:center;margin-bottom:14px;position:relative}
+.qsub{font-size:13px;color:var(--mute);font-weight:700;letter-spacing:.04em;margin-top:10px}
+.qline{font-family:var(--disp);font-size:clamp(24px,5vw,36px);font-weight:600}
+.qline b{background:linear-gradient(135deg,var(--a1),var(--a2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.opts{display:grid;gap:9px}
+.opt{display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:14px;background:var(--panel);border:1px solid var(--line);text-align:left;font-weight:700;font-size:15px;transition:.15s}
+.opt:hover:not([disabled]){background:var(--panel2);border-color:rgba(255,255,255,.2);transform:translateX(2px)}
+.opt .k{flex:0 0 auto;width:28px;height:28px;border-radius:8px;display:grid;place-items:center;background:rgba(255,255,255,.08);font-size:12px;font-weight:800;color:var(--mute)}
+.opt.good{background:rgba(62,224,161,.14);border-color:var(--ok)}
+.opt.good .k{background:var(--ok);color:#06281b}
+.opt.badc{background:rgba(255,107,129,.14);border-color:var(--bad)}
+.opt.badc .k{background:var(--bad);color:#2b0710}
+.opt[disabled]{cursor:default}
+.opt.dim{opacity:.5}
+.explain{margin-top:14px;display:grid;gap:8px;animation:up .3s ease}
+@keyframes up{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.verdict{font-weight:800;font-size:15px;padding:12px 14px;border-radius:12px}
+.verdict.ok{background:rgba(62,224,161,.12);color:#9ff5d2}
+.verdict.no{background:rgba(255,107,129,.12);color:#ffb3c0}
+.mini-g{background:rgba(0,0,0,.22);border:1px solid var(--line);border-radius:14px;padding:12px;text-align:left}
+.mg-h{display:flex;align-items:center;gap:8px;font-weight:800;font-size:13px;letter-spacing:.03em;margin-bottom:8px}
+.mg-h em{margin-left:auto;font-style:normal;font-size:11px;color:var(--mute);font-weight:700}
+.mg-w{display:flex;flex-wrap:wrap;gap:5px}
+.mg-w span{font-size:12.5px;font-weight:600;padding:4px 8px;border-radius:7px;background:rgba(255,255,255,.06)}
+.mg-w span.hl{background:#fff;color:#140f24}
+.row{display:flex;gap:10px;margin-top:14px}
+.row>*{flex:1}
+.bchips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:6px 0 16px}
+.bchip{padding:11px 15px;border-radius:12px;background:var(--panel);border:1px solid var(--line);font-weight:700;font-size:14.5px;transition:.15s}
+.bchip:hover{border-color:rgba(255,255,255,.25)}
+.bchip.sel{background:color-mix(in srgb,var(--a1) 30%,transparent);border-color:var(--a1)}
+.bchip.good{background:rgba(62,224,161,.16);border-color:var(--ok)}
+.bchip.bad{background:rgba(255,107,129,.16);border-color:var(--bad);text-decoration:line-through}
+.wrongs{background:rgba(255,107,129,.07);border:1px solid rgba(255,107,129,.3);border-radius:14px;padding:12px;display:grid;gap:8px;text-align:left}
+.wrongs .wh{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#ffb3c0}
+.wi{display:grid;grid-template-columns:minmax(90px,36%) 1fr;gap:10px;align-items:baseline;font-size:13.5px}
+.wi b{color:#ffb3c0}
+#nextBtn,.stickybtn{scroll-margin-bottom:calc(100px + env(safe-area-inset-bottom))}
+#view{margin-top:14px}
+.wi span{font-weight:700;letter-spacing:.02em;color:var(--text)}
+.wi em{font-style:normal;font-size:10.5px;color:var(--mute);margin-left:4px}
+.bchip.miss{border:1.5px dashed var(--warn);color:#ffdba0}
+.sum{text-align:center;padding:30px 20px}
+.ring{width:150px;height:150px;border-radius:50%;margin:0 auto 18px;display:grid;place-items:center;
+  background:conic-gradient(var(--ok) calc(var(--v)*1%),rgba(255,255,255,.08) 0)}
+.ring div{width:122px;height:122px;border-radius:50%;background:var(--bg);display:grid;place-items:center;font-family:var(--disp);font-size:36px;font-weight:800}
+.sum h2{font-family:var(--disp);font-size:28px;margin:0 0 6px}
+.sum p{color:var(--mute);margin:0 0 18px}
+.missed{display:grid;gap:8px;margin:18px 0;text-align:left}
+.empty{text-align:center;padding:50px 20px;color:var(--mute)}
+.empty b{display:block;font-family:var(--disp);font-size:24px;color:var(--text);margin-bottom:6px}
+.foot{margin-top:40px;text-align:center;font-size:12px;color:var(--mute)}
+.foot button{color:var(--mute);text-decoration:underline;font-size:12px}
+.foot button.armed{color:var(--bad);font-weight:800}
+.scopetoggle{width:100%;display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;background:rgba(0,0,0,.2);border:1px solid var(--line);font-size:13px;color:var(--mute);text-align:left}
+.scopetoggle b{color:var(--text)}
+.chev{transition:transform .25s;font-size:14px;color:var(--text)}
+.chev.up{transform:rotate(180deg)}
+.scopebody{margin-top:12px;animation:up .25s ease}
+.tab .s{display:none}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom));z-index:40;transform:translateX(-50%) translateY(20px);opacity:0;background:#1d1a30;border:1px solid var(--line);padding:10px 16px;border-radius:12px;font-weight:700;font-size:13px;transition:.3s;pointer-events:none;z-index:9}
+.toast.show{opacity:1;transform:translateX(-50%)}
+@media (hover:none){
+  .gcard:hover{transform:none;border-color:var(--line)}
+  .big:hover{transform:none;filter:none}
+  .opt:hover:not([disabled]){transform:none;background:var(--panel);border-color:var(--line)}
+  .tab:hover{background:none;color:var(--mute)}
+  .tab.on:hover{background:var(--panel2);color:var(--text)}
+  .cover:hover{filter:blur(6px)}
+  .wchip:hover{background:rgba(255,255,255,.055)}
+  .tchip:hover{border-color:var(--line);color:var(--mute)}
+  .tchip.on:hover{border-color:color-mix(in srgb,var(--a1) 70%,transparent);color:var(--text)}
+  .big:active,.opt:active:not([disabled]),.bchip:active,.wchip:active,.tchip:active,.mini:active{transform:scale(.97)}
+}
+@media (max-width:620px){
+  .wrap{padding:calc(14px + env(safe-area-inset-top)) calc(12px + env(safe-area-inset-right)) calc(96px + env(safe-area-inset-bottom)) calc(12px + env(safe-area-inset-left))}
+  .top{gap:10px;margin-bottom:12px}
+  .brand p{display:none}
+  .brand h1{font-size:20px}
+  .logo{width:38px;height:38px;font-size:19px;border-radius:12px}
+  .stats{width:100%;gap:6px}
+  .stat{min-width:0;flex:1;padding:6px 9px;border-radius:12px}
+  .stat b{font-size:15px}
+  .stat span{font-size:9.5px;letter-spacing:.05em}
+  .panel{padding:12px;backdrop-filter:none;border-radius:16px}
+  .seg{margin-bottom:10px}
+  .seg button{padding:9px 4px}
+  .seg button b{font-size:14px}
+  .seg button small{display:none}
+  .rowlab{width:100%;margin-bottom:2px}
+  .chiprow{gap:5px}
+  .tchip{width:calc((100% - 6*5px)/7);height:40px;font-size:14px}
+  .scopebar{flex-direction:column;align-items:stretch}
+  .scopeact{justify-content:space-between}
+  .tabs{position:fixed;left:0;right:0;bottom:0;margin:0;z-index:20;display:grid;grid-template-columns:repeat(6,1fr);gap:2px;
+    padding:6px calc(6px + env(safe-area-inset-right)) calc(6px + env(safe-area-inset-bottom)) calc(6px + env(safe-area-inset-left));
+    background:rgba(14,12,26,.94);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-top:1px solid var(--line);overflow:visible}
+  .tab{display:flex;flex-direction:column;align-items:center;gap:3px;padding:7px 2px;font-size:10.5px;border-radius:12px;border:0}
+  .tab em{margin:0;font-size:20px;line-height:1}
+  .tab .f{display:none}.tab .s{display:block}
+  .tab.on{box-shadow:none;background:color-mix(in srgb,var(--a1) 22%,transparent)}
+  .toolbar{margin:0 -12px 10px;padding-left:12px;padding-right:12px}
+  .toggles{width:100%}
+  .tg{flex:1;padding:10px 6px;font-size:12.5px}
+  .legend{gap:10px;font-size:11px}
+  .th{font-size:18px;margin:20px 0 10px}
+  .ggrid{grid-template-columns:1fr;gap:10px}
+  .gcard{padding:12px}
+  .wchip{font-size:14px;padding:8px 11px 8px 21px}
+  .fhead .seg{width:auto!important;flex:1}
+  .qcard .ftag{position:static;display:block;margin-bottom:8px}
+  .fin{height:min(300px,46vh)}
+  #view{margin-top:4px}
+  .opt{min-height:50px!important;padding:11px 12px!important}
+  .opts{gap:7px}
+  .face{padding:20px 16px;border-radius:20px}
+  .bigword{font-size:clamp(30px,10vw,46px)}
+  .swipehint{display:block}
+  .big{padding:15px 8px;font-size:14px}
+  .fbtns .big{padding:15px 4px;font-size:13.5px}
+  kbd{display:none}
+  .qcard{padding:22px 14px;border-radius:20px}
+  .opt{padding:14px 12px;font-size:15px;min-height:54px}
+  .bchip{padding:11px 13px;font-size:14.5px}
+  .row{flex-direction:column}
+  .sum{padding:22px 8px}
+  .ring{width:128px;height:128px}.ring div{width:104px;height:104px;font-size:30px}
+  .stickybtn{position:sticky;bottom:calc(76px + env(safe-area-inset-bottom));width:100%;box-shadow:0 10px 30px -10px #000}
+  .toast{bottom:calc(86px + env(safe-area-inset-bottom))}
+}
+</style>
+</head>
+<body class="adj">
+<div class="wrap">
+  <div class="top">
+    <div class="brand">
+      <div class="logo">K</div>
+      <div><h1>Kelime Atölyesi</h1><p>Adjective &amp; Verb eş anlamlı grupları</p></div>
+    </div>
+    <div class="stats" id="stats"></div>
+  </div>
+  <section class="panel" id="scope"></section>
+  <nav class="tabs" id="tabs"></nav>
+  <main id="view"></main>
+  <div class="foot" id="foot"></div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+const RAW = `
+#adj 1
+ÖNEMLİ - HAYATİ|Important;Significant;Critical;Vital;Crucial;Paramount*;Principal*;Central;Pivotal
+GEREKLİ - ESAS - TEMEL*|Necessary;Essential;Fundamental;Required;Basic*;Primary*;Indispensable*;Prerequisite
+TUHAF - SIRADIŞI - GARİP|Strange;Unusual;Odd;Weird;Bizarre;Abnormal;Uncommon;Peculiar
+BÜYÜK - DEV - DEVASA|Massive;Huge;Vast;Immense;Giant;Gigantic;Enormous;Tremendous;Colossal;Mighty*
+ZORUNLU - MECBURİ|Compulsory;Mandatory;Obligatory;Enforced;Required;Imperative
+ANİ - ACİL|Sudden;Abrupt;Hasty;Urgent
+YAKIN|Immediate;Close;Approaching;Near
+İSTİKRARLI - TUTARLI - SABİT*|Steady;Stable;Consistent*;Fixed*;Persistent;Constant;Regular*
+BOL - ÇOK - SAYISIZ|Abundant;Numerous;Plenty;Plentiful;Ample;Considerable*;Substantial*;Copious
+MUHTEŞEM - HARİKA - ÇARPICI - MÜKEMMEL|Amazing;Astonishing;Beautiful;Breath-taking;Brilliant;Fabulous;Fascinating;Great;Impressive;Magnificent;Outstanding;Picturesque;Remarkable;Striking;Stunning;Wonderful;Spectacular;Charming;Alluring;Marvellous
+#adj 2
+TEHLİKELİ - ZARARLI|Hazardous;Harmful;Detrimental;Perilous;Malignant;Malicious
+ZARARSIZ - İYİ - SAF|Harmless;Benign;Kind;Gentle;Helpful;Innocent;Naive
+YETENEKLİ - BECERİKLİ - HÜNERLİ|Talented;Gifted;Skilful;Capable;Proficient;Versatile*;Competent
+MEŞHUR - ÜNLÜ - TANINMIŞ - SEÇKİN|Famous for;Notable for;Well-known for;Renowned for;Celebrated;Leading;Prominent;Distinguished;Prestigious;Illustrious;Eminent;Distinct
+NAMI KÖTÜYE ÇIKMIŞ|Notorious for;Infamous for
+KÂRLI - KAZANÇLI|Lucrative;Profitable;Gainful;Fruitful;Successful;Profit-making;Thriving*;Flourishing*
+DEVAM EDEN - KESİNTİSİZ - SÜREKLİ|Recurrent;Repeated / Repeating;Ongoing;Continuous;Non-stop;Uninterrupted
+AZ - KÜÇÜK - UFAK - GÖZE ÇARPMAYAN*|Little;Few;Small;Tiny;Meagre;Minor;Slight;Slim;Subtle*
+ÖNEMSİZ - DEĞERSİZ|Negligible;Trivial;Insignificant;Unimportant
+DEĞERLİ - KIYMETLİ|Valuable;Invaluable;Precious;Priceless;Irreplaceable;Inestimable*;Incalculable*
+#adj 3
+ZENGİN - VARLIKLI|Prosperous;Wealthy;Rich;Affluent;Well-off;Flourishing*;Thriving*;Blooming*
+HIZLI - ÇABUK|Instant;Quick;Rapid;Fast;Swift;Prompt
+ÇEŞİTLİ - TÜRLÜ - FARKLI|Various;Varied;Diverse;Divergent;Assorted;Miscellaneous;Separate*;Versatile*;Different*
+YENİ - EŞİ GÖRÜLMEMİŞ - BENZERSİZ|Novel;Innovative;New*;Fresh;Latest;Unique;Unprecedented;Unparalleled;Unrivalled;Unmatched;Matchless
+İSTENMEYEN - OLUMSUZ - ZARARLI|Adverse;Harmful;Damaging;Negative;Destructive;Detrimental;Disadvantageous
+DERİN - BÜYÜK*|Deep;Bottomless;Profound (impact)*
+TARAFSIZ - NESNEL|Neutral;Impartial;Unbiased;Unprejudiced;Objective;Fair
+KAYITSIZ - İLGİSİZ - TEPKİSİZ|Indifferent to;Overlooking;Neglecting;Unconcerned;Insensitive to;Unresponsive;Untouched by*
+DİKKATLİ - TİTİZ|Careful;Cautious;Watchful;Alert;Meticulous;Attentive
+GEÇİCİ - KISA - TEK KULLANIMLIK*|Temporary;Momentary;Brief;Interim;Tentative;Disposable (product)*
+#adj 4
+AÇIK - NET - GÖRÜLÜR - BELİRGİN|Clear;Explicit;Apparent;Obvious;Evident;Transparent;Lucid
+DÜŞMANCIL - KAVGACI|Hostile;Aggressive;Antagonistic;Belligerent;Inhospitable
+RASTGELE - KAZARA|Random;Haphazard;Accidental;Incidental;Arbitrary
+FAKİR - PARASIZ - YOKSUL|Poor;Impoverished;Underfunded;Broke;Needy
+MÜTEVAZI - ORTALAMA|Humble;Moderate;Modest;Average
+GERÇEK - HAKİKİ - ORİJİNAL|Real;Actual;True;Genuine;Authentic;Original;Unique*
+ENDİŞELİ - KAYGILI|Concerned;Worried;Nervous;Anxious;Apprehensive;Fearful;Distressed;Disturbed;Uneasy (about)
+ÖNYARGILI - TARAF TUTAN|Prejudiced;Biased;One-sided;Partial*
+TEHLİKELİ - RİSKLİ|Dangerous;Risky;Unsafe;Perilous
+MANTIKLI - MAKUL - AKLA YATKIN|Reasonable;Logical;Rational;Acceptable;Plausible;Sensible;Practical;Sound*
+#adj 5
+BELİRSİZ|Vague;Ambiguous;Unclear;Obscure;Implicit;Blurred;Opaque
+ZOR - GÜÇ|Difficult;Hard;Challenging;Demanding;Tough;Tricky;Laborious
+VERİMLİ - BEREKETLİ - ÜRETKEN|Fertile;Fruitful;Productive;Prolific;Arable (land);Lush
+GEÇERLİ|Valid;Legitimate;Applicable;Solid*
+GEÇERSİZ - BOŞ|Invalid;Hollow;Null;Void
+GAYRİMEŞRU|Illegitimate
+ZAYIF - KORUNMASIZ - KIRILGAN|Weak;Fragile;Vulnerable to;Prone to;Susceptible to;Delicate
+TOPLU - ORTAK - KARŞILIKLI|Collective;Common;Combined;Public;Communal;Joint;Cooperative;Unanimous;Shared;Mutual
+İSTEKLİ - HEVESLİ|Eager to;Willing to;Keen on sth / to do sth;Enthusiastic;Avid
+ETRAFLI - KAPSAMLI - DETAYLI|Comprehensive;Extensive;Inclusive;Thorough;Large-scale;Wide-ranging;Sophisticated;Complicated;Far-reaching*
+#adj 6
+SAVUNMASIZ - HASSAS|Open to sth{bir şeye açık};Sensitive to;Helpless;Defenceless;Unprotected;Unarmed
+İSTENMEYEN - KÖTÜ|Bad;Bitter;Adverse;Unfavourable;Unwanted;Unintended;Unpleasant;Dire;Side (effect)*
+DOĞUŞTAN GELEN - KALITIMSAL|Natural;Innate;Inborn;Hereditary;Inherited;Inherent;Instinctive;Native*;Intuitive
+ZİHİNSEL - BİLİŞSEL|Mental;Cognitive;Psychological;Intellectual;Notional
+KIT - YETERSİZ - SEYREK - YOK|Scarce;Scant;Rare;Short of;Lack of;Deprived of;Devoid of;Deficient in;Inadequate;Sporadic;Absent;Sparse*
+GÜVENİLİR - EMİN|Credible;Creditable;Dependable;Reliable;Trustworthy
+CİDDİ - VAHİM|Serious;Weighty;Grave;Severe*{aşırı anlamında da kullanılır}
+DEMODE - ESKİ - ZAMANI GEÇMİŞ|Obsolete;Out-of-date;Out-of-fashion;Outmoded;Outdated;Overdue;Expired;Old*;Redundant*{fazla olduğu için gereksiz}
+BASKIN - GÜÇLÜ - SAĞLAM|Superior;Dominant;Powerful;Controlling;Influential;Strong;Assertive;Mighty;Robust;Vigorous
+İLKEL - ESKİ|Ancient;Antique;Old;Primitive;Primal;Primeval;Archaic;Original;Earliest*
+#adj 7
+KATI - SOMUT - ELLE TUTULUR|Solid;Firm;Rigid;Austere (measure);Stern;Hard;Concrete;Factual;Tangible;Empirical (science)
+ASİL - SOYLU|Noble;Royal;Regal;Highborn;Imperial
+UYGUN - MÜSAİT|Appropriate;Suitable;Convenient;Proper;Fitting;Right
+UYGUN OLMAYAN - ELVERİŞSİZ|Inappropriate;Unsuitable;Inconvenient;Improper;Unfitting
+İKNA EDİCİ - TATMİNKÂR - İNANDIRICI|Convincing;Persuasive;Compelling;Conclusive;Satisfying / Satisfactory
+SUSUZ - ÇORAK - VERİMSİZ|Arid;Dry;Waterless;Infertile;Barren
+FAYDASIZ - İŞE YARAMAZ|Useless;Pointless;Meaningless;Futile;Vain;In vain;Fruitless;Ineffective;Inefficient;Idle
+AYRI - FARKLI - BİREYSEL*|Separate;Distinct;Distinctive;Different;Disparate;Single*;Individual*
+EĞLENCELİ - ESPRİLİ - MİZAHİ|Amusing;Fun;Funny;Humorous;Entertaining
+SINIRSIZ - SONSUZ - DAİMİ*|Endless;Boundless;Bottomless;Infinite;Unlimited / Limitless;Eternal*;Perpetual*;Permanent*
+#adj 8
+KARŞILIKLI - ORTAK|Mutual;Reciprocal;Dual;Joint;Bilateral
+YETERLİ - KÂFİ|Sufficient;Adequate;Enough;Satisfactory
+İSTEKSİZ - GÖNÜLSÜZ|Unwilling;Reluctant
+ANA - TEMEL|Prime;Main;Primary;Chief;Principal;Major;Mainstream;Premier
+HAYALİ - KURGUSAL - SANAL|Fictional;Fictitious;Imaginary;Fabricated{uydurma};Unreal;Virtual;Non-existing;Illusory
+YENİLMEZ|Invincible;Unbeatable
+TEMEL - İLK|Basic;Fundamental;Initial;Preliminary;First;Preparatory*;Introductory*
+ÜZÜCÜ - RAHATSIZ EDİCİ|Sad;Upsetting;Disappointing;Frustrating;Disturbing;Distressing;Depressing;Annoying;Bothering;Irritating
+BEDENSEL|Bodily;Physical;Somatic;Corporal*
+DEĞİŞKEN - İSTİKRARSIZ|Changeable;Variable;Volatile;Fluctuating;Unsteady;Unstable;Inconsistent
+#adj 9
+FENA - KORKUNÇ - BERBAT|Wicked;Awful;Disgusting;Terrible;Horrible;Dreadful;Evil
+ZEKİ - DAHİ - AKILLI|Intelligent;Clever;Smart;Genius;Ingenious;Wise;Bright;Brilliant
+ÇEKİCİ - CAZİP - ÜMİT VEREN|Attractive;Tempting;Alluring;Seductive;Charming;Appealing;Promising;Hopeful;Encouraging*;Heartening*
+ALAYCI - GÜLÜNÇ - SAÇMA|Mocking;Satirical;Scornful;Ridiculous;Silly;Foolish;Absurd;Nonsense
+GELENEKSEL|Customary;Habitual;Traditional;Conventional;Established;Usual
+YARATICI|Creative;Inventive;Innovative;Imaginative
+ÖZNEL - SUBJEKTİF|Subjective;Biased*;Personal
+SADE - BASİT|Simple;Effortless;Uncomplicated;Straightforward;Plain;Pure
+TİCARİ|Commercial;Monetary;Marketable
+ETKİLİ|Effective;Effectual
+#adj 10
+ÖNCEKİ - ESKİ|Prior;Preceding;Before;Earlier;Previous;Former;Antecedent
+FAYDALI - YARARLI|Beneficial;Helpful;Useful;Fruitful
+SAF - DOĞAL|Pure;Unmixed;Natural;Simple*
+GÖĞE AİT|Celestial (body);Heavenly;Divine;Extra-terrestrial
+YERE AİT|Terrestrial;Earthly;Worldly
+YATKIN - MEYİLLİ|Apt to;Inclined to do;Predisposed to
+KAÇINILMAZ|Inevitable;Unavoidable;Inescapable
+KESİN|Certain;Conclusive;Decisive;Definite
+SON - NİHAİ|Last;Final;Eventual;Ultimate
+SIRA DIŞI - İSTİSNAİ|Extraordinary;Exceptional;Outstanding;Unusual*
+AŞIRI|Extreme;Acute;Excessive;Exceeding;Severe
+ŞÜPHECİ - ŞÜPHELİ - TEREDDÜTLÜ|Doubtful;In doubt;Dubious;Uncertain;Unsure;Suspicious;Cynical;Hesitant;Indecisive
+#adj 11
+YAYGIN|Common*;Commonplace;Prevalent;Prevailing;Widespread;Universal;Popular;Rampant
+GERGİN - KAYGILI - ATEŞLİ|Anxious;Nervous;Tense;Restless;Apprehensive;Agitated;Feverish (debate);Heated (debate)
+ADAMIŞ - ADANMIŞ|Devoted (to);Committed (to);Dedicated (to)
+AYNI - TIPKI|Identical (to);Same (as);Duplicate;Equivalent (to);Matching;Uniform
+BENZER|Akin (to);Alike;Corresponding;Resembling;Similar (to);Counterpart;Indistinguishable
+OLASI - MÜMKÜN|Probable;Likely (to);Possible;Potential;Prospective
+PARLAYAN - CANLI|Shining;Luminous;Lively;Vibrant;Visible;Vivid
+İNANILMAZ - ANLAŞILMAZ|Unintelligible;Incomprehensible;Inconceivable
+UZUN - UZATILMIŞ|Tall;Long;Lengthy;Long-term;Lengthened;Prolonged;Extended
+YIKICI|Destructive;Devastating;Damaging;Catastrophic;Disruptive
+#adj 12
+UYUMLU|Harmonious;Compatible with;Matching;Coordinated;In line with;In harmony with;In alignment with
+UYUMSUZ|Mismatched;Incompatible with;Inharmonious;Unmatching;Unsuited;At odds with*
+UCUZ - EKONOMİK|Cheap;Economical;Inexpensive;Affordable;Reasonable*;Cost-effective
+GÖSTERİŞLİ|Showy;Ostentatious;Pretentious;Flamboyant
+ACİL - İVEDİ|Urgent;Critical;Immediate;Instant
+MEVCUT - BOŞ - MÜSAİT|Existing;Existent;Available;Accessible;Present;Open*;Vacant*
+VAKTİNDE - DAKİK|Timely;Punctual
+EZİCİ SAYIDA - SAYISIZ|Overwhelming (majority);Innumerable;Inestimable;Incalculable;Numerous;Countless
+DAYANIKLI - KALICI - ESNEK|Durable;Enduring;Lasting;Long-lasting;Resilient;Strong
+ENGELLEYİCİ|Obstructive;Hindering;Impeding;Hampering;Inhibitive;Deterrent
+#adj 13
+ARTAN - YÜKSELEN|Increasing;Rising;Growing;Booming;Ascending;Escalating;Mounting;Soaring
+AZALAN - DÜŞEN|Falling;Decreasing;Lessening;Diminishing;Reducing;Descending
+İMKANSIZ - MUHTEMEL OLMAYAN|Impossible;Improbable;Unlikely to;Impractical*;Unfeasible*
+KAYDA DEĞER|Remarkable;Noteworthy;Significant;Notable;Striking;Marked
+SİNİRLİ - SALDIRGAN|Angry;Furious;Enraged;Aggressive;Belligerent
+EŞİT - DENK|Even;Equal;Equivalent;Synonymous;Twin
+ALAKALI - -E DAİR|Relevant;Related;Concerning;Regarding;Connected with;Linked with;Associated with;As to{= about};Pertaining to
+ALAKASIZ|Irrelevant;Unrelated
+YASAL|Legal;Legitimate;Licit
+YASADIŞI|Illegal;Illegitimate;Illicit
+ÖLÜMLÜ - ÖLÜMSÜZ|Mortal;Immortal
+#adj 14
+HÜSRANA UĞRAMIŞ|Disappointed;Frustrated;Disheartened;Upset
+ÜZÜNTÜ VERİCİ|Disappointing;Frustrating;Disheartening;Upsetting;Worrisome;Distressing
+KIZMIŞ - RAHATSIZ OLMUŞ|Annoyed;Bothered;Irritated;Offended
+COŞKULU - NEŞELİ|Jubilant;Joyous;Vibrant;Cheerful
+UZAK - ULAŞMASI ZOR|Far;Faraway;Remote;Distant;Inaccessible;Isolated
+YAKIN|Close;Near;Nearby;Proximate
+TARTIŞMALI|Controversial;Questionable;Disputed;Equivocal*;Confusing*
+SAVURGAN|Extravagant;Overgenerous;Wasteful;Lavish
+ILIMLI - ORTA KARAR|Moderate
+MÜTEVAZI|Modest*;Humble*;Mild*
+DELİ - ÇILGIN|Insane;Crazy;Mad
+#adj 15
+ISRARLI - KARARLI|Insistent (on);Persistent (in);Determined (to)
+İNATÇI|Stubborn*;Obstinate*
+YABANCI - UZAYLI|Alien;Foreign(er);Unfamiliar;Exotic;Extraterrestrial
+İYİMSER|Optimistic;Hopeful;Positive
+KÖTÜMSER - KASVETLİ|Pessimistic;Negative;Gloomy;Hopeless
+EŞSİZ - ÖZGÜN - GERÇEK|Unique;One-of-a-kind;Original;Real*;Authentic;Irreplaceable*;Genuine
+ASİ - İSYANKAR|Rebellious;Insurgent;Insubordinate;Disobedient;Defiant
+DAR - İNCE - SIĞ|Narrow*;Slim / Thin*;Shallow*
+NİTELİKLİ - KALİFİYE - DONANIMLI|Qualified;Capable (of);Proficient (in);Skilled;Eligible;Entitled (to);Equipped (with)
+NEZİH - DÜZGÜN - NAZİK|Decent;Civilized;Polite*
+DÜRÜST - AÇIKSÖZLÜ - ADİL|Honest*;Candid;Frank;Fair;Just
+#adj 16
+ZALİM - ACIMASIZ|Cruel;Brutal;Merciless;Ruthless;Inhuman
+BATMIŞ - İFLAS ETMİŞ|Bankrupt;Broke*;Penniless*
+ESNEK - EĞİLİP BÜKÜLEN - DAYANIKLI|Flexible;Elastic;Malleable;Resilient*
+KARMAŞIK - DETAYLI|Complicated;Complex;Elaborate;Intricate
+KAFA KARIŞTIRICI|Puzzling;Perplexing;Confusing;Bewildering;Misleading*
+EŞİĞİNDE|On the brink of;On the verge of;On the edge of;On the threshold of;Be about to V1
+KADEMELİ - YAVAŞ|Gradual;Step by step;Slow;Sluggish
+HIRSLI - KARARLI|Ambitious;Determined;Motivated
+DÜŞÜNCESİZ - DİKKATSİZ|Thoughtless;Inconsiderate;Insensitive;Careless;Reckless
+KESKİN - DİK*|Sharp;Dramatic;Drastic;Steep*;Vertical*;Stark
+#adj 17
+ELİ KULAĞINDA - YAKIN|Close;Approaching;Imminent;Impending;Looming
+GENİŞ - KALIN|Wide;Broad;Large;Thick
+SAHTE|Fake;Forged;Counterfeit;Imitation*
+AŞİNA - TANIDIK|Familiar (with / to);Acquainted (with);Accustomed (to)
+BOZUK - HASAR GÖRMÜŞ|Malfunctioning;Broken;Defective;Impaired;Faulty;Out of order;Out of service;Gone off (food);Spoiled
+ÇETİN - ZORLU|Laborious;Hard;Difficult;Challenging;Demanding;Arduous*;Strenuous
+KÖTÜCÜL - KÖTÜ NİYETLİ|Malicious;Malignant;Malevolent;Mischievous
+UTANÇ VERİCİ|Embarrassing;Shameful;Humiliating*
+YOZLAŞMIŞ - BOZULMUŞ|Corrupt;Deceitful;Dishonest;Degenerated;Spoiled
+KORKUTUCU - ÜRPERTİCİ - DEHŞETE DÜŞÜREN|Formidable;Frightening;Intimidating;Dreadful;Scary;Fearsome;Alarming;Horrifying;Terrifying
+#adj 18
+MASUM - SUÇSUZ|Innocent;Guiltless;Blameless
+KASITLI|Deliberate;Intentional;Conscious;On purpose;Premeditated
+ARDIŞIK - TAKİP EDEN|Following;Succeeding;Successive;Consecutive;Ensuing
+VERİLEN SIRAYLA|Respectively*
+TARAFTAR - DESTEKLEYEN|Favouring;Supportive;Sympathetic
+MEMNUN|Glad (with);Pleased (with);Satisfied (with);Content (with);Delighted (at);Delightful
+KARŞIT - ÇELİŞEN - ÇATIŞMA İÇİNDE|Conflicting;Clashing;Confronting;Contradicting;Contradictory;Contrary to{Contrary to popular belief = yaygın inanışın aksine};Opposing;Antagonistic
+FARKINDA - UYANIK|Conscious (of);Aware (of);Mindful (of);Awake;Alert
+YAPAY|Artificial;Synthetic;Man-made
+ŞAŞIRMIŞ - ŞAŞKIN|Surprised;Amazed;Startled;Astonished;Bewildered;Perplexed;Puzzled
+#adj 19
+HEYECAN VERİCİ|Exciting;Thrilling;Awesome*
+SUÇLU|Guilty of;Criminal;Culprit* (N)
+SORUMLU|Accountable for;Responsible for;Liable for
+HÜKÜMLÜ|Sentenced;Convicted;Imprisoned
+GÜNCEL - ÇAĞDAŞ|Modern;Contemporary;Up-to-date
+BAĞIMLI - DÜŞKÜN|Dependent (on);Addicted (to);Attached (to);Adherent*;Fan*
+YERLİ - YEREL - ÖZGÜ|Native;Local;Indigenous;Domestic;Endemic to
+SERT - ŞİDDETLİ - KÖTÜ|Harsh;Severe;Acute;Dire*;Grave*
+#verb 1
+YAŞAMAK - YERLEŞMEK|Live;Reside;Inhabit;Settle;Occupy;Colonize;Populate;Dwell
+MARUZ KALMAK - BAŞINA GELMEK|Undergo;Experience;Face;Be faced with;Be exposed to;Be subjected to
+KATLANMAK - DAYANMAK|Put up with;Bear;Stand;Withstand;Tolerate;Endure;Survive;Stay alive
+BAŞLA(T)MAK|Start (off);Begin;Initiate;Commence;Launch;Introduce;Take up{başlamak / edinmek (hobi vb.)};Break out*
+KAYNAKLANMAK - -DEN GELMEK|Originate from;Derive from;Come from;Result from;Stem from;(Be) caused by;(Be) rooted in
+TARTIŞMAK|Argue;Dispute;Discuss;Debate;Quarrel*;Have a row*
+MÜZAKERE ETMEK - GÖRÜŞMEK|Negotiate;Hold talks;Talk about;Exchange ideas;Confer;Bargain*
+ÖNERMEK|Suggest;Propose;Recommend;Advise;Offer*;Come up with*{üretmek, bulmak}
+GÖSTERMEK - İŞARET ETMEK|Show;Indicate;Reveal;Demonstrate;Suggest (that);Signify;Present;Display*;Exhibit*
+DÜŞÜNMEK - OLARAK GÖRMEK|Think;Consider;Regard;Ponder;Conceive (of);Feel;See;View;Deem
+#verb 2
+DURMAK - DURDURMAK - SONLANDIRMAK|Stop (from);Cease;Quit;Halt;Give up;Abandon;Discontinue;Finish;Terminate;End;Abort
+ANLAMAK - KAVRAMAK|Understand;Comprehend;Realize;Recognize;Grasp;Perceive
+SONUCA VARMAK - ÖĞRENMEK|Learn;Conclude;Discover;Find out;Sort out*;Pick up*;Figure out
+ORTAYA ÇIKMAK|Emerge;Arise;Originate;Appear;Develop;Establish*;Come out;Show up;Come into being / existence
+OLANAK SAĞLAMAK - KOLAYLAŞTIRMAK|Enable;Empower;Facilitate;Make possible;Help
+BOZMAK - ZARAR VERMEK|Ruin;Harm;Undermine;Weaken;Damage;Injure;Impair;Spoil;Disrupt;Interrupt
+YERLE BİR ETMEK|Devastate;Shatter;Demolish;Mess up
+SEBEP OLMAK - SONUÇLANMAK - TETİKLEMEK|Cause;Engender;Lead to;Bring about;Contribute to;Result in;End in;Culminate in;Trigger;Activate;Provoke;Stimulate;Prompt;Inspire*;Motivate*;Induce;Spur;Drive*;Fuel*;Ignite;Spark (off);Instigate
+#verb 3
+VARSAYMAK - FARZ ETMEK|Suppose;Assume;Presume;Imagine*;Visualize*
+DEĞERLENDİRMEK - YARGILAMAK|Judge;Evaluate;Assess;Grade;Appreciate
+İZİN VERMEK|Let;Permit;Allow;Consent;Authorize
+ANLAŞMAK - UZLAŞMAK|Make a deal;Agree;Concur;Settle;Come to terms with;Reach a consensus / an agreement
+DİRENMEK - GERİ ÇEVİRMEK - REDDETMEK*|Oppose;Resist;Reject;Refuse;Decline;Turn down;Confront*
+ELDEN ÇIKARMAK|Discard;Dispose of;Get rid of;Deny*
+AÇIKLAMAK|Explain;Clarify;Make clear;Shed / throw / cast light on sth;Enlighten;Illuminate
+YASAKLAMAK|Prohibit;Ban{ban on sth};Forbid;Outlaw;Restrain;Bar
+BAŞARMAK - GERÇEKLEŞTİRMEK|Succeed (in);Accomplish;Achieve;Attain (goal);Realize;Fulfil a goal / duty;Complete
+GÜVENMEK - BAĞLI OLMAK - İNANMAK|Count on / upon;Rely on / upon;Depend on / upon;Rest on / upon;Trust in;Believe in;Have faith in;Have confidence in
+KULLANMAK - FAYDALANMAK|Utilize;Use;Make use of;Benefit from;Employ;Exploit;Harness;Run on*;Rely on*;Draw on;Enjoy*
+#verb 4
+YÖNETMEK - İŞLETMEK|Manage;Direct;Supervise;Administer;Govern;Rule;Reign;Operate / Run
+KURMAK - İNŞA ETMEK|Build;Construct;Establish;Found;Set up;Institute;Erect
+ENGEL OLMAK|Hinder;Hamper;Obstruct;Block;Impede;Inhibit;Curtail;Curb;Prevent;Deter;Avert*;Avoid*
+HARCAMAK|Spend;Consume;Exploit;Expend
+BOŞA HARCAMAK - İSRAF ETMEK|Waste;Throw away
+ÜSTLENMEK|Undertake;Take on;Embark on;Shoulder;Assume
+SATIN ALMAK - DEVRALMAK - EDİNMEK*|Get;Buy;Purchase;Obtain*;Take over;Acquire*
+İLGİLENMEK - ELE ALMAK|Deal with;Cope with;Tackle;Handle;Address*
+ARAMAK|Search (for);Seek (for);Look for;Try to find;Hunt;Explore;Scan;Call*
+HATIRLAMAK|Recollect;Recall;Remember
+HATIRLATMAK - ANIMSATMAK|Remind of / about;Evoke;Arouse
+#verb 5
+PARA / MADDİ DESTEK SAĞLAMAK|Fund;Finance;Subsidize;Sponsor;Loan
+SAĞLAMAK - TEDARİK ETMEK|Provide with / for;Supply with;Give access to;Grant;Offer;Afford*{can / could ile kullanılır}
+GELİŞMEK - İLERLEMEK|Develop;Advance;Mature;Progress;Improve;Flourish;Thrive;Prosper;Blossom;Expand;Grow;Boom;Evolve
+İPTAL ETMEK - SON VERMEK|Cancel;Call off;Withdraw;Repeal;Remove;Abolish;Invalidate;Nullify;Put an end to;Terminate;Reverse
+TÜKENMEK - TÜKETMEK|Finish;End;Run out (of);Use up;Exhaust;Deplete;Drain;Expire{expiry date = son kullanma tarihi}
+AZALMAK - AZALTMAK - HAFİFLETMEK|Lessen;Decrease;Diminish;Reduce;Fall;Drop;Descend;Go down;Slide down;Shrink{daralmak, küçülmek};Mitigate;Moderate;Alleviate;Relieve;Ease (off);Plunge;Plummet
+ARTMAK - ARTIRMAK - YÜKSELMEK|Rise;Increase;Mount;Climb;Surge;Soar;Go up;Amplify;Escalate;Ascend;Foster;Augment;Enhance;Improve;Boost;Enrich;Promote
+AŞMAK - GEÇMEK|Exceed;Surpass;Overtake;Go / be beyond;Go / be above;Excel;Outweigh;Outpace;Outrun{koşarak geçmek, geride bırakmak}
+DİKKATE ALMAK - HESABA KATMAK|Consider;Note;Pay attention to;Take sth / sb into account;Take sth / sb into consideration
+#verb 6
+GÖZ ARDI ETMEK - İHMAL ETMEK|Ignore;Neglect;Disregard;Pay no attention to;Take no notice of;Overlook*
+UYMAK|Fit with / in;Adapt to;Go with
+İŞE ALMAK|Hire;Employ;Recruit
+DEĞİŞTİRMEK|Change;Alter;Amend;Shift;Modify;Adjust;Adapt;Revise
+DÖNÜŞMEK - DÖNÜŞTÜRMEK|Evolve into;Transform into;Revolutionize;Reform;Turn into;Change into;Convert into / to
+TARİHE DAYANMAK|Date back to{her zaman present simple ile kullanılır};Go back to;Be traced back to;Can be found (in);Can be seen (in)
+YOK OLMAK|Fade;Fade away;Vanish;Disappear;Die out;Become extinct*;Go extinct*
+YOK ETMEK - KÖKÜNÜ KAZIMAK|Terminate;Demolish;Annihilate;Destroy;Eradicate;Wipe out;End;Finish
+ERTELEMEK - GECİKTİRMEK|Postpone;Put off;Delay;Retard;Hold up;Procrastinate
+MÜDAHALE ETMEK - ARAYA GİRMEK|Interrupt;Interfere;Intervene;Step in
+#verb 7
+SALIVERMEK - SIZDIRMAK|Release;Emit;Send out / off;Leak
+İŞTEN ÇIKARMAK|Fire;Sack;Dismiss;Expel;Lay sb off;Make sb redundant
+ASKIYA ALMAK|Suspend;Freeze
+DIŞLAMAK - DIŞTA TUTMAK|Alienate;Isolate;Estrange;Exclude;Omit;Leave out
+İÇERMEK - -DEN OLUŞMAK|Include;Comprise;Encompass;Incorporate;Consist of;Be made up of;Contain;Be composed of
+KURALA UYMAK|Obey;Conform to;Abide by;Comply with;Stick to;Adhere to
+ANLAMINA GELMEK - TEMSİL ETMEK|Refer to;Mean;Signify*;Stand for;Symbolize;Embody
+BAKMAK|Look at;Stare at;Gaze at;Glance at;Glimpse at
+AYRILMAK|Separate;Break apart / up;Diverge;Deviate;Differ;Set apart;Split (up);Break up;Divorce
+SAVAŞMAK - MÜCADELE ETMEK|Fight;Combat;Battle;Clash;Struggle
+#verb 8
+BELİRLEMEK - TANIMLAMAK|Classify;Determine;Specify;Define;Label;Pin down
+TEŞHİS / TESPİT ETMEK|Detect;Spot;Locate;Diagnose;Find;Identify;Recognize
+FARK ETMEK|Recognize;Realize;Notice
+BETİMLEMEK|Describe;Depict;Portray;Picture;Characterize
+DESTEK OLMAK|Help;Aid;Assist;Support;Back (up);Cooperate*;Contribute to*
+KABUL ETMEK - RAZI OLMAK|Accept;Acknowledge;Agree;Come to terms with;Consent;Admit*;Concur
+ONAYLAMAK - GEREKÇELENDİRMEK|Approve of;Confirm;Verify;Validate;Justify;Rationalize;Ratify;Certify;Endorse*
+ETKİLEMEK|Affect;Impress;Appeal to;Influence;Manipulate*;Astonish;Amaze
+DEVAM ETMEK|Continue;Keep on;Go on;Carry on;Proceed*
+BEĞENMEK - SAYGI DUYMAK|Like;Appreciate*;Admire;Respect;Look up to
+`;
+
+const tests=[],groups=[],items=[];
+(function parse(){
+  let cur=null;
+  RAW.split('\n').forEach(line=>{
+    line=line.trim(); if(!line) return;
+    if(line[0]==='#'){
+      const [t,n]=line.slice(1).split(' ');
+      cur={id:t+n,type:t,n:+n,groups:[],
+        name:t==='adj'?`Adjective Test ${n}`:`Verb Test ${String(n).padStart(2,'0')}`,
+        short:(t==='adj'?'ADJ ':'VERB ')+n};
+      tests.push(cur); return;
+    }
+    const [tr,ws]=line.split('|');
+    const g={id:cur.id+'-'+cur.groups.length,test:cur,tr,letter:String.fromCharCode(65+cur.groups.length),items:[]};
+    ws.split(';').forEach(raw=>{
+      const m=raw.match(/^([^{]*)(?:\{(.*)\})?$/);
+      let w=m[1].trim(); const note=m[2]||'';
+      const star=w.includes('*'); w=w.replace(/\*/g,'').replace(/\s+/g,' ').trim();
+      const it={w,star,note,g,key:g.id+'|'+w};
+      g.items.push(it); items.push(it);
+    });
+    cur.groups.push(g); groups.push(g);
+  });
+})();
+const norm=s=>s.toLocaleLowerCase('tr').replace(/\*/g,'').replace(/\(.*?\)/g,'').replace(/\s+/g,' ').trim();
+const byKey=new Map();
+items.forEach(it=>{it.k=norm(it.w);if(!byKey.has(it.k))byKey.set(it.k,new Set());byKey.get(it.k).add(it.g)});
+groups.forEach(g=>{g.tok=new Set(g.tr.toLocaleLowerCase('tr').split(/[^a-zçğıöşüâî]+/).filter(x=>x.length>3))});
+const relCache=new Map();
+function related(a,b){
+  if(a===b) return true;
+  const ck=a.id<b.id?a.id+b.id:b.id+a.id;
+  if(relCache.has(ck)) return relCache.get(ck);
+  let r=false;
+  for(const t of a.tok) if(b.tok.has(t)){r=true;break}
+  if(!r) r=a.items.some(i=>byKey.get(i.k).has(b));
+  relCache.set(ck,r); return r;
+}
+function wordRelatedToGroup(it,g){for(const og of byKey.get(it.k)) if(related(og,g)) return true; return false}
+
+const LS={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+const STORAGE_OK=(()=>{try{localStorage.setItem('__ka','1');localStorage.removeItem('__ka');return true}catch(e){return false}})();
+let P=LS.get('ka_prog',{});
+const isMobile=()=>window.matchMedia('(max-width:620px)').matches;
+let S=Object.assign({type:'adj',sel:null,mode:'list',weak:false,hideTr:false,hideEn:false,dir:'en',search:'',scopeOpen:!isMobile()},LS.get('ka_state',{}));
+if(!S.sel) S.sel=tests.filter(t=>t.type==='adj').map(t=>t.id);
+let sel=new Set(S.sel);
+let streak=0,best=0,sessionOk=0,sessionAll=0;
+function saveS(){S.sel=[...sel];LS.set('ka_state',{type:S.type,sel:S.sel,mode:S.mode,weak:S.weak,hideTr:S.hideTr,hideEn:S.hideEn,dir:S.dir,scopeOpen:S.scopeOpen})}
+const mast=it=>(P[it.key]?P[it.key].s:0);
+const lvl=s=>s>=3?2:s>=1?1:0;
+const isWeak=it=>{const p=P[it.key];return p&&p.w>0&&p.s<3};
+function rec(it,ok,soft){
+  const p=P[it.key]||(P[it.key]={c:0,w:0,s:0});
+  if(ok){p.c++;p.s=Math.min(5,p.s+1)}else{p.w++;p.s=Math.max(0,p.s-(soft?1:2))}
+}
+function tally(ok){sessionAll++;if(ok){sessionOk++;streak++;best=Math.max(best,streak)}else streak=0;LS.set('ka_prog',P);drawStats()}
+function scope(){
+  const gs=groups.filter(g=>sel.has(g.test.id));
+  let its=items.filter(i=>sel.has(i.g.test.id));
+  if(S.weak) its=its.filter(isWeak);
+  return {gs,its};
+}
+const sigOf=()=>[...sel].sort().join(',')+'|'+S.weak;
+
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const shuffle=a=>{for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]]}return a};
+const pick=a=>a[Math.random()*a.length|0];
+const sample=(a,n)=>shuffle(a.slice()).slice(0,n);
+const dedupeK=a=>{const s=new Set();return a.filter(x=>s.has(x.k)?false:(s.add(x.k),true))};
+let lastPicked=null;
+function wpick(arr){
+  if(!arr.length) return null;
+  for(let tries=0;tries<4;tries++){
+    let tot=0;const ws=arr.map(i=>{const p=P[i.key];const s=p?p.s:0;const w=(6-s)+(p&&p.w>p.c?3:0);tot+=w;return w});
+    let r=Math.random()*tot,res=arr[arr.length-1];
+    for(let j=0;j<arr.length;j++){r-=ws[j];if(r<=0){res=arr[j];break}}
+    if(res!==lastPicked||arr.length<2){lastPicked=res;return res}
+  }
+  return lastPicked=pick(arr);
+}
+function distractorGroups(base,filt){
+  const {gs}=scope();
+  let c=gs.filter(g=>g.test.type===base.test.type&&filt(g));
+  if(c.length<8) c=groups.filter(g=>g.test.type===base.test.type&&filt(g));
+  return c;
+}
+function speak(t){
+  try{const u=new SpeechSynthesisUtterance(t.replace(/\(.*?\)|\bsth\b|\bsb\b|V1|\//g,' '));u.lang='en-US';u.rate=.92;speechSynthesis.cancel();speechSynthesis.speak(u)}catch(e){}
+}
+function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('show');clearTimeout(t._h);t._h=setTimeout(()=>t.classList.remove('show'),1600)}
+
+function drawStats(){
+  const learned=items.filter(i=>mast(i)>=3).length;
+  const acc=sessionAll?Math.round(sessionOk/sessionAll*100)+'%':'—';
+  $('#stats').innerHTML=`
+    <div class="stat"><b>${learned}<small style="font-size:12px;color:var(--mute)"> / ${items.length}</small></b><span>Öğrenilen</span></div>
+    <div class="stat"><b>${acc}</b><span>Bu oturum</span></div>
+    <div class="stat"><b>🔥 ${streak}</b><span>Seri · en iyi ${best}</span></div>`;
+}
+function testProg(t){const its=t.groups.flatMap(g=>g.items);return its.filter(i=>mast(i)>=3).length/its.length}
+function drawScope(){
+  const {gs,its}=scope();
+  const types=S.type==='mix'?['adj','verb']:[S.type];
+  const learned=its.filter(i=>mast(i)>=3).length;
+  let h=`<div class="seg">${[['adj','Adjectives','19 test'],['verb','Verbs','8 test'],['mix','Toplu','Adjective + Verb']].map(([t,l,s])=>
+    `<button class="${S.type===t?'on':''}" onclick="setType('${t}')"><b>${l}</b><small>${s}</small></button>`).join('')}</div>`;
+  h+=`<button class="scopetoggle" onclick="S.scopeOpen=!S.scopeOpen;saveS();drawScope()">
+      <span><b>${sel.size}</b> test · <b>${gs.length}</b> grup · <b>${its.length}</b> kelime${S.weak?' <b style="color:var(--warn)">(zayıf)</b>':''} · <b style="color:var(--ok)">${learned}</b> öğrenildi</span>
+      <span class="chev ${S.scopeOpen?'up':''}">▾</span></button>`;
+  if(S.scopeOpen){
+    h+=`<div class="scopebody">`+types.map(t=>`<div class="chiprow"><span class="rowlab">${t==='adj'?'ADJ':'VERB'}</span>${
+      tests.filter(x=>x.type===t).map(x=>{const pr=testProg(x);
+        return `<button class="tchip ${sel.has(x.id)?'on':''}" data-id="${x.id}" title="${x.name} · %${Math.round(pr*100)} öğrenildi">${x.n}<i style="--p:${pr}"></i></button>`}).join('')
+    }</div>`).join('');
+    h+=`<div class="hint">Dokunarak birden fazla testi birleştir · <b>basılı tut</b> veya çift tıkla = sadece o test</div>
+    <div class="scopebar"><div class="scopeact" style="width:100%">
+      <span style="display:flex;gap:6px"><button class="mini" onclick="selAll()">Tümünü seç</button><button class="mini" onclick="selNone()">Temizle</button></span>
+      <label class="sw"><input type="checkbox" ${S.weak?'checked':''} onchange="setWeak(this.checked)"><span></span>Sadece zayıflar</label>
+    </div></div></div>`;
+  }
+  $('#scope').innerHTML=h;
+  bindChips();
+}
+function bindChips(){
+  document.querySelectorAll('.tchip').forEach(b=>{
+    let timer,long=false;
+    b.addEventListener('pointerdown',()=>{long=false;timer=setTimeout(()=>{long=true;try{navigator.vibrate&&navigator.vibrate(15)}catch(e){}soloT(b.dataset.id);toast(b.title.split(' · ')[0]+' seçildi')},500)});
+    ['pointerup','pointerleave','pointercancel'].forEach(ev=>b.addEventListener(ev,()=>clearTimeout(timer)));
+    b.addEventListener('click',e=>{if(long){e.preventDefault();return}toggleT(b.dataset.id)});
+    b.addEventListener('dblclick',()=>soloT(b.dataset.id));
+    b.addEventListener('contextmenu',e=>e.preventDefault());
+  });
+}
+function drawFoot(){
+  $('#foot').innerHTML=(STORAGE_OK?'💾 İlerlemen bu cihazın tarayıcısında saklanıyor':'<span style="color:var(--warn)">⚠️ Bu görünümde tarayıcı kaydı kapalı; ilerleme sayfa kapanınca silinir</span>')+
+    ' · <button id="resetBtn" onclick="resetProg(this)">İlerlemeyi sıfırla</button>';
+}
+function toView(){
+  const v=$('#view');const r=v.getBoundingClientRect();
+  if(r.top<0||r.top>window.innerHeight*.6) window.scrollTo({top:window.scrollY+r.top-(isMobile()?8:12),behavior:'smooth'});
+}
+const MODES=[['list','📚','Liste','Liste'],['flash','🃏','Kartlar','Kartlar'],['meaning','🎯','Anlam Testi','Anlam'],['syn','🔁','Eş Anlam','Eş Anlam'],['odd','🧩','Farklı Olan','Farklı'],['build','🧱','Grup Kur','Grup Kur']];
+function drawTabs(){
+  $('#tabs').innerHTML=MODES.map(([m,i,l,sh])=>`<button class="tab ${S.mode===m?'on':''}" onclick="setMode('${m}')"><em>${i}</em><span class="f">${l}</span><span class="s">${sh}</span></button>`).join('');
+}
+function render(){
+  document.body.className=S.type;
+  drawStats();drawScope();drawTabs();drawFoot();
+  ({list:viewList,flash:viewFlash,meaning:()=>viewQuiz('meaning'),syn:()=>viewQuiz('syn'),odd:()=>viewQuiz('odd'),build:viewBuild})[S.mode]();
+}
+function setType(t){S.type=t;sel=new Set(tests.filter(x=>t==='mix'||x.type===t).map(x=>x.id));saveS();render()}
+function toggleT(id){sel.has(id)?sel.delete(id):sel.add(id);saveS();render()}
+function soloT(id){sel=new Set([id]);saveS();render()}
+function selAll(){sel=new Set(tests.filter(x=>S.type==='mix'||x.type===S.type).map(x=>x.id));saveS();render()}
+function selNone(){sel=new Set();saveS();render()}
+function setWeak(v){S.weak=v;saveS();render()}
+function setMode(m){if(S.mode===m){toView();return}S.mode=m;if(isMobile()&&m!=='list')S.scopeOpen=false;saveS();render();toView()}
+function emptyState(){
+  if(!sel.size) return `<div class="empty"><b>Hiç test seçili değil</b>Yukarıdan çalışmak istediğin testleri seç.</div>`;
+  if(S.weak) return `<div class="empty"><b>Zayıf kelimen yok 🎉</b>Bu kapsamda yanlış yaptığın kelime kalmadı. Filtreyi kapatıp devam et.</div>`;
+  return `<div class="empty"><b>Burada çalışacak kelime yok</b></div>`;
+}
+
+function viewList(){
+  $('#view').innerHTML=`
+  <div class="toolbar">
+    <div class="search"><input id="q" placeholder="Kelime veya Türkçe anlam ara…" value="${esc(S.search||'')}" oninput="S.search=this.value;drawList()"></div>
+    <div class="toggles">
+      <button class="tg ${S.hideTr?'on':''}" onclick="S.hideTr=!S.hideTr;saveS();this.classList.toggle('on');drawList()">Türkçeyi gizle</button>
+      <button class="tg ${S.hideEn?'on':''}" onclick="S.hideEn=!S.hideEn;saveS();this.classList.toggle('on');drawList()">İngilizceyi gizle</button>
+    </div>
+  </div>
+  <div class="legend"><span><i></i>Yeni</span><span><i style="background:var(--warn)"></i>Çalışılıyor</span><span><i style="background:var(--ok)"></i>Öğrenildi</span><span><b style="color:var(--warn)">*</b> Kitapta yıldızlı</span><span>🔊 Kelimeye tıkla → telaffuz</span></div>
+  <div id="lres"></div>`;
+  drawList();
+}
+function drawList(){
+  const {gs,its}=scope();
+  const q=norm(S.search||'');
+  let show=S.weak?gs.filter(g=>its.some(i=>i.g===g)):gs;
+  if(q) show=show.filter(g=>g.tr.toLocaleLowerCase('tr').includes(q)||g.items.some(i=>i.k.includes(q)));
+  if(!show.length){$('#lres').innerHTML=q?`<div class="empty"><b>Sonuç yok</b>“${esc(S.search)}” için eşleşme bulunamadı.</div>`:emptyState();return}
+  let out='',cur=null;
+  for(const g of show){
+    if(g.test!==cur){if(cur)out+='</div>';cur=g.test;out+=`<h3 class="th"><span class="tbadge ${cur.type}">${cur.type==='adj'?'ADJ':'VERB'}</span>${cur.name}</h3><div class="ggrid">`}
+    out+=gcard(g,q);
+  }
+  $('#lres').innerHTML=out+'</div>';
+}
+function gcard(g,q){
+  const ws=g.items.map(it=>{const hit=q&&it.k.includes(q);
+    return `<button class="wchip m${lvl(mast(it))} ${hit?'hit':''} ${S.hideEn?'cover':''}" data-w="${esc(it.w)}" onclick="this.classList.remove('cover');speak(this.dataset.w)">${esc(it.w)}${it.star?'<sup>*</sup>':''}</button>`}).join('');
+  const notes=g.items.filter(i=>i.note).map(i=>`<div class="note">📝 <b>${esc(i.w)}</b> — ${esc(i.note)}</div>`).join('');
+  return `<article class="gcard"><header><span class="gl">${g.letter}</span><h4 class="${S.hideTr?'cover':''}" onclick="this.classList.remove('cover')">${esc(g.tr)}</h4><span class="gc">${g.items.length}</span></header><div class="wl">${ws}</div>${notes}</article>`;
+}
+
+let F=null;
+function viewFlash(){if(!F||F.sig!==sigOf()+S.dir) newDeck();drawFlash()}
+function newDeck(list){
+  const {gs,its}=scope();
+  if(!list) list=S.dir==='en'?shuffle(its.slice()):shuffle((S.weak?gs.filter(g=>its.some(i=>i.g===g)):gs).slice());
+  F={sig:sigOf()+S.dir,deck:list,i:0,flip:false,know:0,again:0,skip:0,uniq:list.length,unk:new Set(),seen:new Set()};
+}
+const fkey=c=>c.items?'grp|'+c.id:c.key;
+function fstat(c,create){const k=fkey(c);if(!P[k]&&create)P[k]={c:0,w:0,s:0};return P[k]||{}}
+function fcountHTML(c){
+  const st=fstat(c),k=st.fk||0,u=st.fu||0;
+  if(!k&&!u) return `<div class="fcount new">Yeni kart</div>`;
+  return `<div class="fcount"><span class="k">✓ ${k}</span><span class="u">✗ ${u}</span></div>`;
+}
+function drawFlash(){
+  const head=`<div class="meta fhead" style="flex-wrap:nowrap"><div class="seg" style="margin:0;grid-template-columns:1fr 1fr;width:290px">
+      <button class="${S.dir==='en'?'on':''}" onclick="S.dir='en';saveS();viewFlash()"><b>EN → TR</b></button>
+      <button class="${S.dir==='tr'?'on':''}" onclick="S.dir='tr';saveS();viewFlash()"><b>TR → EN</b></button></div>
+    <button class="mini" onclick="newDeck();drawFlash()" title="Karıştır / baştan">↻ Karıştır</button></div>`;
+  if(!F.deck.length){$('#view').innerHTML=`<div class="stage">${head}${emptyState()}</div>`;return}
+  if(F.i>=F.deck.length){
+    const graded=F.know+F.again, pct=Math.round(F.know/Math.max(1,graded)*100);
+    const seen=[...F.seen];
+    const hard=seen.filter(c=>(fstat(c).fu||0)>0).sort((a,b)=>(fstat(b).fu-(fstat(b).fk||0))-(fstat(a).fu-(fstat(a).fk||0))).slice(0,10);
+    const label=c=>c.items?esc(c.tr):`<b>${esc(c.w)}</b> <span style="color:var(--mute)">· ${esc(c.g.tr)}</span>`;
+    $('#view').innerHTML=`<div class="stage">${head}<div class="panel sum"><div class="ring" style="--v:${pct}"><div>${pct}%</div></div>
+      <h2>Deste bitti!</h2><p>${F.uniq} kart</p>
+      <div class="fsum"><div class="k"><b>${F.know}</b><span>Biliyorum</span></div><div class="u"><b>${F.again}</b><span>Bilmiyorum</span></div><div><b>${F.skip}</b><span>Geçildi</span></div></div>
+      <div class="row"><button class="big primary" onclick="newDeck();drawFlash()">Yeni deste</button>
+      ${F.unk.size?`<button class="big again" onclick="newDeck(shuffle([...F.unk]));drawFlash()">Bilmediklerimi tekrar et (${F.unk.size})</button>`:''}</div>
+      ${hard.length?`<div class="missed"><div class="qsub" style="text-align:left">En çok zorlandıkların (tüm zamanlar)</div>${hard.map(c=>{const st=fstat(c);
+        return `<div class="hrow"><span>${label(c)}</span><span class="cnt"><i class="k">✓ ${st.fk||0}</i><i class="u">✗ ${st.fu||0}</i></span></div>`}).join('')}</div>`:''}
+    </div></div>`;
+    return;
+  }
+  const c=F.deck[F.i];
+  const done=F.i, total=F.deck.length;
+  let front,back;
+  if(S.dir==='en'){
+    front=`<div class="ftag">${c.g.test.short} · ${c.g.letter}</div>${fcountHTML(c)}<div class="bigword">${esc(c.w)}${c.star?'<sup style="color:var(--warn);font-size:.4em">*</sup>':''}</div>
+      <button class="speak" onclick="event.stopPropagation();speak('${esc(c.w).replace(/'/g,"\\'")}')">🔊</button><div class="fhint">Çevirmek için dokun<kbd>Space</kbd></div>`;
+    back=`<div class="ftag">ANLAM</div>${fcountHTML(c)}<div class="bigtr">${esc(c.g.tr)}</div>
+      <div class="syns">${c.g.items.map(x=>`<span class="${x===c?'hl':''}">${esc(x.w)}</span>`).join('')}</div>
+      ${c.note?`<div class="note" style="margin-top:14px">📝 ${esc(c.note)}</div>`:''}`;
+  }else{
+    front=`<div class="ftag">${c.test.short} · ${c.letter}</div>${fcountHTML(c)}<div class="bigtr" style="font-size:clamp(22px,4.4vw,34px)">${esc(c.tr)}</div>
+      <div class="qsub">Bu anlamdaki ${c.items.length} kelimeden kaçını hatırlıyorsun?</div><div class="fhint">Çevirmek için dokun<kbd>Space</kbd></div>`;
+    back=`<div class="ftag">KELİMELER</div>${fcountHTML(c)}<div class="bigtr" style="font-size:16px;opacity:.8">${esc(c.tr)}</div>
+      <div class="syns">${c.items.map(x=>`<span>${esc(x.w)}</span>`).join('')}</div>`;
+  }
+  $('#view').innerHTML=`<div class="stage">${head}
+    <div class="meta"><span>Kart <b>${done+1}</b> / ${total}</span><span class="fsess"><i class="k">✓ ${F.know}</i><i class="u">✗ ${F.again}</i><i>⏭ ${F.skip}</i></span></div>
+    <div class="bar"><i style="width:${done/total*100}%"></i></div>
+    <div class="flash ${F.flip?'flipped':''}" id="fc" onclick="if(!this._sw)flip()"><div class="fin"><div class="face front">${front}</div><div class="face back">${back}</div></div></div>
+    <div class="swipehint">Dokun: çevir · ← sola: bilmiyorum · sağa: biliyorum →</div>
+    <div class="fbtns">
+      <button class="big again" onclick="grade(false)">✗ Bilmiyorum<kbd>←</kbd></button>
+      <button class="big skip" onclick="skipCard()">Sıradaki ⏭<kbd>↓</kbd></button>
+      <button class="big know" onclick="grade(true)">✓ Biliyorum<kbd>→</kbd></button>
+    </div></div>`;
+  bindSwipe();
+}
+function flip(){F.flip=!F.flip;$('#fc').classList.toggle('flipped',F.flip)}
+function grade(ok){
+  const c=F.deck[F.i]; const its=S.dir==='en'?[c]:c.items;
+  its.forEach(it=>rec(it,ok,true));
+  const st=fstat(c,true); if(ok) st.fk=(st.fk||0)+1; else st.fu=(st.fu||0)+1;
+  tally(ok); F.seen.add(c);
+  if(ok){F.know++;F.unk.delete(c)}
+  else{F.again++;F.unk.add(c);F.deck.splice(Math.min(F.deck.length,F.i+3+(Math.random()*3|0)),0,c)}
+  F.i++;F.flip=false;drawFlash();
+}
+function skipCard(){F.skip++;F.i++;F.flip=false;drawFlash()}
+function bindSwipe(){
+  const el=$('#fc');if(!el)return;
+  let x0=0,y0=0,dx=0,down=false,horiz=null;
+  el.addEventListener('pointerdown',e=>{down=true;x0=e.clientX;y0=e.clientY;dx=0;horiz=null;el._sw=false;el.style.transition='none'});
+  el.addEventListener('pointermove',e=>{
+    if(!down)return;dx=e.clientX-x0;const dy=e.clientY-y0;
+    if(horiz===null&&(Math.abs(dx)>8||Math.abs(dy)>8)){horiz=Math.abs(dx)>Math.abs(dy);if(horiz){el._sw=true;try{el.setPointerCapture(e.pointerId)}catch(_){}}}
+    if(horiz){el.style.transform=`translateX(${dx}px) rotate(${dx/22}deg)`;el.classList.toggle('sw-ok',dx>70);el.classList.toggle('sw-no',dx<-70)}
+  });
+  const end=()=>{
+    if(!down)return;down=false;el.style.transition='';
+    if(horiz&&Math.abs(dx)>90){const d=dx>0?1:-1;el.style.transform=`translateX(${d*120}vw) rotate(${d*18}deg)`;setTimeout(()=>grade(d>0),170)}
+    else{el.style.transform='';el.classList.remove('sw-ok','sw-no');setTimeout(()=>{el._sw=false},0)}
+  };
+  el.addEventListener('pointerup',end);el.addEventListener('pointercancel',end);
+}
+
+let Q=null;const QN=15;
+const QTITLE={meaning:'Anlam Testi',syn:'Eş Anlam Testi',odd:'Farklı Olanı Bul'};
+function viewQuiz(kind){if(!Q||Q.sig!==sigOf()+kind) newQuiz(kind);drawQuiz()}
+function newQuiz(kind,pool){Q={kind,sig:sigOf()+kind,i:0,score:0,missed:[],ans:null,pool:pool||null};Q.cur=gen()}
+function gen(){for(let t=0;t<40;t++){const q=({meaning:genMeaning,syn:genSyn,odd:genOdd})[Q.kind]();if(q)return q}return null}
+function poolNow(){const {its}=scope();return (Q.pool&&Q.pool.length)?Q.pool:its}
+function groupMini(g,hl){
+  return `<div class="mini-g"><div class="mg-h"><span class="gl sm">${g.letter}</span>${esc(g.tr)}<em>${g.test.short}</em></div>
+  <div class="mg-w">${g.items.map(x=>`<span class="${hl&&hl.includes(x.w)?'hl':''}">${esc(x.w)}</span>`).join('')}</div></div>`;
+}
+function genMeaning(){
+  const it=wpick(poolNow()); if(!it) return null;
+  const own=byKey.get(it.k);
+  const c=distractorGroups(it.g,g=>!own.has(g)&&![...own].some(o=>related(o,g)));
+  const trs=new Set([it.g.tr]); const ds=[];
+  for(const g of shuffle(c.slice())){if(!trs.has(g.tr)){trs.add(g.tr);ds.push(g)} if(ds.length===3)break}
+  if(ds.length<3) return null;
+  return {it,
+    prompt:`<div class="bigword">${esc(it.w)}</div><button class="speak" onclick="speak(this.dataset.w)" data-w="${esc(it.w)}">🔊</button>`,
+    sub:'Bu kelime hangi anlam grubunda yer alıyor?',
+    opts:shuffle([{label:it.g.tr,ok:true},...ds.map(g=>({label:g.tr,ok:false,g}))]),
+    explain:()=>groupMini(it.g,[it.w])+(own.size>1?`<div class="qsub" style="text-align:left">Bu kelime başka gruplarda da geçiyor:</div>`+[...own].filter(g=>g!==it.g).map(g=>groupMini(g,[it.w])).join(''):''),
+    rec:(ok,o)=>{rec(it,ok)}};
+}
+function genSyn(){
+  const it=wpick(poolNow().filter(i=>i.g.items.length>=2)); if(!it) return null;
+  const own=byKey.get(it.k);
+  const ans=pick(it.g.items.filter(x=>x.k!==it.k)); if(!ans) return null;
+  const cg=distractorGroups(it.g,g=>!own.has(g)&&![...own].some(o=>related(o,g)));
+  const ws=dedupeK(shuffle(cg.flatMap(g=>g.items))).filter(c=>c.k!==ans.k&&![...own].some(g=>wordRelatedToGroup(c,g))).slice(0,4);
+  if(ws.length<4) return null;
+  return {it,
+    prompt:`<div class="qline">“<b>${esc(it.w)}</b>” means ----.</div>`,
+    sub:'Anlamca en yakın kelimeyi seç',
+    opts:shuffle([{label:ans.w,ok:true,it:ans},...ws.map(w=>({label:w.w,ok:false,it:w}))]),
+    explain:(o)=>groupMini(it.g,[it.w,ans.w])+(o&&!o.ok?groupMini(o.it.g,[o.it.w]):''),
+    rec:(ok)=>{rec(it,ok);rec(ans,ok,true)}};
+}
+function genOdd(){
+  const it=wpick(poolNow().filter(i=>dedupeK(i.g.items).length>=3)); if(!it) return null;
+  const g=it.g;
+  const three=[it,...sample(dedupeK(g.items).filter(x=>x.k!==it.k),2)];
+  const cg=distractorGroups(g,x=>!related(x,g)); if(!cg.length) return null;
+  const og=pick(cg);
+  const odd=pick(og.items.filter(x=>!wordRelatedToGroup(x,g)&&!three.some(t=>byKey.get(t.k).has(og))));
+  if(!odd) return null;
+  return {it,
+    prompt:`<div class="qline" style="font-size:clamp(20px,4vw,28px)">Hangisi diğerleriyle <b>aynı anlam grubunda değil</b>?</div>`,
+    sub:'Üç kelime eş anlamlı, biri farklı',
+    opts:shuffle([...three.map(x=>({label:x.w,ok:false,it:x})),{label:odd.w,ok:true,it:odd}]),
+    explain:()=>groupMini(g,three.map(x=>x.w))+groupMini(og,[odd.w]),
+    rec:(ok)=>{three.forEach(x=>rec(x,ok,true));rec(odd,ok,true)}};
+}
+function drawQuiz(){
+  const k=Q.kind;
+  if(!Q.cur){$('#view').innerHTML=`<div class="stage">${emptyState()}</div>`;return}
+  if(Q.i>=QN){
+    const pct=Math.round(Q.score/QN*100);
+    const miss=dedupeK(Q.missed);
+    const msg=pct>=90?'Mükemmel! 🏆':pct>=70?'Çok iyi gidiyor! 💪':pct>=50?'Fena değil, devam!':'Tekrar zamanı 📚';
+    $('#view').innerHTML=`<div class="stage"><div class="panel sum"><div class="ring" style="--v:${pct}"><div>${Q.score}/${QN}</div></div>
+      <h2>${msg}</h2><p>${QTITLE[k]} tamamlandı · %${pct} başarı</p>
+      <div class="row"><button class="big primary" onclick="newQuiz('${k}');drawQuiz()">Yeni tur</button>
+      ${miss.length?`<button class="big again" onclick="newQuiz('${k}',Q.missed.slice());drawQuiz()">Yanlışları tekrar et (${miss.length})</button>`:''}</div>
+      ${miss.length?`<div class="missed"><div class="qsub" style="text-align:left">Kaçırdıkların:</div>${[...new Set(miss.map(m=>m.g))].map(g=>groupMini(g,miss.map(m=>m.w))).join('')}</div>`:''}
+    </div></div>`;
+    return;
+  }
+  const q=Q.cur,a=Q.ans;
+  const opts=q.opts.map((o,i)=>{
+    let cls='';if(a!=null){if(o.ok)cls='good';else if(i===a)cls='badc';else cls='dim'}
+    return `<button class="opt ${cls}" ${a!=null?'disabled':''} onclick="answer(${i})"><span class="k">${'ABCDE'[i]}</span>${esc(o.label)}</button>`}).join('');
+  let ex='';
+  if(a!=null){const ok=q.opts[a].ok;
+    ex=`<div class="explain"><div class="verdict ${ok?'ok':'no'}">${ok?'✓ Doğru!':'✗ Doğru cevap: '+esc(q.opts.find(o=>o.ok).label)}</div>
+      <button class="big primary" id="nextBtn" onclick="nextQ()">${Q.i+1>=QN?'Sonuçları gör':'Sonraki soru'} →<kbd>Enter</kbd></button>${q.explain(q.opts[a])}</div>`}
+  $('#view').innerHTML=`<div class="stage">
+    <div class="meta"><span>${QTITLE[k]} · Soru <b>${Q.i+1}</b> / ${QN}</span><span>Puan <b>${Q.score}</b></span></div>
+    <div class="bar"><i style="width:${(Q.i+(a!=null?1:0))/QN*100}%"></i></div>
+    <div class="qcard"><div class="ftag">${q.it.g.test.short}</div>${q.prompt}<div class="qsub">${q.sub}</div></div>
+    <div class="opts">${opts}</div>${ex}</div>`;
+}
+function answer(i){
+  if(Q.ans!=null)return;Q.ans=i;const q=Q.cur,o=q.opts[i];
+  if(o.ok)Q.score++;else Q.missed.push(q.it);
+  q.rec(o.ok,o);tally(o.ok);drawQuiz();
+  const nb=$('#nextBtn');if(nb&&isMobile())nb.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+function nextQ(){Q.i++;Q.ans=null;if(Q.i<QN)Q.cur=gen();drawQuiz();drawScope();toView()}
+
+let B=null;const BN=10;
+function viewBuild(){if(!B||B.sig!==sigOf()) newBuild();drawBuild()}
+function newBuild(){B={sig:sigOf(),i:0,score:0};B.cur=genBuild()}
+function genBuild(){
+  const {its}=scope();
+  for(let t=0;t<30;t++){
+    const it=wpick(its.filter(i=>dedupeK(i.g.items).length>=3)); if(!it) return null;
+    const g=it.g; const uniq=dedupeK(g.items);
+    const right=sample(uniq,Math.min(6,uniq.length));
+    const cg=distractorGroups(g,x=>!related(x,g));
+    const wrong=dedupeK(shuffle(cg.flatMap(x=>x.items))).filter(c=>!wordRelatedToGroup(c,g)&&!right.some(r=>r.k===c.k)).slice(0,10-right.length);
+    if(wrong.length<3) continue;
+    return {g,chips:shuffle([...right.map(x=>({it:x,ok:true})),...wrong.map(x=>({it:x,ok:false}))]),picked:new Set(),checked:false};
+  }
+  return null;
+}
+function drawBuild(){
+  if(!B.cur){$('#view').innerHTML=`<div class="stage">${emptyState()}</div>`;return}
+  if(B.i>=BN){
+    const pct=Math.round(B.score/BN*100);
+    $('#view').innerHTML=`<div class="stage"><div class="panel sum"><div class="ring" style="--v:${pct}"><div>${B.score}/${BN}</div></div>
+      <h2>${pct>=80?'Gruplar senden sorulur! 🧱':'İyi antrenman!'}</h2><p>${BN} grubun ${B.score} tanesini eksiksiz kurdun</p>
+      <div class="row"><button class="big primary" onclick="newBuild();drawBuild()">Yeni tur</button></div></div></div>`;return;
+  }
+  const c=B.cur,nRight=c.chips.filter(x=>x.ok).length;
+  const chips=c.chips.map((x,i)=>{
+    let cls=c.picked.has(i)?'sel':'';
+    if(c.checked){cls=x.ok?(c.picked.has(i)?'good':'miss'):(c.picked.has(i)?'bad':'dim')}
+    return `<button class="bchip ${cls}" ${c.checked?'disabled':''} onclick="pickB(${i})">${esc(x.it.w)}</button>`}).join('');
+  let foot;
+  if(!c.checked) foot=`<button class="big primary stickybtn" onclick="checkB()">Kontrol et<kbd>Enter</kbd></button>`;
+  else{
+    const hits=c.chips.filter((x,i)=>x.ok&&c.picked.has(i)).length,bad=c.chips.filter((x,i)=>!x.ok&&c.picked.has(i)).length;
+    const perfect=hits===nRight&&!bad;
+    const wrongs=c.chips.filter((x,i)=>!x.ok&&c.picked.has(i));
+    foot=`<div class="explain"><div class="verdict ${perfect?'ok':'no'}">${perfect?'✓ Kusursuz!':`${hits}/${nRight} doğru seçim${bad?` · ${bad} yanlış seçim`:''}`}</div>
+      ${wrongs.length?`<div class="wrongs"><div class="wh">Yanlış seçtiklerinin anlamı</div>${wrongs.map(x=>`<div class="wi"><b>${esc(x.it.w)}</b><span>${[...byKey.get(x.it.k)].map(g=>esc(g.tr)+` <em>${g.test.short}</em>`).join('<br>')}</span></div>`).join('')}</div>`:''}
+      <button class="big primary" id="nextBtn" onclick="nextB()">${B.i+1>=BN?'Sonuçları gör':'Sonraki grup'} →<kbd>Enter</kbd></button>${groupMini(c.g,c.chips.filter(x=>x.ok).map(x=>x.it.w))}</div>`;
+  }
+  $('#view').innerHTML=`<div class="stage">
+    <div class="meta"><span>Grup Kur · <b>${B.i+1}</b> / ${BN}</span><span>Puan <b>${B.score}</b></span></div>
+    <div class="bar"><i style="width:${(B.i+(c.checked?1:0))/BN*100}%"></i></div>
+    <div class="qcard"><div class="ftag">${c.g.test.short}</div><div class="qsub" style="margin:0 0 8px">Bu anlama gelen <b style="color:var(--text)">${nRight}</b> kelimeyi seç</div>
+      <div class="bigtr" style="font-size:clamp(20px,4vw,30px)">${esc(c.g.tr)}</div></div>
+    <div class="bchips">${chips}</div>${foot}</div>`;
+}
+function pickB(i){const c=B.cur;c.picked.has(i)?c.picked.delete(i):c.picked.add(i);drawBuild()}
+function checkB(){
+  const c=B.cur;if(c.checked)return;c.checked=true;
+  let perfect=true;
+  c.chips.forEach((x,i)=>{const p=c.picked.has(i);if(x.ok){rec(x.it,p,true);if(!p)perfect=false}else if(p){perfect=false}});
+  if(perfect)B.score++;tally(perfect);drawBuild();
+  const nb=$('#nextBtn');if(nb&&isMobile())nb.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+function nextB(){B.i++;if(B.i<BN)B.cur=genBuild();drawBuild();drawScope();toView()}
+
+document.addEventListener('keydown',e=>{
+  if(e.target.tagName==='INPUT')return;
+  if(S.mode==='flash'&&F&&F.i<F.deck.length){
+    if(e.code==='Space'||e.key==='Enter'){e.preventDefault();flip()}
+    else if(e.key==='ArrowLeft'||e.key==='1')grade(false);
+    else if(e.key==='ArrowRight'||e.key==='3')grade(true);
+    else if(e.key==='ArrowDown'||e.key==='2'||e.key==='n'){e.preventDefault();skipCard()}
+  }else if(['meaning','syn','odd'].includes(S.mode)&&Q&&Q.cur&&Q.i<QN){
+    const n=parseInt(e.key);
+    if(n>=1&&n<=Q.cur.opts.length)answer(n-1);
+    else if(/^[a-e]$/i.test(e.key)&&'abcde'.indexOf(e.key.toLowerCase())<Q.cur.opts.length)answer('abcde'.indexOf(e.key.toLowerCase()));
+    else if(e.key==='Enter'&&Q.ans!=null){e.preventDefault();nextQ()}
+  }else if(S.mode==='build'&&B&&B.cur&&B.i<BN&&e.key==='Enter'){e.preventDefault();B.cur.checked?nextB():checkB()}
+});
+function resetProg(btn){
+  if(!btn.classList.contains('armed')){btn.classList.add('armed');btn.textContent='Emin misin? Tekrar tıkla';setTimeout(()=>{btn.classList.remove('armed');btn.textContent='İlerlemeyi sıfırla'},3000);return}
+  P={};LS.set('ka_prog',P);streak=best=sessionOk=sessionAll=0;btn.classList.remove('armed');btn.textContent='İlerlemeyi sıfırla';F=Q=B=null;render();toast('İlerleme sıfırlandı');
+}
+render();
+</script>
+</body>
+</html>
