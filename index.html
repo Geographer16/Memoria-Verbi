@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-title" content="Memoria Verbi">
 <meta name="application-name" content="Memoria Verbi">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700;9..144,800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700;9..144,800&family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=Caveat:wght@600&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#0b0a16;--panel:rgba(255,255,255,.045);--panel2:rgba(255,255,255,.07);--line:rgba(255,255,255,.09);
@@ -35,6 +35,37 @@ body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;
 }
 button{font:inherit;color:inherit;cursor:pointer;border:0;background:none;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
 button:focus-visible{outline:2px solid var(--a1);outline-offset:2px}
+.page[hidden]{display:none!important}
+.hhead{text-align:center;padding:40px 0 30px}
+.logo.xl{width:72px;height:72px;font-size:36px;border-radius:22px;margin:0 auto 18px}
+.hhead h1{font-family:var(--disp);font-size:clamp(34px,7vw,52px);margin:0;letter-spacing:-.02em}
+.hhead p{color:var(--mute);margin:8px 0 0;font-size:16px}
+.pick{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;max-width:860px;margin:0 auto}
+.pcard,.lcard{position:relative;text-align:left;display:flex;flex-direction:column;gap:10px;padding:26px 24px;border-radius:24px;background:var(--panel);border:1px solid var(--line);overflow:hidden;transition:transform .2s,border-color .2s,box-shadow .2s}
+.pcard::before,.lcard::before{content:"";position:absolute;inset:0 0 auto 0;height:4px;background:linear-gradient(90deg,#b794ff,#ff7ab6)}
+.pcard.g::before{background:linear-gradient(90deg,#4f46e5,#7c3aed,#db2777)}
+.pcard:hover,.lcard:hover{transform:translateY(-3px);border-color:rgba(255,255,255,.2);box-shadow:0 24px 50px -28px #b794ff}
+.pi{font-size:34px;line-height:1}
+.pcard h2,.lcard h2{font-family:var(--disp);font-size:26px;margin:0;letter-spacing:-.01em}
+.lcard h2 em{font-weight:500;opacity:.85}
+.pcard p,.lcard p{margin:0;color:var(--mute);font-size:14.5px;line-height:1.5}
+.pm{display:flex;flex-wrap:wrap;gap:6px}
+.pm span{font-size:12px;font-weight:700;padding:5px 9px;border-radius:8px;background:rgba(255,255,255,.07);color:var(--text)}
+.pm span.ok{background:rgba(62,224,161,.14);color:#9ff5d2}
+.pbar{height:5px;border-radius:5px;background:rgba(255,255,255,.08);overflow:hidden}
+.pbar i{display:block;height:100%;width:0;background:var(--ok);transition:width .5s}
+.go{margin-top:4px;font-weight:800;font-size:14px;background:linear-gradient(135deg,#b794ff,#ff7ab6);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lk{font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#c4b5fd}
+.ghead{display:flex;flex-direction:column;gap:14px;padding:10px 0 24px}
+.ghead h1{font-family:var(--disp);font-size:clamp(28px,6vw,40px);margin:0}
+.backbtn{align-self:flex-start;font-size:13px;font-weight:700;padding:8px 13px;border-radius:10px;background:var(--panel);border:1px solid var(--line);color:var(--mute)}
+.backbtn:hover{color:var(--text)}
+.homerow{margin-bottom:14px}
+.fhome{flex:0 0 auto;width:40px;height:40px;border-radius:12px;background:var(--panel);border:1px solid var(--line);font-size:18px;font-weight:800;color:var(--text)}
+.lessons{display:grid;gap:14px;max-width:760px}
+.brand{cursor:pointer}
+.fbar .logo{cursor:pointer}
+@media (hover:none){.pcard:hover,.lcard:hover{transform:none}.pcard:active,.lcard:active{transform:scale(.98)}}
 .wrap{max-width:1160px;margin:0 auto;overflow-x:clip;padding:calc(22px + env(safe-area-inset-top)) calc(18px + env(safe-area-inset-right)) 80px calc(18px + env(safe-area-inset-left))}
 .top{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:18px}
 .brand{display:flex;align-items:center;gap:12px}
@@ -140,6 +171,7 @@ button:focus-visible{outline:2px solid var(--a1);outline-offset:2px}
 .fcount span{padding:4px 8px;border-radius:8px}
 .fcount .k,.fsess .k,.cnt .k{background:rgba(62,224,161,.14);color:#9ff5d2}
 .fcount .u,.fsess .u,.cnt .u{background:rgba(255,107,129,.14);color:#ffb3c0}
+.fcount .sc{background:rgba(255,255,255,.07);color:var(--mute)}
 .fcount.new{padding:4px 8px;border-radius:8px;background:rgba(255,255,255,.07);color:var(--mute)}
 .fsess,.cnt{display:flex;gap:6px}
 .fsess i,.cnt i{font-style:normal;font-weight:800;font-size:12px;padding:3px 8px;border-radius:8px;background:rgba(255,255,255,.06)}
@@ -263,7 +295,7 @@ kbd{font-family:var(--ui);font-size:10px;padding:2px 5px;border-radius:5px;backg
   .tchip{width:calc((100% - 6*5px)/7);height:40px;font-size:14px}
   .scopebar{flex-direction:column;align-items:stretch}
   .scopeact{justify-content:space-between}
-  body.study .top,body.study #scope{display:none}
+  body.study .top,body.study #scope,body.study .homerow{display:none}
   body.study.showscope #scope{display:block;margin-bottom:12px}
   body.study.showscope .scopetoggle{display:none}
   body.study.showscope .scopebody{margin-top:0}
@@ -306,9 +338,606 @@ kbd{font-family:var(--ui);font-size:10px;padding:2px 5px;border-radius:5px;backg
 </style>
 </head>
 <body class="adj">
-<div class="wrap">
+<div class="wrap page" id="pg-home" hidden>
+  <div class="hhead">
+    <div class="logo xl">M</div>
+    <h1>Memoria Verbi</h1>
+    <p>Bugün ne çalışmak istersin?</p>
+  </div>
+  <div class="pick">
+    <button class="pcard" onclick="go('kelime')">
+      <div class="pi">📚</div>
+      <h2>Kelime Çalışmaları</h2>
+      <p>Adjective &amp; Verb eş anlamlı grupları · kartlar, testler, grup kurma</p>
+      <div class="pm" id="homeVocab"></div>
+      <div class="pbar"><i id="homeBar"></i></div>
+      <span class="go">Başla →</span>
+    </button>
+    <button class="pcard g" onclick="go('gramer')">
+      <div class="pi">✍️</div>
+      <h2>Gramer Çalışmaları</h2>
+      <p>Konu anlatımları, adım adım örnekler, alıştırmalar ve testler</p>
+      <div class="pm"><span>1 ders</span></div>
+      <span class="go">Derslere git →</span>
+    </button>
+  </div>
+</div>
+<div class="wrap page" id="pg-gramer" hidden>
+  <div class="ghead">
+    <button class="backbtn" onclick="go('home')">← Ana sayfa</button>
+    <h1>Gramer Çalışmaları</h1>
+  </div>
+  <div class="lessons">
+    <button class="lcard" onclick="go('relative-clause')">
+      <span class="lk">YDS · Grammar</span>
+      <h2>Relative Clause Kısaltmaları <em>&amp; Infinitive</em></h2>
+      <p>V-ing, V3, having V3, the first / only + to V, cümle başında kısaltma ve infinitive kullanımları.</p>
+      <div class="pm"><span>10 bölüm</span><span>6 adım adım örnek</span><span>12 alıştırma</span><span>25 test sorusu</span></div>
+      <span class="go">Derse başla →</span>
+    </button>
+  </div>
+</div>
+<div class="page" id="pg-lesson" hidden></div>
+<template id="tpl-rc"><style>:host{display:block}
+
+.lx{--bg:#0b0a16;--card:#16132a;--ink:#ece9fb;--muted:#a19cbf;--line:#2a2643;--grad:linear-gradient(135deg,#4f46e5 0%,#7c3aed 50%,#db2777 100%);
+  --blue:#8b8cff;--blue-soft:#1f1d3d;--green:#4ade9f;--green-soft:#11291f;--red:#ff7a93;--red-soft:#33141d;--amber:#fbbf5a;--amber-soft:#2e2312;--purple:#b79cff;--purple-soft:#241c3d;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 12px 30px -12px rgba(0,0,0,.6);--shadow-h:0 2px 4px rgba(0,0,0,.3),0 20px 44px -14px rgba(0,0,0,.7);}
+*{box-sizing:border-box}
+.lx{margin:0;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);line-height:1.7;font-size:16px;
+  background:var(--bg);
+  background-image:radial-gradient(circle at 10% 0%,rgba(124,58,237,.10),transparent 40%),radial-gradient(circle at 90% 30%,rgba(219,39,119,.08),transparent 40%),radial-gradient(var(--line) 1px,transparent 1px);
+  background-size:auto,auto,22px 22px;background-attachment:fixed}
+::selection{background:#c4b5fd;color:#1b1830}
+a{color:var(--blue)}
+
+#progress{position:fixed;top:0;left:0;height:4px;width:0;background:var(--grad);z-index:20;transition:width .1s}
+
+.hero{position:relative;overflow:hidden;background:var(--grad);color:#fff;padding:70px 20px 90px;text-align:center}
+.hero::before,.hero::after{content:"";position:absolute;border-radius:50%;filter:blur(10px);opacity:.35}
+.hero::before{width:380px;height:380px;background:#f9a8d4;top:-140px;left:-100px}
+.hero::after{width:300px;height:300px;background:#93c5fd;bottom:-160px;right:-60px}
+.hero .in{position:relative;z-index:1;max-width:760px;margin:0 auto}
+.hero .kicker{display:inline-block;font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.3);padding:5px 14px;border-radius:999px;backdrop-filter:blur(6px)}
+.hero h1{font-family:Fraunces,Georgia,serif;font-weight:700;font-size:clamp(32px,6vw,56px);line-height:1.08;margin:18px 0 14px;letter-spacing:-.02em}
+.hero h1 em{font-style:italic;font-weight:500;opacity:.92}
+.hero p{font-size:17px;opacity:.92;margin:0 auto;max-width:600px}
+.hero .chips{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:26px 0}
+.hero .chip{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);border-radius:14px;padding:10px 16px;backdrop-filter:blur(6px);min-width:110px}
+.hero .chip b{display:block;font-family:Fraunces,Georgia,serif;font-size:26px;line-height:1}
+.hero .chip span{font-size:12.5px;opacity:.85}
+.hero .cta{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.hero .cta a{text-decoration:none;font-weight:600;padding:12px 22px;border-radius:12px;transition:transform .2s,box-shadow .2s}
+.hero .cta a.p{background:#fff;color:#4f46e5;box-shadow:0 10px 30px -10px rgba(0,0,0,.4)}
+.hero .cta a.s{color:#fff;border:1px solid rgba(255,255,255,.5)}
+.hero .cta a:hover{transform:translateY(-2px)}
+.wave{display:block;width:100%;height:50px;margin-top:-50px;position:relative;z-index:2}
+.wave path{fill:var(--bg)}
+
+nav{position:sticky;top:0;z-index:10;display:flex;gap:6px;overflow-x:auto;padding:12px 16px;margin:0 auto;
+  background:color-mix(in srgb,var(--bg) 78%,transparent);backdrop-filter:blur(14px) saturate(1.4);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line);scrollbar-width:none}
+nav::-webkit-scrollbar{display:none}
+nav a{white-space:nowrap;text-decoration:none;color:var(--muted);font-size:13px;font-weight:500;padding:7px 13px;border-radius:999px;border:1px solid transparent;transition:border-color .2s,box-shadow .2s}
+nav a:hover{color:var(--blue);background:var(--card);border-color:var(--line)}
+nav a.on{color:#fff;background:var(--grad);box-shadow:0 6px 16px -6px rgba(124,58,237,.6)}
+
+main{max-width:960px;margin:0 auto;padding:10px 18px 90px}
+section{position:relative;background:var(--card);border:1px solid var(--line);border-radius:24px;padding:32px 30px;margin:28px 0;scroll-margin-top:70px;box-shadow:var(--shadow);overflow:hidden}
+section::before{content:"";position:absolute;inset:0 0 auto 0;height:5px;background:var(--grad);opacity:.9}
+@media (max-width:600px){section{padding:24px 18px;border-radius:18px}}
+h2{margin:0 0 8px;font-family:Fraunces,Georgia,serif;font-size:clamp(22px,3.4vw,28px);font-weight:700;letter-spacing:-.01em;display:flex;align-items:center;gap:12px;line-height:1.2}
+h2 .n{flex:none;width:42px;height:42px;line-height:42px;text-align:center;border-radius:14px;background:var(--grad);color:#fff;font-family:Inter,sans-serif;font-size:17px;font-weight:700;box-shadow:0 8px 18px -8px rgba(124,58,237,.7)}
+h3{font-size:17px;margin:30px 0 10px;display:flex;align-items:center;gap:8px}
+h3::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--grad)}
+.sub{color:var(--muted);margin:0 0 16px}
+.goal{display:flex;gap:10px;align-items:flex-start;background:var(--purple-soft);border-radius:14px;padding:12px 16px;font-size:14.5px;margin:12px 0 18px}
+.goal::before{content:"🎯";font-size:18px;line-height:1.4}
+.goal b{color:var(--purple)}
+.formula{font-family:Caveat,cursive;font-size:28px;line-height:1.2;color:var(--blue);background:var(--blue-soft);border-radius:14px;padding:8px 20px;display:inline-block;margin:8px 0;border:1px dashed color-mix(in srgb,var(--blue) 40%,transparent)}
+
+.pair{position:relative;border:1px solid var(--line);padding:12px 16px 12px 20px;margin:10px 0;background:var(--card);border-radius:14px;transition:transform .2s,box-shadow .2s,border-color .2s}
+.pair::before{content:"";position:absolute;left:0;top:10px;bottom:10px;width:4px;border-radius:0 4px 4px 0;background:var(--grad)}
+.pair:hover{transform:translateY(-2px);box-shadow:var(--shadow-h);border-color:transparent}
+.pair .from{color:var(--muted)}
+.pair .to{font-weight:500}
+.pair .to::before{content:"→ ";color:var(--green);font-weight:700}
+.pair .tr{font-size:14px;color:var(--muted);font-style:italic;margin-top:4px}
+b.k{color:var(--purple);background:var(--purple-soft);padding:0 4px;border-radius:5px}
+s{color:var(--red);text-decoration-thickness:2px}
+.rc{background:var(--amber-soft);border-radius:5px;padding:0 4px;box-shadow:inset 0 -2px 0 color-mix(in srgb,var(--amber) 40%,transparent)}
+.mv{background:var(--green-soft);border-radius:5px;padding:0 4px;box-shadow:inset 0 -2px 0 color-mix(in srgb,var(--green) 40%,transparent)}
+sup.t{font-size:10.5px;color:#fff;background:var(--purple);font-weight:700;margin-left:3px;padding:0 5px;border-radius:5px}
+
+.tip,.warn,.ok,.why{position:relative;border-radius:14px;padding:14px 18px 14px 52px;margin:16px 0;font-size:15px;border:1px solid transparent}
+.tip::before,.warn::before,.ok::before,.why::before{position:absolute;left:16px;top:13px;font-size:20px}
+.tip{background:var(--amber-soft);border-color:color-mix(in srgb,var(--amber) 25%,transparent)} .tip::before{content:"💡"} .tip>strong:first-child{color:var(--amber)}
+.warn{background:var(--red-soft);border-color:color-mix(in srgb,var(--red) 25%,transparent)} .warn::before{content:"⚠️"} .warn>strong:first-child{color:var(--red)}
+.ok{background:var(--green-soft);border-color:color-mix(in srgb,var(--green) 25%,transparent)} .ok::before{content:"✅"} .ok>strong:first-child{color:var(--green)}
+.why{background:var(--purple-soft);border-color:color-mix(in srgb,var(--purple) 25%,transparent)} .why::before{content:"🧠"} .why>strong:first-child{color:var(--purple)}
+.note{position:relative;background:repeating-linear-gradient(var(--card) 0 27px,color-mix(in srgb,var(--blue) 14%,transparent) 27px 28px);border:1px solid var(--line);border-left:4px solid var(--red);border-radius:6px 14px 14px 6px;padding:12px 18px;margin:16px 0;font-size:15px;line-height:28px;box-shadow:var(--shadow);transform:rotate(-.3deg)}
+.note .lbl{font-family:Caveat,cursive;font-size:24px;color:var(--red);display:block;line-height:1.2;margin-bottom:2px}
+
+.scroll{overflow-x:auto;border-radius:14px;border:1px solid var(--line);margin:14px 0}
+table{width:100%;border-collapse:separate;border-spacing:0;font-size:15px;border:1px solid var(--line);border-radius:14px;overflow:hidden;margin:14px 0}
+.scroll table{border:none;margin:0;border-radius:0}
+th,td{padding:11px 13px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+tr:last-child td{border-bottom:none}
+th{background:var(--grad);color:#fff;font-weight:600;font-size:14px}
+tr:nth-child(even) td{background:color-mix(in srgb,var(--purple-soft) 55%,transparent)}
+td.f{font-weight:600;color:var(--purple)}
+
+button{font:inherit;cursor:pointer}
+.btn{font-size:14px;font-weight:600;padding:9px 16px;border-radius:10px;border:none;background:var(--grad);color:#fff;box-shadow:0 6px 16px -8px rgba(124,58,237,.7);transition:transform .15s,box-shadow .15s,opacity .15s}
+.btn:hover{transform:translateY(-1px);box-shadow:0 10px 22px -8px rgba(124,58,237,.8)}
+.btn.ghost{background:var(--card);color:var(--blue);border:1px solid var(--line);box-shadow:none}
+.btn.ghost:hover{border-color:var(--blue)}
+.btn:disabled{opacity:.4;cursor:default;transform:none}
+
+.stepper{border:1px solid var(--line);border-radius:18px;padding:18px;margin:18px 0;background:linear-gradient(180deg,var(--purple-soft),var(--card) 70%)}
+.stepper .ttl{font-size:12px;font-weight:700;color:var(--purple);letter-spacing:.02em;margin-bottom:10px}
+.stepper .ttl::before{content:"▶ "}
+.stepper .st{display:none;position:relative;padding:10px 0 10px 18px;border-left:2px dashed color-mix(in srgb,var(--purple) 35%,transparent);margin-left:10px}
+.stepper .st.show{display:block;animation:fade .4s ease}
+.stepper .sn{display:inline-block;font-size:11.5px;font-weight:700;color:#fff;background:var(--grad);border-radius:999px;padding:2px 10px;margin-right:8px;position:relative;left:-30px;margin-right:-22px;box-shadow:0 0 0 4px var(--card)}
+.stepper .s{font-size:16.5px}
+.stepper .c{font-size:14px;color:var(--muted);margin-top:3px}
+.stepper .ctrl{display:flex;gap:8px;margin-top:12px}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+.q{border:1px solid var(--line);border-radius:16px;padding:16px 18px;margin:14px 0;background:var(--card);transition:box-shadow .2s}
+.q:hover{box-shadow:var(--shadow)}
+.q p{margin:0 0 12px;font-weight:600}
+.q .cat{display:inline-block;font-size:10.5px;font-weight:700;color:var(--purple);background:var(--purple-soft);letter-spacing:.02em;padding:2px 9px;border-radius:999px;margin-bottom:8px}
+.opts{display:flex;flex-wrap:wrap;gap:8px}
+.opts.col{flex-direction:column}
+.opts button{font-size:14.5px;padding:9px 14px;border-radius:11px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);text-align:left;transition:all .15s}
+.opts button:hover{border-color:var(--purple);transform:translateY(-1px)}
+.opts button.right{background:var(--green-soft);border-color:var(--green);color:var(--green);font-weight:600;animation:pop .3s}
+.opts button.wrong{background:var(--red-soft);border-color:var(--red);color:var(--red);animation:shake .35s}
+@keyframes pop{50%{transform:scale(1.04)}}
+@keyframes shake{25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+.exp{display:none;margin-top:12px;font-size:14px;color:var(--muted);background:var(--bg);border-radius:10px;padding:8px 12px}
+.exp.show{display:block;animation:fade .3s}
+
+.pr{border:1px solid var(--line);border-radius:16px;padding:16px 18px;margin:14px 0;background:var(--card)}
+.pr .src{margin-bottom:10px}
+.pr input{width:100%;font:inherit;font-size:15px;padding:11px 14px;border-radius:11px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);transition:border-color .15s,box-shadow .15s}
+.pr input:focus{outline:none;border-color:var(--purple);box-shadow:0 0 0 4px var(--purple-soft)}
+.pr .row{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.pr .res{margin-top:10px;font-size:14px}
+.pr .res.good{color:var(--green)} .pr .res.bad{color:var(--red)}
+.pr .hint{font-size:13.5px;color:var(--amber);background:var(--amber-soft);border-radius:8px;padding:6px 10px;margin-top:8px}
+
+.wiz{position:relative;border-radius:20px;padding:24px;background:linear-gradient(var(--card),var(--card)) padding-box,var(--grad) border-box;border:2px solid transparent;box-shadow:var(--shadow)}
+.wiz .wq{font-weight:700;font-size:17px;margin-bottom:14px}
+.wiz .wa{display:flex;gap:10px;flex-wrap:wrap}
+.wiz .wa button{padding:11px 18px;border-radius:12px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);font-size:14.5px;font-weight:500;transition:all .15s}
+.wiz .wa button:hover{background:var(--grad);color:#fff;border-color:transparent;transform:translateY(-2px)}
+.wiz .path{font-size:12.5px;color:var(--muted);margin-bottom:12px;padding:6px 10px;background:var(--bg);border-radius:8px}
+.wiz .out{background:var(--purple-soft);border-radius:14px;padding:18px;animation:fade .4s}
+.wiz .out .big{font-family:Caveat,cursive;font-size:42px;line-height:1.1;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+.flow{display:grid;gap:10px;margin:14px 0;counter-reset:f}
+.flow .fs{display:flex;gap:14px;align-items:flex-start;background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:12px 16px;transition:transform .2s}
+.flow .fs:hover{transform:translateX(4px)}
+.flow .fs .num{flex:none;width:30px;height:30px;border-radius:10px;background:var(--grad);color:#fff;text-align:center;line-height:30px;font-size:14px;font-weight:700}
+
+.cheat{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px}
+.cheat .cc{position:relative;border:1px solid var(--line);border-radius:16px;padding:16px;background:var(--card);overflow:hidden;transition:transform .2s,box-shadow .2s}
+.cheat .cc::before{content:"";position:absolute;inset:0 0 auto 0;height:4px;background:var(--grad)}
+.cheat .cc:hover{transform:translateY(-3px);box-shadow:var(--shadow-h)}
+.cheat .cc h4{margin:0 0 6px;font-size:13px;letter-spacing:.02em;color:var(--purple)}
+.cheat .cc .fm{font-family:Caveat,cursive;font-size:25px;color:var(--blue);line-height:1.2}
+.cheat .cc .ex{font-size:13.5px;color:var(--muted);margin-top:4px}
+
+.mist{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}
+.mist .m{border:1px solid var(--line);border-radius:16px;padding:14px 16px;background:var(--card);transition:box-shadow .2s}
+.mist .m:hover{box-shadow:var(--shadow)}
+.mist .m .bad{color:var(--red);text-decoration:line-through;text-decoration-thickness:1px;opacity:.85} .mist .m .bad::before{content:"✗ ";font-weight:700}
+.mist .m .good{color:var(--green);font-weight:600;margin-top:4px} .mist .m .good::before{content:"✓ "}
+.mist .m .ex{font-size:13.5px;color:var(--muted);margin-top:8px;padding-top:8px;border-top:1px dashed var(--line)}
+
+#final-result{display:none;border-radius:18px;padding:20px;margin-top:18px;background:linear-gradient(var(--card),var(--card)) padding-box,var(--grad) border-box;border:2px solid transparent;animation:fade .4s}
+.bar{height:10px;border-radius:5px;background:var(--line);overflow:hidden;margin:6px 0 12px}
+.bar i{display:block;height:100%;border-radius:5px;transition:width .8s}
+.score{font-weight:700;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;font-size:18px}
+ul,ol{padding-left:22px}
+li{margin:4px 0}
+footer{text-align:center;color:var(--muted);font-size:13px;padding:10px}
+
+.rv{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+.rv.in{opacity:1;transform:none}
+#top{position:fixed;right:18px;bottom:18px;width:46px;height:46px;border-radius:14px;border:none;background:var(--grad);color:#fff;font-size:20px;box-shadow:0 10px 24px -8px rgba(124,58,237,.8);opacity:0;pointer-events:none;transition:opacity .25s,transform .25s;z-index:15}
+#top.show{opacity:1;pointer-events:auto}
+#top:hover{transform:translateY(-3px)}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}}
+
+nav a.back{color:var(--ink);border-color:var(--line);background:var(--card)}
+.lx{min-height:100vh}
+</style><div class="lx">
+<div id="progress"></div>
+<header class="hero"><div class="in">
+  <span class="kicker">YDS · Grammar Ders Notu</span>
+  <h1>Relative Clause <em>Kısaltmaları</em><br>&amp; Infinitive</h1>
+  <p>Önce mantığını anla, sonra örnekleri adım adım dönüştür, her bölümde kendini dene ve genel testle bitir.</p>
+  <div class="chips">
+    <div class="chip"><b>10</b><span>bölüm</span></div>
+    <div class="chip"><b>6</b><span>adım adım örnek</span></div>
+    <div class="chip"><b>12</b><span>yazma alıştırması</span></div>
+    <div class="chip"><b>25</b><span>test sorusu</span></div>
+  </div>
+  <div class="cta"><a class="p" href="#giris">Derse başla →</a><a class="s" href="#karar">Karar sihirbazı</a><a class="s" href="#test">Teste geç</a></div>
+</div></header>
+<svg class="wave" viewBox="0 0 1440 50" preserveAspectRatio="none"><path d="M0,30 C240,60 480,0 720,20 C960,40 1200,10 1440,30 L1440,50 L0,50 Z"/></svg>
+<nav>
+  <a href="#gramer" class="back">← Gramer</a>
+  <a href="#giris">0 · Giriş</a>
+  <a href="#temel">1 · Ön bilgi</a>
+  <a href="#karar">2 · Karar sihirbazı</a>
+  <a href="#active">3 · Active</a>
+  <a href="#passive">4 · Passive</a>
+  <a href="#first">5 · The first / only</a>
+  <a href="#tablo">6 · Büyük tablo</a>
+  <a href="#basta">7 · Cümle başı & Kim/Ne</a>
+  <a href="#inf">8 · Infinitive</a>
+  <a href="#hata">9 · Sık hatalar</a>
+  <a href="#ozet">10 · Özet kart</a>
+  <a href="#test">Genel test</a>
+</nav>
+<main>
+
+<section id="giris">
+  <h2><span class="n">0</span>Önce Türkçeden başlayalım</h2>
+  <p>Aslında bu konuyu Türkçede her gün kullanıyorsun. Türkçede "<i>Üst katta <b>yaşayan</b> adam</i>" deriz: tek kelimelik bir sıfat-fiil (<b>-an / -en</b>) yeterli. İngilizce ise aynı şeyi uzun yoldan söyler:</p>
+  <div class="pair">
+    <div class="from">The man <span class="rc">who lives upstairs</span> … <span style="font-size:14px">(üst katta <u>yaşayan</u> adam)</span></div>
+  </div>
+  <p><b>Kısaltma (reduction)</b>, İngilizcedeki bu uzun "who / which" cümleciğini Türkçedeki gibi kısa bir yapıya çevirmektir:</p>
+  <div class="pair"><div class="to">The man <b class="k">living</b> upstairs …</div></div>
+  <div class="scroll">
+  <table>
+    <tr><th>Türkçe ek</th><th>Anlam</th><th>İngilizce karşılığı</th><th>Örnek</th></tr>
+    <tr><td class="f">-an / -en</td><td>yapan (etken, aynı zaman)</td><td><b>V-ing</b></td><td>üreten → producing</td></tr>
+    <tr><td class="f">-miş olan</td><td>yapmış olan (etken, önce)</td><td><b>having V3</b></td><td>üretmiş olan → having produced</td></tr>
+    <tr><td class="f">-ilen / -ılan</td><td>yapılan (edilgen)</td><td><b>V3 / being V3</b></td><td>üretilen → produced</td></tr>
+    <tr><td class="f">-ilmiş olan</td><td>yapılmış olan (edilgen, önce)</td><td><b>having been V3</b></td><td>üretilmiş olan → having been produced</td></tr>
+  </table>
+  </div>
+  <div class="why"><strong>Bu tablo neden önemli?</strong> Bir kısaltmayı gördüğünde Türkçeye çevirip "<i>-en mi, -miş olan mı, -ilen mi?</i>" diye sorarsan doğru yapıyı neredeyse her zaman bulursun.</div>
+</section>
+
+<section id="temel">
+  <h2><span class="n">1</span>Ön bilgi: Hangi cümlecik kısaltılır?</h2>
+  <div class="goal"><b>Bu bölümün hedefi:</b> Bir who/which cümleciğinin kısaltılıp kısaltılamayacağını 3 saniyede anlamak.</div>
+  <p>Kısaltmanın tek ön şartı şu: <b>who / which / that</b> bağlacı, cümleciğin <b>öznesi</b> olmalı. Bunu anlamanın yolu bağlacın hemen arkasına bakmaktır.</p>
+  <div class="scroll">
+  <table>
+    <tr><th>Bağlaçtan sonra ne var?</th><th>Örnek</th><th>Kısaltılır mı?</th></tr>
+    <tr><td><b>Fiil</b></td><td>The person who <u>lives</u> upstairs</td><td style="color:var(--green)">✓ Evet → living</td></tr>
+    <tr><td><b>be</b> (is/are/was/were)</td><td>The man that <u>is</u> standing by the door</td><td style="color:var(--green)">✓ Evet → who + be silinir</td></tr>
+    <tr><td><b>Özne</b> (I, he, they, the man…)</td><td>The book which <u>I</u> bought</td><td style="color:var(--red)">✗ Bu yolla kısaltılmaz; sadece <i>which</i> atılabilir → The book I bought</td></tr>
+  </table>
+  </div>
+  <div class="ok"><strong>En basit kural:</strong> Bağlaçtan sonra <b>be</b> geliyorsa <b>bağlacı ve be'yi silmen</b> yeterli. Geriye V-ing kalırsa active, V3 kalırsa passive olur.<br>
+  The man <s>that is</s> standing by the door → The man <b>standing</b> by the door<br>
+  The man <s>who was</s> shot yesterday → The man <b>shot</b> yesterday</div>
+  <h3>Kısaltma yaparken sorulacak 4 soru</h3>
+  <div class="flow">
+    <div class="fs"><span class="num">1</span><div><b>Bağlaçtan sonra fiil/be mi var?</b> Yoksa (özne varsa) dur, kısaltma yok.</div></div>
+    <div class="fs"><span class="num">2</span><div><b>İsmin önünde the first / the second / the last / the only / the best / the most / -est var mı?</b> Varsa cevap <b>to V</b> ailesinden.</div></div>
+    <div class="fs"><span class="num">3</span><div><b>Etken mi, edilgen mi?</b> İsim işi yapıyorsa active, işe maruz kalıyorsa passive (be + V3).</div></div>
+    <div class="fs"><span class="num">4</span><div><b>Zaman farkı var mı?</b> Cümlecikteki eylem ana fiilden önce bitmişse <b>having / to have</b> eklenir.</div></div>
+  </div>
+  <h3>Kendini dene</h3>
+  <div class="qset" data-set="temel"></div>
+</section>
+
+<section id="karar">
+  <h2><span class="n">2</span>Karar sihirbazı</h2>
+  <p class="sub">Elindeki cümle için soruları cevapla, sihirbaz hangi yapıyı kullanacağını söylesin. Kendi cümlelerini kontrol etmek için de kullanabilirsin.</p>
+  <div class="wiz" id="wiz"></div>
+</section>
+
+<section id="active">
+  <h2><span class="n">3</span>Active (Etken) kısaltma</h2>
+  <div class="goal"><b>Bu bölümün hedefi:</b> V-ing ile having V3 arasındaki farkı zaman ilişkisine bakarak seçmek.</div>
+  <div class="formula">V-ing (yapan) · having V3 (yapmış olan)</div>
+  <p>İsim eylemi <b>kendisi yapıyorsa</b> active kısaltma kullanılır. İki seçenek var ve aralarındaki tek fark <b>zaman</b>:</p>
+  <ul>
+    <li><b>V-ing</b>: eylem ana fiille aynı zamanda oluyor ya da genel bir durum.</li>
+    <li><b>having V3</b>: eylem ana fiilden <b>önce</b> olmuş ve bitmiş.</li>
+  </ul>
+
+  <h3>a) Aynı zaman / genel durum → V-ing</h3>
+  <div class="stepper" data-ex="a1"></div>
+  <div class="pair">
+    <div class="from">The man <s>that is</s> standing by the door is talking on the phone.</div>
+    <div class="to">The man <b class="k">standing</b> by the door is talking on the phone.</div>
+    <div class="tr">Kapının yanında duran adam telefonla konuşuyor.</div>
+  </div>
+  <div class="pair">
+    <div class="from">The car <s>which is</s> running is my car.</div>
+    <div class="to">The car <b class="k">running</b> is my car.</div>
+    <div class="tr">Çalışan araba benim arabam.</div>
+  </div>
+  <div class="pair">
+    <div class="from">Most of the people who work in this company speak English.</div>
+    <div class="to">Most of the people <b class="k">working</b> in this company speak English.</div>
+  </div>
+  <div class="pair">
+    <div class="from">M. K. Atatürk, who founded<sup class="t">V2</sup> the Turkish Republic, was<sup class="t">V2</sup> the first teacher.</div>
+    <div class="to">M. K. Atatürk, <b class="k">founding</b> the Turkish Republic, was the first teacher.</div>
+    <div class="to"><b class="k">Founding</b> the Turkish Republic, M. K. Atatürk was the first teacher.</div>
+  </div>
+  <div class="tip"><strong>Püf:</strong> Atatürk örneğinde iki fiil de <b>V2</b>. Aralarındaki zaman farkı vurgulanmadığı için basit <b>V-ing</b> kullanıldı. Önceliği özellikle göstermek istersen <i>Having founded…</i> da doğrudur.</div>
+
+  <h3>b) Eylem önce olmuşsa → having V3</h3>
+  <div class="stepper" data-ex="a2"></div>
+  <div class="pair">
+    <div class="from">Jack, who graduated<sup class="t">V2</sup> from university last year, is<sup class="t">P</sup> hunting for a new job.</div>
+    <div class="to">Jack, <b class="k">having graduated</b> from university last year, is hunting for a new job.</div>
+    <div class="tr">Geçen yıl üniversiteden mezun olmuş olan Jack yeni bir iş arıyor.</div>
+  </div>
+  <div class="pair">
+    <div class="from">The factory which produced millions of toys until recently is now producing cars.</div>
+    <div class="to">The factory <b class="k">having produced</b> millions of toys until recently is now producing cars.</div>
+  </div>
+  <div class="pair">
+    <div class="from">Bill Gates, who founded<sup class="t">V2</sup> Microsoft, is<sup class="t">P</sup> one of the richest people in the world.</div>
+    <div class="to">Bill Gates, <b class="k">having founded</b> Microsoft, is one of the richest people in the world.</div>
+    <div class="to"><b class="k">Having founded</b> Microsoft, Bill Gates is one of the richest people in the world.</div>
+  </div>
+  <div class="tip"><strong>Püf:</strong> Tahtadaki gibi fiillerin üstüne zamanını yaz. Cümlecik <b>V2</b>, ana fiil <b>P (present)</b> ise zaman farkı vardır → <b>having V3</b>. Zaman ifadeleri de ipucu verir: <i>last year, until recently, before 2000</i>.</div>
+  <div class="why"><strong>Bilgi notu:</strong> Günlük İngilizcede virgülsüz (tanımlayıcı) cümleciklerde <i>having V3</i> pek kullanılmaz; anadili İngilizce olan biri genelde <i>The man who lived upstairs…</i> der. <i>having V3</i> en çok <b>virgüllü yapılarda</b> ve <b>cümle başında</b> görülür (<i>Jack, having graduated…</i> / <i>Having founded Microsoft, …</i>). Sınavda ise zaman farkını göstermek için doğru kabul edilir.</div>
+
+  <h3>Alıştırma: Kısaltılmış halini yaz</h3>
+  <div class="pset" data-set="active"></div>
+</section>
+
+<section id="passive">
+  <h2><span class="n">4</span>Passive (Edilgen) kısaltma</h2>
+  <div class="goal"><b>Bu bölümün hedefi:</b> İsim işe maruz kalıyorsa V3 ailesini seçmek ve V-ing tuzağına düşmemek.</div>
+  <div class="formula">V3 / being V3 (yapılan) · having been V3 (yapılmış olan)</div>
+  <div class="note"><span class="lbl">✎ Defterimden</span>
+  <b>be + V3</b> olmadan edilgen (passive) olmaz. Kısaltmada sadece V3 görsen bile arkada silinmiş bir <i>be</i> vardır: <i>The man <s>who was</s> shot…</i> → <i>The man shot…</i></div>
+
+  <h3>a) En sık kullanılan hali: sadece V3</h3>
+  <div class="stepper" data-ex="p1"></div>
+  <div class="pair">
+    <div class="from">The car <s>which was</s> stolen last year was found yesterday.</div>
+    <div class="to">The car <b class="k">stolen</b> last year was found yesterday.</div>
+    <div class="tr">Geçen yıl çalınan araba dün bulundu.</div>
+  </div>
+  <div class="pair">
+    <div class="from">The computer <s>that was</s> bought last year was broken last week.</div>
+    <div class="to">The computer <b class="k">bought</b> last year was broken last week.</div>
+    <div class="tr">Geçen yıl alınan bilgisayar geçen hafta bozuldu.</div>
+  </div>
+
+  <h3>b) Şu an devam ediyorsa → being V3</h3>
+  <div class="pair">
+    <div class="from">The bridge <s>which is being</s> built now will connect the two cities.</div>
+    <div class="to">The bridge <b class="k">being built</b> now will connect the two cities.</div>
+    <div class="tr">Şu an yapılmakta olan köprü iki şehri birbirine bağlayacak.</div>
+  </div>
+
+  <h3>c) Önceliği vurgulamak için → having been V3</h3>
+  <div class="pair">
+    <div class="from">The man who was shot yesterday is now in the hospital.</div>
+    <div class="to">The man <b class="k">having been shot</b> yesterday is now in the hospital.</div>
+  </div>
+  <div class="pair">
+    <div class="from">The car which had been stolen before 2000 was found yesterday.</div>
+    <div class="to">The car <b class="k">having been stolen</b> before 2000 was found yesterday.</div>
+  </div>
+  <div class="pair">
+    <div class="from">Microsoft, which was founded<sup class="t">V2</sup> by Bill Gates, is<sup class="t">P</sup> the largest software company in the world.</div>
+    <div class="to">Microsoft, <b class="k">having been founded</b> by Bill Gates, is …</div>
+    <div class="to"><b class="k">(Having been) founded</b> by Bill Gates, Microsoft is the largest software company …</div>
+  </div>
+  <div class="tip"><strong>Active mi passive mi? İki hızlı test:</strong><br>
+  1) Kısaltmadan sonra <b>by</b> geliyorsa passive'dir (<i>founded <b>by</b> Bill Gates</i>).<br>
+  2) Fiilden sonra <b>nesne</b> geliyorsa genelde active'dir (<i>having founded <b>Microsoft</b></i>).<br>
+  3) Türkçeye çevir: "araba <b>çalan</b>" mı, "<b>çalınan</b> araba" mı? Araba kendisi çalmaz → passive → <b>stolen</b>.</div>
+  <div class="warn"><strong>Tuzak:</strong> <s>The car <u>stealing</u> last year…</s> ✗ → "çalan araba" demiş olursun. Doğrusu: <b>stolen</b>.</div>
+
+  <h3>Alıştırma</h3>
+  <div class="pset" data-set="passive"></div>
+</section>
+
+<section id="first">
+  <h2><span class="n">5</span>The first / the only / the last / superlative + to V</h2>
+  <div class="goal"><b>Bu bölümün hedefi:</b> Sıra veya üstünlük bildiren bir ifade gördüğünde otomatik olarak "to V" ailesine geçmek.</div>
+  <p>İsmin önünde aşağıdakilerden biri varsa kısaltma <b>V-ing / V3 ile değil, infinitive (to V) ile</b> yapılır:</p>
+  <div class="formula">the only · the first · the second · the last · the best · the most · -est</div>
+  <div class="why"><strong>Neden "to"?</strong> Bu kalıp İngilizcede sabittir. Türkçede "<i>Ay'da yürüyen <b>ilk</b> insan</i>" deriz. İngilizcede "ilk" kelimesi geldiğinde sıfat-fiil yerine infinitive kullanılır: <i>the first person <b>to walk</b> on the Moon</i>.</div>
+  <table>
+    <tr><th></th><th>Aynı zaman / genel</th><th>Önceden olmuş</th></tr>
+    <tr><td class="f">Active</td><td><b>to V1</b><br><span style="font-size:13px;color:var(--muted)">yapan</span></td><td><b>to have V3</b><br><span style="font-size:13px;color:var(--muted)">yapmış olan</span></td></tr>
+    <tr><td class="f">Passive</td><td><b>to be V3</b><br><span style="font-size:13px;color:var(--muted)">yapılan</span></td><td><b>to have been V3</b><br><span style="font-size:13px;color:var(--muted)">yapılmış olan</span></td></tr>
+  </table>
+
+  <h3>Active örnekler</h3>
+  <div class="stepper" data-ex="f1"></div>
+  <div class="pair">
+    <div class="from">The first man who lived upstairs was a doctor.</div>
+    <div class="to">The first man <b class="k">to live</b> upstairs was a doctor.</div>
+    <div class="tr">Üst katta yaşayan ilk adam doktordu.</div>
+  </div>
+  <div class="pair">
+    <div class="from">The only car which is running is my car.</div>
+    <div class="to">The only car <b class="k">to run</b> is my car.</div>
+  </div>
+  <div class="pair">
+    <div class="from">The first man who lived upstairs last year is living downstairs now.</div>
+    <div class="to">The first man <b class="k">to have lived</b> upstairs last year is living downstairs.</div>
+  </div>
+  <div class="pair">
+    <div class="from">The only man who graduated from university last year is now …</div>
+    <div class="to">The only man <b class="k">to have graduated</b> from university last year is now …</div>
+  </div>
+  <div class="pair">
+    <div class="from">Neil Armstrong was the first person who walked on the Moon.</div>
+    <div class="to">Neil Armstrong was the first person <b class="k">to walk</b> on the Moon.</div>
+  </div>
+
+  <h3>Passive örnekler</h3>
+  <div class="pair">
+    <div class="from">The last man who was shot yesterday worked for me.</div>
+    <div class="to">The last man <b class="k">to be shot</b> yesterday worked for me.</div>
+    <div class="tr">Dün vurulan son adam benim için çalışıyordu.</div>
+  </div>
+  <div class="pair">
+    <div class="from">The most expensive car which was stolen last year was found yesterday.</div>
+    <div class="to">The most expensive car <b class="k">to be stolen</b> last year was found yesterday.</div>
+  </div>
+  <div class="pair">
+    <div class="from">The only computer which has been bought lately is still working.</div>
+    <div class="to">The only computer <b class="k">to be bought</b> lately is still working.</div>
+  </div>
+  <div class="pair">
+    <div class="from">The oldest man who was shot yesterday is now in the hospital.</div>
+    <div class="to">The oldest man <b class="k">to have been shot</b> yesterday is now in the hospital.</div>
+  </div>
+  <div class="tip"><strong>Püf:</strong> Tahtada aynı cümle iki şekilde yazıldı: <i>to be shot</i> ve <i>to have been shot</i>. İkisi de doğru. Sınavda en sık <b>to be V3</b> çıkar; <b>to have been V3</b> eylemin önce olduğunu özellikle vurgular.</div>
+  <div class="warn"><strong>Tuzak:</strong> <s>The first man <u>calling</u> me…</s> ✗ → <i>The first man <b>to call</b> me…</i> ✓. "the first" gördüğün an V-ing şıklarını ele.</div>
+
+  <h3>Alıştırma</h3>
+  <div class="pset" data-set="first"></div>
+</section>
+
+<section id="tablo">
+  <h2><span class="n">6</span>Büyük tablo: "produce" fiilinin 8 hali</h2>
+  <p class="sub">Konunun tamamı bu tabloda. Ezberlemek yerine mantığını gör: satırlar "zaman", sütunlar "etken/edilgen".</p>
+  <div class="scroll">
+  <table>
+    <tr><th>Yapı</th><th>Active</th><th>Türkçe</th><th>Passive</th><th>Türkçe</th></tr>
+    <tr><td class="f">Participle (aynı zaman)</td><td>producing</td><td>üreten</td><td>produced / being produced</td><td>üretilen</td></tr>
+    <tr><td class="f">Participle (önceden)</td><td>having produced</td><td>üretmiş olan</td><td>having been produced</td><td>üretilmiş olan</td></tr>
+    <tr><td class="f">Infinitive (aynı zaman)</td><td>to produce</td><td>üreten</td><td>to be produced</td><td>üretilen</td></tr>
+    <tr><td class="f">Infinitive (önceden)</td><td>to have produced</td><td>üretmiş olan</td><td>to have been produced</td><td>üretilmiş olan</td></tr>
+  </table>
+  </div>
+  <div class="tip"><strong>Ezber formülü:</strong> Passive'in anahtarı her zaman <b>be + V3</b>. <i>being V3, to be V3, having been V3, to have been V3</i>: hepsinde be'nin bir hali + V3 var. "Önceden" anlamının anahtarı ise <b>have</b>: <i>having / to have</i>.</div>
+</section>
+
+<section id="basta">
+  <h2><span class="n">7</span>Cümle başında kısaltma ve "Kim? / Ne?" kuralı</h2>
+  <div class="goal"><b>Bu bölümün hedefi:</b> YDS cümle tamamlama sorularında doğru özneyi seçmek.</div>
+  <p>Virgüllü bir kısaltma cümlenin başına alınabilir:</p>
+  <div class="pair">
+    <div class="from">Bill Gates, having founded Microsoft, is one of the richest people in the world.</div>
+    <div class="to"><b class="k">Having founded Microsoft</b>, Bill Gates is one of the richest people in the world.</div>
+  </div>
+  <div class="note"><span class="lbl">✎ Defterimden</span>
+  <b>V-ing</b> ya da <b>V3</b> ile başlayan cümle kısaltılmış bir cümledir. Cümle tamamlama sorularında bu kısaltmaya <b>"Kim?"</b> ve <b>"Ne?"</b> diye sorulur. Şıklardan, virgülden sonra bu soruya cevap veren özneyle başlayan seçenek işaretlenir.</div>
+  <div class="stepper" data-ex="k1"></div>
+  <div class="warn"><strong>Dangling (sarkık) yapı hatası:</strong> <s>Having founded Microsoft, the company grew fast.</s> → Kim kurdu? Şirket kendini kurmadı! Doğrusu: <i>Having founded Microsoft, <b>Bill Gates</b>…</i></div>
+  <div class="tip"><strong>Püf:</strong> Şıklarda virgülden sonra <b>it, there, people</b> gibi genel öznelerle başlayan seçenekler genelde çeldiricidir. Kısaltmadaki eylemi gerçekten yapabilecek (ya da ona maruz kalabilecek) isim hangisiyse o şık doğrudur.</div>
+  <h3>YDS tarzı sorular</h3>
+  <div class="qset" data-set="basta"></div>
+</section>
+
+<section id="inf">
+  <h2><span class="n">8</span>Infinitive (to V) kullanımları</h2>
+  <div class="goal"><b>Bu bölümün hedefi:</b> "to"nun cümlede hangi görevle geldiğini tanımak: sahte özne, fiil kalıbı, amaç, edilgen + to.</div>
+
+  <h3>8.1 It is + sıfat + to V1 / to be V3</h3>
+  <div class="formula">It + be + adjective + to V1 / to be V3</div>
+  <div class="pair"><div class="to">It is <b class="k">possible to pass</b> YDS.</div><div class="tr">YDS'yi geçmek mümkün.</div></div>
+  <div class="pair"><div class="to">It is <b class="k">easy to pass</b> YDS.</div></div>
+  <div class="pair"><div class="to">It is <b class="k">important to pass</b> YDS.</div></div>
+  <div class="pair"><div class="to">It is <b class="k">possible to be killed</b> during an experiment.</div><div class="tr">Bir deney sırasında öldürülmek mümkündür. (passive)</div></div>
+  <div class="why"><strong>Mantık:</strong> Buradaki <b>it</b> sahte öznedir; gerçek özne <i>to pass YDS</i>'dir. <i>To pass YDS is important.</i> = <i>It is important to pass YDS.</i> İngilizce uzun özneyi sona atmayı sever.</div>
+
+  <h3>8.2 Fiil + nesne + to V1 (enable, allow, cause, force, motivate)</h3>
+  <div class="formula">enable · allow · cause · force · motivate + nesne + to V1</div>
+  <div class="pair"><div class="to">The atmosphere <b class="k">enables</b> us <b class="k">to stay</b> alive.</div><div class="tr">Atmosfer hayatta kalmamızı sağlar.</div></div>
+  <div class="pair"><div class="to">Greenhouse gases <b class="k">cause</b> the glaciers <b class="k">to melt</b> down.</div><div class="tr">Sera gazları buzulların erimesine neden olur.</div></div>
+  <div class="pair"><div class="to">The new law <b class="k">allows</b> workers <b class="k">to work</b> from home.</div></div>
+  <div class="pair"><div class="to">The storm <b class="k">forced</b> the pilot <b class="k">to land</b> early.</div></div>
+  <div class="pair"><div class="to">Good teachers <b class="k">motivate</b> students <b class="k">to learn</b> more.</div></div>
+  <p>Aynı kalıbı kullanan diğer fiiller: <i>encourage, require, permit, persuade, oblige, compel, lead, urge, warn, expect, ask, tell, want</i>.</p>
+  <div class="warn"><strong>Tuzak:</strong> <b>make</b> ve <b>let</b> <b>to</b> almaz: <i>Greenhouse gases <b>make</b> the glaciers <b>melt</b>.</i> / <i>They <b>let</b> us <b>leave</b>.</i> (<s>make them to melt</s> ✗). <b>help</b> ikisini de alır: <i>help us (to) learn</i>.</div>
+
+  <h3>8.3 Amaç bildiren "to" (-mek için)</h3>
+  <div class="formula">to = in order to = so as to</div>
+  <div class="pair"><div class="to"><b class="k">To pass</b> YDS, I come here.</div><div class="tr">YDS'yi geçmek için buraya geliyorum.</div></div>
+  <div class="pair"><div class="to">We have to breathe oxygen <b class="k">to survive</b>.</div><div class="tr">Hayatta kalmak için oksijen solumak zorundayız.</div></div>
+  <div class="pair"><div class="to">He spoke quietly <b class="k">so as not to</b> wake the baby.</div></div>
+  <div class="tip"><strong>Olumsuz hali:</strong> <i>in order not to / so as not to</i>.<br><strong>Yazım:</strong> <i>breath</i> isimdir (nefes), <i>breathe</i> fiildir (nefes almak). "have to" fiil ister → <b>breathe</b>.</div>
+
+  <h3>8.4 be V3 + to V (biliniyor / deniyor / sanılıyor)</h3>
+  <div class="formula">be V3 + to V1 / to have V3</div>
+  <div class="note"><span class="lbl">✎ Defterimden</span>
+  Edilgen bir eylemden (be V3) sonra tekrar bir fiil kullanmak istenirse, o fiil <b>"to"</b> ile kullanılmalıdır.<br>
+  <i>Crocodiles <b>are known to eat</b>…</i> · <i>The pilot <b>was forced to land</b>.</i> · <i>We <b>are expected to finish</b> by Friday.</i></div>
+  <div class="stepper" data-ex="i1"></div>
+  <div class="pair">
+    <div class="from">People believe that the pyramids were built over 4,500 years ago.</div>
+    <div class="to">The pyramids <b class="k">are believed to have been built</b> over 4,500 years ago.</div>
+  </div>
+  <div class="pair">
+    <div class="from">It is said that he lived in Paris for ten years.</div>
+    <div class="to">He <b class="k">is said to have lived</b> in Paris for ten years.</div>
+  </div>
+  <p>Bu kalıbı kuran fiiller: <i>know, say, believe, think, consider, report, expect, suppose, claim, estimate</i>.</p>
+  <div class="tip"><strong>Püf:</strong> "that" cümlesindeki eylem ana fiille aynı zamandaysa → <b>to V1</b>; daha önce olmuşsa → <b>to have V3</b>. Yine aynı "önce mi oldu?" sorusu.</div>
+
+  <h3>Alıştırma</h3>
+  <div class="pset" data-set="inf"></div>
+</section>
+
+<section id="hata">
+  <h2><span class="n">9</span>En sık yapılan 8 hata</h2>
+  <div class="mist">
+    <div class="m"><div class="bad">The first man calling me yesterday was Jack.</div><div class="good">The first man to call me yesterday was Jack.</div><div class="ex">"the first" → to V. V-ing kullanılmaz.</div></div>
+    <div class="m"><div class="bad">The car stealing last year was found.</div><div class="good">The car stolen last year was found.</div><div class="ex">Araba çalmaz, çalınır → passive → V3.</div></div>
+    <div class="m"><div class="bad">The man was shot yesterday worked for me.</div><div class="good">The man shot yesterday worked for me.</div><div class="ex">who'yu silip "was"ı bırakırsan cümlede iki çekimli fiil olur. who ile be birlikte silinir.</div></div>
+    <div class="m"><div class="bad">The book buying by me is expensive.</div><div class="good">The book (which) I bought is expensive.</div><div class="ex">Bağlaçtan sonra özne (I) varsa bu kısaltma yapılmaz; sadece which atılabilir.</div></div>
+    <div class="m"><div class="bad">Built in 1900, tourists visit the hotel.</div><div class="good">Built in 1900, the hotel is visited by many tourists.</div><div class="ex">Ne inşa edildi? Otel. Virgülden sonra otel gelmeli.</div></div>
+    <div class="m"><div class="bad">Greenhouse gases make the glaciers to melt.</div><div class="good">Greenhouse gases make the glaciers melt. / cause the glaciers to melt.</div><div class="ex">make/let → V1; cause/enable/force → to V1.</div></div>
+    <div class="m"><div class="bad">Crocodiles are known eating human flesh.</div><div class="good">Crocodiles are known to eat human flesh.</div><div class="ex">be V3'ten sonra gelen fiil "to" alır.</div></div>
+    <div class="m"><div class="bad">Jack, graduating last year, is looking for a job.</div><div class="good">Jack, having graduated last year, is looking for a job.</div><div class="ex">Mezuniyet geçen yıl bitti, iş arama şimdi → zaman farkı → having V3.</div></div>
+  </div>
+</section>
+
+<section id="ozet">
+  <h2><span class="n">10</span>Tek sayfalık özet kart</h2>
+  <p class="sub">Sınavdan önce sadece bu bölüme bakman yeterli.</p>
+  <div class="cheat">
+    <div class="cc"><h4>Ön şart</h4><div class="fm">who/which + fiil / be</div><div class="ex">Bağlaçtan sonra özne varsa kısaltma yok.</div></div>
+    <div class="cc"><h4>Active – aynı zaman</h4><div class="fm">V-ing</div><div class="ex">The person living upstairs…</div></div>
+    <div class="cc"><h4>Active – önce</h4><div class="fm">having V3</div><div class="ex">Jack, having graduated last year, …</div></div>
+    <div class="cc"><h4>Passive</h4><div class="fm">V3 / being V3</div><div class="ex">The car stolen last year… / The bridge being built…</div></div>
+    <div class="cc"><h4>Passive – önce</h4><div class="fm">having been V3</div><div class="ex">Having been founded by Bill Gates, …</div></div>
+    <div class="cc"><h4>the first / only / -est</h4><div class="fm">to V · to have V3<br>to be V3 · to have been V3</div><div class="ex">The first man to call me…</div></div>
+    <div class="cc"><h4>It is + sıfat</h4><div class="fm">to V1 / to be V3</div><div class="ex">It is important to pass YDS.</div></div>
+    <div class="cc"><h4>Fiil + nesne</h4><div class="fm">enable/cause/force + O + to V</div><div class="ex">make / let + O + V1 (to yok!)</div></div>
+    <div class="cc"><h4>Amaç</h4><div class="fm">to = in order to = so as to</div><div class="ex">We breathe oxygen to survive.</div></div>
+    <div class="cc"><h4>be V3 + to</h4><div class="fm">be known/said + to V / to have V3</div><div class="ex">Crocodiles are known to eat human flesh.</div></div>
+    <div class="cc"><h4>Cümle başı</h4><div class="fm">Kim? / Ne?</div><div class="ex">Virgülden sonraki özne eylemi yapan/maruz kalan olmalı.</div></div>
+    <div class="cc"><h4>Altın soru</h4><div class="fm">Önce mi oldu?</div><div class="ex">Evet → having / to have eklenir.</div></div>
+  </div>
+</section>
+
+<section id="test">
+  <h2>Genel test (20 soru)</h2>
+  <p class="sub">Hepsini cevapladığında hangi konuda eksiğin olduğu ve hangi bölüme dönmen gerektiği gösterilir. Skor: <span class="score" id="fscore">0 / 0</span></p>
+  <div class="qset" data-set="final"></div>
+  <div id="final-result"></div>
+  <div style="margin-top:12px"><button class="btn ghost" id="reset">Testi sıfırla</button></div>
+</section>
+
+<button id="top" title="Yukarı çık">↑</button>
+<footer>17 Kasım 2026 ders notları ve defter notları üzerine hazırlanmıştır.</footer>
+</main>
+
+</div></template>
+<div class="wrap page" id="pg-kelime" hidden>
+  <div class="homerow"><button class="backbtn" onclick="go('home')">← Ana sayfa</button></div>
   <div class="top">
-    <div class="brand">
+    <div class="brand" onclick="go('home')" title="Ana sayfa">
       <div class="logo">M</div>
       <h1>Memoria Verbi</h1>
     </div>
@@ -676,11 +1305,15 @@ let sel=new Set(S.sel);
 let streak=0,best=0,sessionOk=0,sessionAll=0;
 function saveS(){S.sel=[...sel];LS.set('ka_state',{type:S.type,sel:S.sel,mode:S.mode,weak:S.weak,hideTr:S.hideTr,hideEn:S.hideEn,dir:S.dir,scopeOpen:S.scopeOpen})}
 const mast=it=>(P[it.key]?P[it.key].s:0);
-const lvl=s=>s>=3?2:s>=1?1:0;
-const isWeak=it=>{const p=P[it.key];return p&&p.w>0&&p.s<3};
-function rec(it,ok,soft){
+const MAXS=10,LEARN=8;
+const CARDMAX=2;
+const learnedIt=it=>{const p=P[it.key];return !!p&&p.s>=LEARN&&(p.t||0)>=1};
+const lvlIt=it=>learnedIt(it)?2:mast(it)>=1?1:0;
+const isWeak=it=>{const p=P[it.key];return p&&p.w>0&&p.s<LEARN};
+function rec(it,ok,soft,card){
   const p=P[it.key]||(P[it.key]={c:0,w:0,s:0});
-  if(ok){p.c++;p.s=Math.min(5,p.s+1)}else{p.w++;p.s=Math.max(0,p.s-(soft?1:2))}
+  if(ok){p.c++;if(card){if(p.s<CARDMAX)p.s++}else{p.t=(p.t||0)+1;p.s=Math.min(MAXS,p.s+1)}}
+  else{p.w++;p.s=Math.max(0,p.s-(soft?1:2))}
 }
 function tally(ok){sessionAll++;if(ok){sessionOk++;streak++;best=Math.max(best,streak)}else streak=0;LS.set('ka_prog',P);drawStats()}
 function scope(){
@@ -701,7 +1334,7 @@ let lastPicked=null;
 function wpick(arr){
   if(!arr.length) return null;
   for(let tries=0;tries<4;tries++){
-    let tot=0;const ws=arr.map(i=>{const p=P[i.key];const s=p?p.s:0;const w=(6-s)+(p&&p.w>p.c?3:0);tot+=w;return w});
+    let tot=0;const ws=arr.map(i=>{const p=P[i.key];const s=p?p.s:0;const w=(MAXS+1-s)+(p&&p.w>p.c?3:0);tot+=w;return w});
     let r=Math.random()*tot,res=arr[arr.length-1];
     for(let j=0;j<arr.length;j++){r-=ws[j];if(r<=0){res=arr[j];break}}
     if(res!==lastPicked||arr.length<2){lastPicked=res;return res}
@@ -721,18 +1354,18 @@ function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('show');cl
 
 function drawStats(){
   if($('#fbar'))drawFbar();
-  const learned=items.filter(i=>mast(i)>=3).length;
+  const learned=items.filter(i=>learnedIt(i)).length;
   const acc=sessionAll?Math.round(sessionOk/sessionAll*100)+'%':'—';
   $('#stats').innerHTML=`
     <div class="stat"><b>${learned}<small style="font-size:12px;color:var(--mute)"> / ${items.length}</small></b><span>Öğrenilen</span></div>
     <div class="stat"><b>${acc}</b><span>Bu oturum</span></div>
     <div class="stat"><b>🔥 ${streak}</b><span>Seri · en iyi ${best}</span></div>`;
 }
-function testProg(t){const its=t.groups.flatMap(g=>g.items);return its.filter(i=>mast(i)>=3).length/its.length}
+function testProg(t){const its=t.groups.flatMap(g=>g.items);return its.filter(i=>learnedIt(i)).length/its.length}
 function drawScope(){
   const {gs,its}=scope();
   const types=S.type==='mix'?['adj','verb']:[S.type];
-  const learned=its.filter(i=>mast(i)>=3).length;
+  const learned=its.filter(i=>learnedIt(i)).length;
   let h=`<div class="seg">${[['adj','Adjectives','19 test'],['verb','Verbs','8 test'],['mix','Toplu','Adjective + Verb']].map(([t,l,s])=>
     `<button class="${S.type===t?'on':''}" onclick="setType('${t}')"><b>${l}</b><small>${s}</small></button>`).join('')}</div>`;
   h+=`<button class="scopetoggle" onclick="S.scopeOpen=!S.scopeOpen;saveS();drawScope()">
@@ -791,7 +1424,7 @@ function toggleSheet(){scopeSheet=!scopeSheet;S.scopeOpen=scopeSheet;saveS();ren
 function drawFbar(){
   const {its}=scope();
   const lab=S.type==='mix'?'Toplu':S.type==='adj'?'Adjectives':'Verbs';
-  $('#fbar').innerHTML=`<div class="logo">M</div>
+  $('#fbar').innerHTML=`<button class="fhome" onclick="go('home')" title="Ana sayfa" aria-label="Ana sayfa">←</button>
     <button class="fscope" onclick="toggleSheet()"><span><b>${lab}</b> · ${sel.size} test · ${its.length} kelime</span><span class="chev ${scopeSheet?'up':''}">▾</span></button>
     <span class="fstreak">🔥 ${streak}</span>`;
 }
@@ -810,7 +1443,7 @@ function viewList(){
       <button class="tg ${S.hideEn?'on':''}" onclick="S.hideEn=!S.hideEn;saveS();this.classList.toggle('on');drawList()">İngilizceyi gizle</button>
     </div>
   </div>
-  <div class="legend"><span><i></i>Yeni</span><span><i style="background:var(--warn)"></i>Çalışılıyor</span><span><i style="background:var(--ok)"></i>Öğrenildi</span><span><b style="color:var(--warn)">*</b> Kitapta yıldızlı</span><span>🔊 Kelimeye tıkla → telaffuz</span></div>
+  <div class="legend"><span><i></i>Yeni</span><span><i style="background:var(--warn)"></i>Çalışılıyor (1–7)</span><span><i style="background:var(--ok)"></i>Öğrenildi (8+ / 10, en az 1 test doğrusu)</span><span>Kartlar en fazla 2 puan kazandırır</span><span><b style="color:var(--warn)">*</b> Kitapta yıldızlı</span><span>🔊 Kelimeye tıkla → telaffuz</span></div>
   <div id="lres"></div>`;
   drawList();
 }
@@ -829,7 +1462,7 @@ function drawList(){
 }
 function gcard(g,q){
   const ws=g.items.map(it=>{const hit=q&&(it.k.includes(q)||norm(it.m).includes(q));
-    return `<button class="wchip m${lvl(mast(it))} ${hit?'hit':''}" data-w="${esc(it.w)}" onclick="this.querySelectorAll('.cover').forEach(e=>e.classList.remove('cover'));speak(this.dataset.w)"><span class="ww ${S.hideEn?'cover':''}">${esc(it.w)}${it.star?'<sup>*</sup>':''}</span>${it.m?`<span class="wm ${S.hideTr?'cover':''}">${esc(it.m)}</span>`:''}</button>`}).join('');
+    return `<button class="wchip m${lvlIt(it)} ${hit?'hit':''}" title="Puan: ${mast(it)} / 10" data-w="${esc(it.w)}" onclick="this.querySelectorAll('.cover').forEach(e=>e.classList.remove('cover'));speak(this.dataset.w)"><span class="ww ${S.hideEn?'cover':''}">${esc(it.w)}${it.star?'<sup>*</sup>':''}</span>${it.m?`<span class="wm ${S.hideTr?'cover':''}">${esc(it.m)}</span>`:''}</button>`}).join('');
   const notes=g.items.filter(i=>i.note).map(i=>`<div class="note">📝 <b>${esc(i.w)}</b> — ${esc(i.note)}</div>`).join('');
   return `<article class="gcard"><header><span class="gl">${g.letter}</span><h4 class="${S.hideTr?'cover':''}" onclick="this.classList.remove('cover')">${esc(g.tr)}</h4><span class="gc">${g.items.length}</span></header><div class="wl">${ws}</div>${notes}</article>`;
 }
@@ -845,8 +1478,9 @@ const fkey=c=>c.items?'grp|'+c.id:c.key;
 function fstat(c,create){const k=fkey(c);if(!P[k]&&create)P[k]={c:0,w:0,s:0};return P[k]||{}}
 function fcountHTML(c){
   const st=fstat(c),k=st.fk||0,u=st.fu||0;
-  if(!k&&!u) return `<div class="fcount new">Yeni kart</div>`;
-  return `<div class="fcount"><span class="k">✓ ${k}</span><span class="u">✗ ${u}</span></div>`;
+  const sc=c.items?'':`<span class="sc">${mast(c)}/10</span>`;
+  if(!k&&!u) return `<div class="fcount">${sc}<span class="sc">Yeni</span></div>`;
+  return `<div class="fcount">${sc}<span class="k">✓ ${k}</span><span class="u">✗ ${u}</span></div>`;
 }
 function drawFlash(){
   const head=`<div class="meta fhead" style="flex-wrap:nowrap"><div class="seg" style="margin:0;grid-template-columns:1fr 1fr;width:290px">
@@ -900,7 +1534,7 @@ function drawFlash(){
 function flip(){F.flip=!F.flip;$('#fc').classList.toggle('flipped',F.flip)}
 function grade(ok){
   const c=F.deck[F.i]; const its=S.dir==='en'?[c]:c.items;
-  its.forEach(it=>rec(it,ok,true));
+  its.forEach(it=>rec(it,ok,true,true));
   const st=fstat(c,true); if(ok) st.fk=(st.fk||0)+1; else st.fu=(st.fu||0)+1;
   tally(ok); F.seen.add(c);
   if(ok){F.know++;F.unk.delete(c)}
@@ -1094,6 +1728,7 @@ function checkB(){
 function nextB(){B.i++;if(B.i<BN)B.cur=genBuild();drawBuild();drawScope();toView()}
 
 document.addEventListener('keydown',e=>{
+  if(curRoute!=='kelime')return;
   if(e.target.tagName==='INPUT')return;
   if(S.mode==='flash'&&F&&F.i<F.deck.length){
     if(e.code==='Space'||e.key==='Enter'){e.preventDefault();flip()}
@@ -1110,7 +1745,232 @@ function resetProg(btn){
   if(!btn.classList.contains('armed')){btn.classList.add('armed');btn.textContent='Emin misin? Tekrar tıkla';setTimeout(()=>{btn.classList.remove('armed');btn.textContent='İlerlemeyi sıfırla'},3000);return}
   P={};LS.set('ka_prog',P);streak=best=sessionOk=sessionAll=0;btn.classList.remove('armed');btn.textContent='İlerlemeyi sıfırla';F=Q=B=null;render();toast('İlerleme sıfırlandı');
 }
-render();
+let curRoute=null,lessonReady=false;
+const ROUTES=['home','kelime','gramer','relative-clause'];
+const TITLES={home:'Memoria Verbi',kelime:'Kelime Çalışmaları · Memoria Verbi',gramer:'Gramer Çalışmaları · Memoria Verbi','relative-clause':'Relative Clause Kısaltmaları · Memoria Verbi'};
+function go(r){
+  if(!ROUTES.includes(r))r='home';
+  try{if(location.hash!=='#'+r)location.hash=r}catch(e){}
+  route(r);
+}
+function drawHome(){
+  const n=items.filter(learnedIt).length;
+  $('#homeVocab').innerHTML=`<span>27 test</span><span>${items.length.toLocaleString('tr-TR')} kelime</span><span class="ok">${n} öğrenildi</span>`;
+  $('#homeBar').style.width=(n/items.length*100)+'%';
+}
+function route(r){
+  if(!r){const h=location.hash.slice(1);r=ROUTES.includes(h)?h:'home'}
+  if(r===curRoute)return;
+  curRoute=r;
+  const map={home:'pg-home',kelime:'pg-kelime',gramer:'pg-gramer','relative-clause':'pg-lesson'};
+  Object.values(map).forEach(id=>{document.getElementById(id).hidden=true});
+  document.getElementById(map[r]).hidden=false;
+  document.title=TITLES[r];
+  if(r==='home')drawHome();
+  if(r==='kelime')render();
+  if(r==='relative-clause'&&!lessonReady){
+    const host=$('#pg-lesson');const root=host.attachShadow({mode:'open'});
+    root.appendChild($('#tpl-rc').content.cloneNode(true));
+    initLesson(root);lessonReady=true;
+  }
+  window.scrollTo(0,0);
+}
+window.addEventListener('hashchange',()=>route());
+
+function initLesson(root){
+
+const EX={
+ a1:{t:"Adım adım: The person who lives upstairs…",s:[
+  ["The person <span class='rc'>who lives upstairs</span> <span class='mv'>is working</span> for me.","Sarı kısım sıfat cümleciği, yeşil kısım ana fiil."],
+  ["The person who <u>lives</u><sup class='t'>P</sup> upstairs <u>is working</u><sup class='t'>P</sup> for me.","Bağlaçtan sonra fiil var → kısaltılabilir. İki eylem de şimdiki zaman → zaman farkı yok."],
+  ["The person <s>who</s> <s>lives</s> → <b class='k'>living</b> upstairs…","Kişi yaşıyor (etken) + aynı zaman → V-ing."],
+  ["The person <b class='k'>living</b> upstairs is working for me.","Türkçesi: Üst katta yaşayan kişi benim için çalışıyor."]]},
+ a2:{t:"Adım adım: The man who lived upstairs last year…",s:[
+  ["The man <span class='rc'>who lived upstairs last year</span> <span class='mv'>is living</span> downstairs now.","Cümleciği ve ana fiili ayır."],
+  ["…who <u>lived</u><sup class='t'>V2</sup> … last year <u>is living</u><sup class='t'>P</sup> … now.","Cümlecik geçmişte (last year), ana fiil şimdi (now) → eylem önce olmuş."],
+  ["The man <s>who lived</s> → <b class='k'>having lived</b>","Adam yaşadı (etken) + önce → having V3."],
+  ["The man <b class='k'>having lived</b> upstairs last year is living downstairs now.","Türkçesi: Geçen yıl üst katta yaşamış olan adam şimdi alt katta yaşıyor."]]},
+ p1:{t:"Adım adım: The man who was shot yesterday…",s:[
+  ["The man <span class='rc'>who was shot yesterday</span> <span class='mv'>worked</span> for me.","Bağlaçtan sonra <b>be</b> (was) var."],
+  ["was shot = <b>be + V3</b>","Adam vurmadı, vuruldu → passive."],
+  ["The man <s>who was</s> shot yesterday…","who + be birlikte silinir, V3 kalır."],
+  ["The man <b class='k'>shot</b> yesterday worked for me.","Türkçesi: Dün vurulan adam benim için çalışıyordu."]]},
+ f1:{t:"Adım adım: The last man who called me…",s:[
+  ["<u>The last</u> man <span class='rc'>who called me last week</span> <span class='mv'>was</span> John.","İsmin önünde <b>the last</b> var → to V ailesi!"],
+  ["Adam aradı → active. Zaman farkı vurgulanmıyor (ikisi de V2).","Active + aynı zaman → to V1."],
+  ["The last man <s>who called</s> → <b class='k'>to call</b>","Fiilin V1 haline dön, başına to ekle."],
+  ["The last man <b class='k'>to call</b> me last week was John.","Türkçesi: Geçen hafta beni arayan son adam John'du."]]},
+ k1:{t:"Adım adım: Cümle başı kısaltmada doğru şıkkı bulmak",s:[
+  ["<b>Founded by Bill Gates,</b> ________.","Cümle V3 ile başlıyor → kısaltma (passive)."],
+  ["Soru sor: <b>Ne</b> kuruldu?","Bill Gates tarafından kurulan şey… bir şirket."],
+  ["a) Bill Gates became rich &nbsp; b) <b>Microsoft</b> is the largest software company &nbsp; c) it is very successful","a'da Bill Gates kendisini kurmadı; c'deki 'it' belirsiz."],
+  ["<b class='k'>Founded by Bill Gates, Microsoft is the largest software company in the world.</b>","Virgülden sonra 'Ne?' sorusunun cevabı gelmeli."]]},
+ i1:{t:"Adım adım: It is known that crocodiles eat…",s:[
+  ["It is known that <span class='rc'>crocodiles eat human flesh</span>.","that cümlesinin öznesi: crocodiles."],
+  ["<b>Crocodiles</b> are known …","Özneyi başa al, 'it is known' → 'are known' (çoğul)."],
+  ["…are known + <b>to</b> + eat","Defter notu: edilgen eylemden sonra gelen fiil 'to' alır. Aynı zaman → to V1."],
+  ["Crocodiles <b class='k'>are known to eat</b> human flesh.","Türkçesi: Timsahların insan eti yediği bilinir."]]}
+};
+root.querySelectorAll('.stepper').forEach(el=>{
+ const d=EX[el.dataset.ex];let i=0;
+ el.innerHTML=`<div class="ttl">${d.t}</div>`+d.s.map((s,k)=>`<div class="st"><span class="sn">Adım ${k+1}</span><span class="s">${s[0]}</span><div class="c">${s[1]}</div></div>`).join('')+`<div class="ctrl"><button class="btn nx">Sonraki adım ▶</button><button class="btn ghost rs">Baştan</button></div>`;
+ const st=el.querySelectorAll('.st'),nx=el.querySelector('.nx');
+ const show=()=>{st.forEach((s,k)=>s.classList.toggle('show',k<=i));nx.disabled=i>=st.length-1;};
+ nx.onclick=()=>{i++;show();};el.querySelector('.rs').onclick=()=>{i=0;show();};show();
+});
+
+const W={
+ start:{q:"1) who/which/that'ten hemen sonra ne geliyor?",a:[["Fiil ya da be (is/was…)","first"],["Bir özne (I, he, the man…)","R_no"]]},
+ first:{q:"2) İsmin önünde the first / second / last / only / best / most / -est var mı?",a:[["Evet","inf_v"],["Hayır","part_v"]]},
+ part_v:{q:"3) İsim eylemi kendisi mi yapıyor, yoksa eyleme maruz mu kalıyor?",a:[["Kendisi yapıyor (active)","part_a"],["Maruz kalıyor (passive, be + V3)","part_p"]]},
+ part_a:{q:"4) Cümlecikteki eylem ana fiilden ÖNCE olup bitmiş mi?",a:[["Hayır, aynı zaman / genel","R_ving"],["Evet, önce olmuş","R_havingv3"]]},
+ part_p:{q:"4) Eylem ana fiilden önce mi olmuş, şu an mı devam ediyor?",a:[["Genel / sadece edilgen","R_v3"],["Şu an devam ediyor","R_beingv3"],["Önce olduğunu vurgulamak istiyorum","R_hbv3"]]},
+ inf_v:{q:"3) İsim eylemi kendisi mi yapıyor, yoksa eyleme maruz mu kalıyor?",a:[["Kendisi yapıyor (active)","inf_a"],["Maruz kalıyor (passive)","inf_p"]]},
+ inf_a:{q:"4) Eylem ana fiilden ÖNCE olmuş mu?",a:[["Hayır / vurgulamıyorum","R_tov"],["Evet","R_tohave"]]},
+ inf_p:{q:"4) Eylem ana fiilden ÖNCE olmuş mu?",a:[["Hayır / vurgulamıyorum","R_tobe"],["Evet","R_tohavebeen"]]},
+ R_no:{r:"Bu yolla kısaltılmaz",e:"Bağlaç nesne konumunda. Sadece which/that atılabilir: The book <s>which</s> I bought → The book I bought."},
+ R_ving:{r:"V-ing",e:"The person <b>living</b> upstairs is working for me."},
+ R_havingv3:{r:"having V3",e:"Jack, <b>having graduated</b> last year, is hunting for a job."},
+ R_v3:{r:"V3",e:"The car <b>stolen</b> last year was found yesterday."},
+ R_beingv3:{r:"being V3",e:"The bridge <b>being built</b> now will connect the two cities."},
+ R_hbv3:{r:"having been V3",e:"The car <b>having been stolen</b> before 2000 was found yesterday."},
+ R_tov:{r:"to V1",e:"The last man <b>to call</b> me last week was John."},
+ R_tohave:{r:"to have V3",e:"The only man <b>to have graduated</b> last year is now…"},
+ R_tobe:{r:"to be V3",e:"The last man <b>to be shot</b> yesterday worked for me."},
+ R_tohavebeen:{r:"to have been V3",e:"The oldest man <b>to have been shot</b> yesterday is now in the hospital."}
+};
+const wiz=root.getElementById('wiz');let path=[];
+function wr(k){const n=W[k];
+ const p=path.length?`<div class="path">Seçimlerin: ${path.join(' → ')}</div>`:'';
+ if(n.r){wiz.innerHTML=p+`<div class="out"><div style="font-size:13px;color:var(--muted)">Kullanman gereken yapı:</div><div class="big">${n.r}</div><div style="margin-top:6px">${n.e}</div></div><div style="margin-top:12px"><button class="btn" id="wre">Yeniden başla</button></div>`;
+  root.getElementById('wre').onclick=()=>{path=[];wr('start');};return;}
+ wiz.innerHTML=p+`<div class="wq">${n.q}</div><div class="wa"></div>`;
+ const wa=wiz.querySelector('.wa');
+ n.a.forEach(([l,to])=>{const b=document.createElement('button');b.textContent=l;b.onclick=()=>{path.push(l);wr(to);};wa.appendChild(b);});
+}
+wr('start');
+
+const P={
+ active:[
+  {s:"The girl who is sitting next to me is my sister.",a:["The girl sitting next to me is my sister."],h:"who + is silinir."},
+  {s:"Students who study regularly usually pass the exam.",a:["Students studying regularly usually pass the exam."],h:"Genel durum → V-ing."},
+  {s:"Ali, who finished the project last week, is on holiday now.",a:["Ali, having finished the project last week, is on holiday now."],h:"last week vs now → önce olmuş."}],
+ passive:[
+  {s:"The letters which were written by Atatürk are in the museum.",a:["The letters written by Atatürk are in the museum.","The letters having been written by Atatürk are in the museum."],h:"which + were silinir."},
+  {s:"The road which is being repaired is closed.",a:["The road being repaired is closed."],h:"Şu an devam eden passive."},
+  {s:"The computer that was bought last year was broken last week.",a:["The computer bought last year was broken last week."],h:"Tahtadaki örnek."}],
+ first:[
+  {s:"She was the first woman who flew across the Atlantic.",a:["She was the first woman to fly across the Atlantic."],h:"the first → to V1."},
+  {s:"It was the only house which was damaged in the storm.",a:["It was the only house to be damaged in the storm.","It was the only house to have been damaged in the storm."],h:"the only + passive."},
+  {s:"The most expensive car which was stolen last year was found yesterday.",a:["The most expensive car to be stolen last year was found yesterday.","The most expensive car to have been stolen last year was found yesterday."],h:"the most + passive."}],
+ inf:[
+  {s:"It is said that he is very rich.",a:["He is said to be very rich."],h:"He is said + to + …"},
+  {s:"People believe that the ship sank in 1912.",a:["The ship is believed to have sunk in 1912."],h:"Önce olmuş → to have V3 (sink-sank-sunk)."},
+  {s:"Greenhouse gases cause … (the glaciers / melt)",a:["Greenhouse gases cause the glaciers to melt.","Greenhouse gases cause the glaciers to melt down."],h:"cause + nesne + to V1."}]
+};
+const norm=s=>s.toLowerCase().replace(/[’']/g,"'").replace(/[.,!?;:]/g,' ').replace(/\s+/g,' ').trim();
+root.querySelectorAll('.pset').forEach(box=>{
+ P[box.dataset.set].forEach((it,i)=>{
+  const d=document.createElement('div');d.className='pr';
+  d.innerHTML=`<div class="src"><b>${i+1}.</b> ${it.s}</div><input placeholder="Kısaltılmış halini yaz…"><div class="row"><button class="btn ck">Kontrol et</button><button class="btn ghost hn">İpucu</button><button class="btn ghost sh">Cevabı göster</button></div><div class="hint" style="display:none">💡 ${it.h}</div><div class="res"></div>`;
+  const inp=d.querySelector('input'),res=d.querySelector('.res');
+  const check=()=>{const v=norm(inp.value);if(!v){res.textContent='Önce cevabını yaz.';res.className='res';return;}
+   if(it.a.some(x=>norm(x)===v)){res.innerHTML='✓ Doğru!'+(it.a.length>1?` <span style="color:var(--muted)">Diğer doğru cevap: ${it.a.filter(x=>norm(x)!==v).join(' / ')}</span>`:'');res.className='res good';}
+   else{res.innerHTML='✗ Tam olarak tutmadı. Yazımı kontrol et ya da ipucuna bak.';res.className='res bad';}};
+  d.querySelector('.ck').onclick=check;inp.addEventListener('keydown',e=>{if(e.key==='Enter')check();});
+  d.querySelector('.hn').onclick=()=>{d.querySelector('.hint').style.display='block';};
+  d.querySelector('.sh').onclick=()=>{res.innerHTML='Cevap: <b>'+it.a.join('</b> ya da <b>')+'</b>';res.className='res good';};
+  box.appendChild(d);
+ });
+});
+
+const Q={
+ temel:[
+  {q:"Hangisi bu yolla (V-ing / V3) KISALTILAMAZ?",o:["The man who is standing by the door…","The car which was stolen…","The book which I bought…","The person who lives upstairs…"],a:2,e:"which'ten sonra özne (I) geliyor. Sadece which atılabilir: The book I bought."},
+  {q:"\"The man that is standing by the door\" kısaltılınca ne silinir?",o:["Sadece that","that + is","Sadece is","Hiçbir şey"],a:1,e:"Bağlaçtan sonra be varsa bağlaç ve be birlikte silinir → The man standing by the door."}],
+ basta:[
+  {q:"Built in the 16th century, ________.",o:["the architect designed the mosque carefully","the mosque is one of the oldest in the city","many tourists visit the mosque every year","it was decided that the mosque should be restored"],a:1,e:"Ne inşa edildi? Cami. Virgülden sonra 'the mosque' gelmeli."},
+  {q:"Having lived abroad for ten years, ________.",o:["his English is perfect","Mehmet speaks English fluently","it is easy for him to speak English","the city has changed a lot"],a:1,e:"Kim yurt dışında yaşadı? Mehmet. 'his English' yaşamadı!"},
+  {q:"Discovered in 1928, ________.",o:["Alexander Fleming became famous","scientists still study penicillin","penicillin has saved millions of lives","it was a great success"],a:2,e:"Ne keşfedildi? Penisilin. Fleming keşfedilmedi, keşfetti."}],
+ final:[
+  {c:"The first / only",q:"The first woman ____ the Nobel Prize was Marie Curie.",o:["winning","to win","won","having won"],a:1,e:"\"The first\" → to V1.",g:"first"},
+  {c:"Active",q:"____ Microsoft, Bill Gates is one of the richest people in the world.",o:["Founded","Having been founded","Having founded","To be founded"],a:2,e:"Bill Gates kurdu (active) ve önce oldu → Having founded.",g:"active"},
+  {c:"Passive",q:"The bridge ____ now will connect the two cities.",o:["building","being built","having built","to build"],a:1,e:"Köprü yapılıyor (passive) ve şu an devam ediyor → being built.",g:"passive"},
+  {c:"Infinitive",q:"Greenhouse gases cause the glaciers ____ .",o:["melt","melting","to melt","melted"],a:2,e:"cause + nesne + to V1.",g:"inf"},
+  {c:"Infinitive",q:"Crocodiles are known ____ human flesh.",o:["eat","to eat","eating","to be eaten"],a:1,e:"be V3 + to V1 (timsahlar yer → active).",g:"inf"},
+  {c:"Passive",q:"The car ____ before 2000 was found yesterday.",o:["having stolen","stealing","having been stolen","to steal"],a:2,e:"Araba çalındı (passive) ve bu önce oldu → having been stolen.",g:"passive"},
+  {c:"Infinitive",q:"The pyramids are believed ____ over 4,500 years ago.",o:["to build","to be built","to have been built","having built"],a:2,e:"Passive + önceden olmuş → to have been built.",g:"inf"},
+  {c:"Infinitive",q:"We have to breathe oxygen ____ .",o:["surviving","to survive","survived","for survive"],a:1,e:"Amaç (-mek için) → to survive.",g:"inf"},
+  {c:"Infinitive",q:"The heavy rain made the river ____ .",o:["to overflow","overflowing","overflow","overflowed"],a:2,e:"make + nesne + V1 (to almaz!).",g:"inf"},
+  {c:"The first / only",q:"She is the youngest player ____ for the national team.",o:["selecting","to have been selected","having selected","to select"],a:1,e:"Superlative + passive + önceden → to have been selected.",g:"first"},
+  {c:"Active",q:"The man ____ by the door is talking on the phone.",o:["stood","standing","to be stood","having been stood"],a:1,e:"Adam duruyor (active), aynı zaman → standing.",g:"active"},
+  {c:"Passive",q:"The computer ____ last year was broken last week.",o:["buying","bought","to buy","having bought"],a:1,e:"Bilgisayar satın alındı → passive → bought.",g:"passive"},
+  {c:"The first / only",q:"The last man ____ me last week was John.",o:["calling","called","to call","to be called"],a:2,e:"the last + active → to call.",g:"first"},
+  {c:"The first / only",q:"The most expensive car ____ last year was found yesterday.",o:["stealing","to steal","to be stolen","having stolen"],a:2,e:"the most + passive → to be stolen.",g:"first"},
+  {c:"Active",q:"Jack, ____ from university last year, is hunting for a new job.",o:["graduated","having graduated","to graduate","being graduated"],a:1,e:"Geçen yıl mezun oldu, şimdi iş arıyor → having graduated.",g:"active"},
+  {c:"Kim / Ne?",q:"Written in 1850, ________.",o:["the author became famous with this novel","the novel is still read by millions","readers still love it","it is a classic"],a:1,e:"Ne yazıldı? Roman → the novel.",g:"basta"},
+  {c:"Kim / Ne?",q:"Having finished her homework, ________.",o:["the TV was turned on","Ayşe watched TV","her mother was happy","it was time for dinner"],a:1,e:"Kim ödevini bitirdi? Ayşe.",g:"basta"},
+  {c:"Infinitive",q:"It is important ____ YDS.",o:["passing","to pass","passed","pass"],a:1,e:"It is + sıfat + to V1.",g:"inf"},
+  {c:"Infinitive",q:"The atmosphere enables us ____ alive.",o:["stay","staying","to stay","stayed"],a:2,e:"enable + nesne + to V1.",g:"inf"},
+  {c:"Passive",q:"Most of the products ____ in this factory are exported.",o:["producing","produced","to produce","having produced"],a:1,e:"Ürünler üretiliyor (passive) → produced.",g:"passive"}
+ ]
+};
+const CAT={active:["Active kısaltma","#active"],passive:["Passive kısaltma","#passive"],first:["The first / only + to V","#first"],inf:["Infinitive kullanımları","#inf"],basta:["Cümle başı & Kim/Ne","#basta"]};
+let fRight=0,fDone=0;const fStats={};
+function buildSet(box){
+ const set=box.dataset.set,final=set==='final';box.innerHTML='';
+ Q[set].forEach((it,i)=>{
+  const d=document.createElement('div');d.className='q';
+  d.innerHTML=`${it.c?`<span class="cat">${it.c}</span>`:''}<p>${i+1}. ${it.q}</p><div class="opts${it.o.some(x=>x.length>30)?' col':''}"></div><div class="exp">${it.e}</div>`;
+  const opts=d.querySelector('.opts'),exp=d.querySelector('.exp');let done=false;
+  it.o.forEach((t,j)=>{const b=document.createElement('button');b.textContent=String.fromCharCode(97+j)+') '+t;
+   b.onclick=()=>{if(done)return;done=true;const ok=j===it.a;
+    if(ok)b.classList.add('right');else{b.classList.add('wrong');opts.children[it.a].classList.add('right');}
+    exp.innerHTML=(ok?'✓ ':'✗ ')+it.e;exp.classList.add('show');
+    if(final){fDone++;if(ok)fRight++;const s=fStats[it.g]||(fStats[it.g]={r:0,t:0});s.t++;if(ok)s.r++;
+     root.getElementById('fscore').textContent=fRight+' / '+fDone;if(fDone===Q.final.length)showFinal();}};
+   opts.appendChild(b);});
+  box.appendChild(d);
+ });
+}
+function showFinal(){
+ const el=root.getElementById('final-result');const pct=Math.round(fRight/Q.final.length*100);
+ let h=`<h3 style="margin-top:0">Sonuç: ${fRight} / ${Q.final.length} (%${pct})</h3>`;
+ h+=pct>=85?'<p>Harika! Konuya hakimsin. Özet kartı sınav öncesi tekrar için kullan.</p>':pct>=60?'<p>İyi gidiyorsun. Aşağıda düşük kalan konuların bölümlerine dön.</p>':'<p>Temeli tekrar etmekte fayda var. Önce <a href="#temel">Ön bilgi</a> ve <a href="#karar">Karar sihirbazı</a> bölümlerine dön.</p>';
+ Object.keys(fStats).forEach(k=>{const s=fStats[k],p=Math.round(s.r/s.t*100);
+  h+=`<div style="display:flex;justify-content:space-between;font-size:14px"><span>${CAT[k][0]}</span><span>${s.r}/${s.t}${p<70?` · <a href="${CAT[k][1]}">bölüme dön</a>`:''}</span></div><div class="bar"><i style="width:${p}%;background:${p<70?'var(--red)':'var(--green)'}"></i></div>`;});
+ el.innerHTML=h;el.style.display='block';el.scrollIntoView({behavior:'smooth',block:'center'});
+}
+root.querySelectorAll('.qset').forEach(buildSet);
+root.getElementById('reset').onclick=()=>{fRight=0;fDone=0;for(const k in fStats)delete fStats[k];
+ root.getElementById('fscore').textContent='0 / 0';root.getElementById('final-result').style.display='none';
+ buildSet(root.querySelector('.qset[data-set="final"]'));};
+
+(function(){
+ const pg=root.getElementById('progress'),top=root.getElementById('top');
+ const links=[...root.querySelectorAll('nav a')],secs=links.map(a=>root.querySelector(a.getAttribute('href')));
+ function onS(){const h=document.documentElement,max=h.scrollHeight-h.clientHeight;pg.style.width=(max>0?h.scrollTop/max*100:0)+'%';
+  top.classList.toggle('show',h.scrollTop>600);
+  let cur=-1;secs.forEach((s,i)=>{if(s&&s.getBoundingClientRect().top<120)cur=i;});
+  links.forEach((a,i)=>a.classList.toggle('on',i===cur));
+  if(cur>=0){const a=links[cur],n=a.parentElement;const l=a.offsetLeft-n.clientWidth/2+a.clientWidth/2;if(Math.abs(n.scrollLeft-l)>40)n.scrollTo({left:l,behavior:'smooth'});}}
+ addEventListener('scroll',onS,{passive:true});onS();
+ top.onclick=()=>scrollTo({top:0,behavior:'smooth'});
+ const els=root.querySelectorAll('section, .pair, .stepper, .q, .pr, .cc, .m');
+ if('IntersectionObserver' in window){els.forEach(e=>e.classList.add('rv'));
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}}),{rootMargin:'0px 0px -40px 0px'});
+  els.forEach(e=>io.observe(e));}
+})();
+
+root.addEventListener('click',e=>{
+  const a=e.target.closest&&e.target.closest('a[href^="#"]');if(!a)return;
+  const id=a.getAttribute('href').slice(1);const t=root.getElementById(id);
+  e.preventDefault();
+  if(t)t.scrollIntoView({behavior:'smooth'});else go(id);
+});
+}
+
+route();
 </script>
 </body>
 </html>
