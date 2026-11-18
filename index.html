@@ -554,6 +554,56 @@ footer{text-align:center;color:var(--muted);font-size:13px;padding:10px}
 
 nav a.back{color:var(--ink);border-color:var(--line);background:var(--card)}
 .lx{min-height:100vh}
+
+.goal{display:block;position:relative;padding-left:46px}
+.goal::before{position:absolute;left:14px;top:11px}
+@media (max-width:600px){
+  .hero{padding:44px 16px 70px}
+  .hero p{font-size:15.5px}
+  .hero .chips{gap:8px;margin:20px 0}
+  .hero .chip{min-width:0;flex:1 1 40%;padding:9px 10px}
+  .hero .cta a{flex:1 1 40%;text-align:center;padding:12px 14px}
+  nav{padding:10px 12px}
+  nav a{padding:8px 12px}
+  main{padding:4px 10px calc(90px + env(safe-area-inset-bottom))}
+  section{padding:22px 15px;margin:18px 0;border-radius:18px}
+  h2{font-size:22px;gap:10px}
+  h2 .n{width:36px;height:36px;line-height:36px;font-size:15px;border-radius:12px}
+  h3{font-size:16px;margin:24px 0 8px}
+  .formula{font-size:23px;padding:6px 14px;display:block}
+  .tip,.warn,.ok,.why{padding:12px 14px 12px 44px;font-size:14.5px}
+  .tip::before,.warn::before,.ok::before,.why::before{left:13px;top:11px;font-size:18px}
+  .note{font-size:14.5px;transform:none}
+  .pair{padding:11px 13px 11px 17px}
+  .pair:hover,.flow .fs:hover,.cheat .cc:hover{transform:none}
+  .stepper{padding:14px 12px}
+  .stepper .s{font-size:15.5px}
+  .stepper .ctrl .btn{flex:1}
+  .wiz{padding:16px}
+  .wiz .wa{flex-direction:column}
+  .wiz .wa button{width:100%;text-align:left;padding:13px 15px}
+  .wiz .out .big{font-size:36px}
+  .q{padding:14px 13px}
+  .opts{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .opts.col{grid-template-columns:1fr}
+  .opts button{min-height:46px;padding:10px 12px;font-size:15px}
+  .opts button:hover{transform:none}
+  .pr{padding:14px 13px}
+  .pr input{font-size:16px;padding:12px 13px}
+  .pr .row .btn{flex:1 1 auto;padding:11px 12px}
+  .cheat,.mist{grid-template-columns:1fr}
+  .scroll{overflow:visible;border:none;border-radius:0}
+  table.stack,table.stack tbody,table.stack tr,table.stack td{display:block;width:100%}
+  table.stack{border:none;background:none}
+  table.stack tr.hd{display:none}
+  table.stack tr{border:1px solid var(--line);border-radius:14px;padding:10px 13px;margin:0 0 10px;background:var(--card)}
+  table.stack tr:nth-child(even) td{background:none}
+  table.stack td{border:none;padding:4px 0 4px 40%;position:relative;min-height:26px}
+  table.stack td::before{content:attr(data-label);position:absolute;left:0;top:6px;width:37%;color:var(--muted);font-size:12px;font-weight:600;line-height:1.35}
+  table.stack td.rowh{padding-left:0;font-size:15.5px;padding-bottom:6px;margin-bottom:4px;border-bottom:1px dashed var(--line)}
+  table.stack td.rowh::before{display:none}
+  #top{right:14px;bottom:calc(14px + env(safe-area-inset-bottom));width:44px;height:44px}
+}
 </style><div class="lx">
 <div id="progress"></div>
 <header class="hero"><div class="in">
@@ -1962,6 +2012,15 @@ root.getElementById('reset').onclick=()=>{fRight=0;fDone=0;for(const k in fStats
   els.forEach(e=>io.observe(e));}
 })();
 
+root.querySelectorAll('table').forEach(t=>{
+  const rows=[...t.querySelectorAll('tr')];if(!rows.length||!rows[0].querySelector('th'))return;
+  const hs=[...rows[0].children].map(c=>c.textContent.trim());
+  t.classList.add('stack');rows[0].classList.add('hd');
+  rows.slice(1).forEach(r=>[...r.children].forEach((c,i)=>{
+    const l=hs[i]||'';c.setAttribute('data-label',l);
+    if(i===0)c.classList.add('rowh');
+  }));
+});
 root.addEventListener('click',e=>{
   const a=e.target.closest&&e.target.closest('a[href^="#"]');if(!a)return;
   const id=a.getAttribute('href').slice(1);const t=root.getElementById(id);
