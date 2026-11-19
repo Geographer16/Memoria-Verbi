@@ -61,6 +61,7 @@ button:focus-visible{outline:2px solid var(--a1);outline-offset:2px}
 .backbtn{align-self:flex-start;font-size:13px;font-weight:700;padding:8px 13px;border-radius:10px;background:var(--panel);border:1px solid var(--line);color:var(--mute)}
 .backbtn:hover{color:var(--text)}
 .homerow{margin-bottom:14px}
+.homerow[hidden]{display:none}
 .fhome{flex:0 0 auto;width:40px;height:40px;border-radius:12px;background:var(--panel);border:1px solid var(--line);font-size:18px;font-weight:800;color:var(--text)}
 .lessons{display:grid;gap:14px;max-width:760px}
 .brand{cursor:pointer}
@@ -985,9 +986,9 @@ nav a.back{color:var(--ink);border-color:var(--line);background:var(--card)}
 
 </div></template>
 <div class="wrap page" id="pg-kelime" hidden>
-  <div class="homerow"><button class="backbtn" onclick="go('home')">← Ana sayfa</button></div>
+  <div class="homerow" hidden><button class="backbtn" onclick="go('home')">← Ana sayfa</button></div>
   <div class="top">
-    <div class="brand" onclick="go('home')" title="Ana sayfa">
+    <div class="brand">
       <div class="logo">M</div>
       <h1>Memoria Verbi</h1>
     </div>
@@ -1474,7 +1475,7 @@ function toggleSheet(){scopeSheet=!scopeSheet;S.scopeOpen=scopeSheet;saveS();ren
 function drawFbar(){
   const {its}=scope();
   const lab=S.type==='mix'?'Toplu':S.type==='adj'?'Adjectives':'Verbs';
-  $('#fbar').innerHTML=`<button class="fhome" onclick="go('home')" title="Ana sayfa" aria-label="Ana sayfa">←</button>
+  $('#fbar').innerHTML=`${GRAMMAR_ON?`<button class="fhome" onclick="go('home')" title="Ana sayfa" aria-label="Ana sayfa">←</button>`:'<div class="logo">M</div>'}
     <button class="fscope" onclick="toggleSheet()"><span><b>${lab}</b> · ${sel.size} test · ${its.length} kelime</span><span class="chev ${scopeSheet?'up':''}">▾</span></button>
     <span class="fstreak">🔥 ${streak}</span>`;
 }
@@ -1795,6 +1796,7 @@ function resetProg(btn){
   if(!btn.classList.contains('armed')){btn.classList.add('armed');btn.textContent='Emin misin? Tekrar tıkla';setTimeout(()=>{btn.classList.remove('armed');btn.textContent='İlerlemeyi sıfırla'},3000);return}
   P={};LS.set('ka_prog',P);streak=best=sessionOk=sessionAll=0;btn.classList.remove('armed');btn.textContent='İlerlemeyi sıfırla';F=Q=B=null;render();toast('İlerleme sıfırlandı');
 }
+const GRAMMAR_ON=false;
 let curRoute=null,lessonReady=false;
 const ROUTES=['home','kelime','gramer','relative-clause'];
 const TITLES={home:'Memoria Verbi',kelime:'Kelime Çalışmaları · Memoria Verbi',gramer:'Gramer Çalışmaları · Memoria Verbi','relative-clause':'Relative Clause Kısaltmaları · Memoria Verbi'};
@@ -1810,6 +1812,7 @@ function drawHome(){
 }
 function route(r){
   if(!r){const h=location.hash.slice(1);r=ROUTES.includes(h)?h:'home'}
+  if(!GRAMMAR_ON)r='kelime';
   if(r===curRoute)return;
   curRoute=r;
   const map={home:'pg-home',kelime:'pg-kelime',gramer:'pg-gramer','relative-clause':'pg-lesson'};
