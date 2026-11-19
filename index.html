@@ -1352,6 +1352,7 @@ let P=LS.get('ka_prog',{});
 const isMobile=()=>window.matchMedia('(max-width:620px)').matches;
 let S=Object.assign({type:'adj',sel:null,mode:'list',weak:false,hideTr:false,hideEn:false,dir:'en',search:'',scopeOpen:!isMobile()},LS.get('ka_state',{}));
 if(!S.sel) S.sel=tests.filter(t=>t.type==='adj').map(t=>t.id);
+S.mode='list';S.search='';S.scopeOpen=!isMobile();
 let sel=new Set(S.sel);
 let streak=0,best=0,sessionOk=0,sessionAll=0;
 function saveS(){S.sel=[...sel];LS.set('ka_state',{type:S.type,sel:S.sel,mode:S.mode,weak:S.weak,hideTr:S.hideTr,hideEn:S.hideEn,dir:S.dir,scopeOpen:S.scopeOpen})}
