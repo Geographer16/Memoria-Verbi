@@ -1859,7 +1859,7 @@ function resetProg(btn){
   if(!btn.classList.contains('armed')){btn.classList.add('armed');btn.textContent='Emin misin? Tekrar tıkla';setTimeout(()=>{btn.classList.remove('armed');btn.textContent='İlerlemeyi sıfırla'},3000);return}
   P={};LS.set('ka_prog',P);streak=best=sessionOk=sessionAll=0;btn.classList.remove('armed');btn.textContent='İlerlemeyi sıfırla';F=Q=B=null;render();toast('İlerleme sıfırlandı');
 }
-const GRAMMAR_ON=true;
+const GRAMMAR_ON=false;
 let curRoute=null,lessonReady=false;
 const ROUTES=['home','kelime','gramer','relative-clause'];
 const TITLES={home:'Memoria Verbi',kelime:'Kelime Çalışmaları · Memoria Verbi',gramer:'Gramer Çalışmaları · Memoria Verbi','relative-clause':'Relative Clause Kısaltmaları · Memoria Verbi'};
