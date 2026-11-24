@@ -346,6 +346,42 @@ kbd{font-family:var(--ui);font-size:10px;padding:2px 5px;border-radius:5px;backg
   .stickybtn{position:sticky;bottom:calc(76px + env(safe-area-inset-bottom));width:100%;box-shadow:0 10px 30px -10px #000}
   .toast{bottom:calc(86px + env(safe-area-inset-bottom))}
 }
+
+.progbtn{text-align:left;cursor:pointer;transition:.15s}
+.progbtn:hover{border-color:color-mix(in srgb,var(--a1) 60%,transparent)}
+.pmodal{position:fixed;inset:0;z-index:50;background:rgba(5,4,12,.72);backdrop-filter:blur(8px);display:flex;align-items:flex-start;justify-content:center;padding:max(16px,env(safe-area-inset-top)) 14px max(16px,env(safe-area-inset-bottom));overflow-y:auto}
+.pmodal[hidden]{display:none}
+.psheet{width:100%;max-width:720px;background:var(--bg);border:1px solid var(--line);border-radius:24px;padding:22px 20px 26px;box-shadow:0 30px 80px -30px #000}
+.phead{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:16px}
+.phead h2{margin:0;font-size:20px}
+.pclose{width:38px;height:38px;border-radius:11px;background:var(--panel);border:1px solid var(--line);font-size:16px;font-weight:800;color:var(--text)}
+.pbig{display:flex;align-items:center;gap:18px;flex-wrap:wrap;margin-bottom:14px}
+.pring{width:112px;height:112px;border-radius:50%;display:grid;place-items:center;flex:0 0 auto}
+.pring div{width:88px;height:88px;border-radius:50%;background:var(--bg);display:grid;place-items:center;font-size:24px;font-weight:800}
+.pnums{flex:1;min-width:180px}
+.pnums b{font-size:26px}
+.pnums small{display:block;color:var(--mute);font-size:12.5px;margin-top:4px;line-height:1.45}
+.pstack{display:flex;height:10px;border-radius:10px;overflow:hidden;background:rgba(255,255,255,.08);margin:10px 0 8px}
+.pstack i{display:block;height:100%}
+.pstack .a{background:var(--ok)}.pstack .b{background:var(--warn)}
+.plegend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--mute);margin-bottom:6px}
+.plegend b{color:var(--text)}
+.plegend em{display:inline-block;width:9px;height:9px;border-radius:3px;margin-right:5px;font-style:normal}
+.psec{margin-top:20px}
+.psec h3{margin:0 0 10px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:8px}
+.ptile{position:relative;text-align:left;padding:9px 10px 12px;border-radius:12px;background:var(--panel);border:1px solid var(--line);color:var(--text);transition:.15s}
+.ptile:hover{border-color:color-mix(in srgb,var(--a1) 60%,transparent)}
+.ptile b{font-size:14px;display:block}
+.ptile span{font-size:11px;color:var(--mute)}
+.ptile .pb{display:flex;position:absolute;left:10px;right:10px;bottom:6px;height:3px;border-radius:3px;background:rgba(255,255,255,.08);overflow:hidden}
+.ptile .pb u{display:block;height:100%;background:var(--ok);text-decoration:none}
+.ptile .pb u.l{background:var(--warn)}
+.pweak{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.pweak li{display:flex;justify-content:space-between;gap:10px;padding:9px 12px;border-radius:11px;background:var(--panel);border:1px solid var(--line);font-size:14px}
+.pweak li span{color:var(--mute);font-size:12px;text-align:right}
+.prow{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.pnote{font-size:12px;color:var(--mute);line-height:1.5;margin:8px 0 0}
 </style>
 </head>
 <body class="adj">
@@ -1011,6 +1047,7 @@ nav a.back{color:var(--ink);border-color:var(--line);background:var(--card)}
   <div class="foot" id="foot"></div>
 </div>
 <div class="toast" id="toast"></div>
+<div class="pmodal" id="progModal" hidden onclick="if(event.target===this)closeProg()"><div class="psheet" id="progBody"></div></div>
 
 <script>
 const RAW = `
@@ -1378,7 +1415,7 @@ const tests=[],groups=[],items=[];
       const m=raw.match(/^([^{]*)(?:\{(.*)\})?$/);
       let w=m[1].trim(); const note=m[2]||'';
       const star=w.includes('*'); w=w.replace(/\*/g,'').replace(/\s+/g,' ').trim();
-      const it={w,star,note,g,key:g.id+'|'+w,m:(TRM[cur.type]&&TRM[cur.type][w])||''};
+      const it={w,star,note,g,key:cur.id+'|'+tr+'|'+w,m:(TRM[cur.type]&&TRM[cur.type][w])||''};
       g.items.push(it); items.push(it);
     });
     cur.groups.push(g); groups.push(g);
@@ -1400,9 +1437,69 @@ function related(a,b){
 }
 function wordRelatedToGroup(it,g){for(const og of byKey.get(it.k)) if(related(og,g)) return true; return false}
 
-const LS={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+const LS={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v));return true}catch(e){return false}}};
 const STORAGE_OK=(()=>{try{localStorage.setItem('__ka','1');localStorage.removeItem('__ka');return true}catch(e){return false}})();
-let P=LS.get('ka_prog',{});
+const PKEY='ka_prog2';
+let dirty=false,saveOK=true,idbOK=null,persisted=null,savedAt=0;
+const IDB={
+  db:null,
+  open(){return this.db||(this.db=new Promise((res,rej)=>{try{const r=indexedDB.open('memoria-verbi',1);r.onupgradeneeded=()=>r.result.createObjectStore('kv');r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error);r.onblocked=()=>rej(new Error('blocked'))}catch(e){rej(e)}}))},
+  async get(k){const db=await this.open();return new Promise((res,rej)=>{const q=db.transaction('kv').objectStore('kv').get(k);q.onsuccess=()=>res(q.result);q.onerror=()=>rej(q.error)})},
+  async set(k,v){const db=await this.open();return new Promise((res,rej)=>{const t=db.transaction('kv','readwrite');t.objectStore('kv').put(v,k);t.oncomplete=()=>res(true);t.onerror=()=>rej(t.error);t.onabort=()=>rej(t.error)})}
+};
+function migrateOld(old){
+  const out={};
+  const k13=groups.find(g=>g.test.id==='adj13'&&g.tr==='ÖLÜMLÜ');
+  const base=k13?k13.test.groups.indexOf(k13):-1;
+  Object.keys(old).forEach(key=>{
+    const m=key.match(/^(adj|verb)(\d+)-(\d+)\|(.*)$/);if(!m)return;
+    const t=tests.find(x=>x.id===m[1]+m[2]);if(!t)return;
+    let gi=+m[3];
+    if(t.id==='adj13'&&base>=0){if(gi===base)gi=m[4]==='Immortal'?base+1:base;else if(gi>base)gi+=1}
+    const g=t.groups[gi];if(!g)return;
+    out[t.id+'|'+g.tr+'|'+m[4]]=old[key];
+  });
+  return out;
+}
+function cleanProg(src){
+  const o={};
+  Object.keys(src||{}).forEach(k=>{
+    const x=src[k];if(!x||typeof x!=='object')return;
+    const n=v=>Number.isFinite(+v)?Math.max(0,+v|0):0;
+    const e={c:n(x.c),w:n(x.w),s:Math.min(10,n(x.s))};
+    if(x.t)e.t=n(x.t);
+    o[k]=e;
+  });
+  return o;
+}
+function mergeProg(a,b){
+  const o=Object.assign({},a);
+  Object.keys(b).forEach(k=>{
+    const x=o[k],y=b[k];
+    if(!x){o[k]=y;return}
+    const nx=x.c+x.w,ny=y.c+y.w;
+    if(ny>nx||(ny===nx&&y.s>x.s))o[k]=y;
+  });
+  return o;
+}
+function loadProg(){
+  const cur=LS.get(PKEY,null);
+  if(cur&&cur.P&&typeof cur.P==='object'){savedAt=cur.t||0;return cleanProg(cur.P)}
+  const old=LS.get('ka_prog',null);
+  if(old&&typeof old==='object'){const m=cleanProg(migrateOld(old));LS.set(PKEY,{v:2,t:Date.now(),P:m});return m}
+  return {};
+}
+let P=loadProg();
+function saveProg(force){
+  if(!dirty&&!force)return;
+  const payload={v:2,t:Date.now(),P};
+  saveOK=LS.set(PKEY,payload);
+  savedAt=payload.t;dirty=false;
+  IDB.set(PKEY,payload).then(()=>{idbOK=true}).catch(()=>{idbOK=false});
+}
+function askPersist(){
+  try{if(navigator.storage&&navigator.storage.persist)navigator.storage.persist().then(v=>{persisted=v}).catch(()=>{})}catch(e){}
+}
 const isMobile=()=>window.matchMedia('(max-width:620px)').matches;
 let S=Object.assign({type:'adj',sel:null,mode:'list',weak:false,hideTr:false,hideEn:false,dir:'en',search:'',scopeOpen:!isMobile()},LS.get('ka_state',{}));
 if(!S.sel) S.sel=tests.filter(t=>t.type==='adj').map(t=>t.id);
@@ -1421,7 +1518,7 @@ function rec(it,ok,soft,card){
   if(ok){p.c++;if(card){if(p.s<CARDMAX)p.s++}else{p.t=(p.t||0)+1;p.s=Math.min(MAXS,p.s+1)}}
   else{p.w++;p.s=Math.max(0,p.s-(soft?1:2))}
 }
-function tally(ok){sessionAll++;if(ok){sessionOk++;streak++;best=Math.max(best,streak)}else streak=0;LS.set('ka_prog',P);drawStats()}
+function tally(ok){sessionAll++;if(ok){sessionOk++;streak++;best=Math.max(best,streak)}else streak=0;dirty=true;saveProg();askPersist();drawStats()}
 function scope(){
   const gs=groups.filter(g=>sel.has(g.test.id));
   let its=items.filter(i=>sel.has(i.g.test.id));
@@ -1465,7 +1562,8 @@ function drawStats(){
   $('#stats').innerHTML=`
     <div class="stat"><b>${learned}<small style="font-size:12px;color:var(--mute)"> / ${items.length}</small></b><span>Öğrenilen</span></div>
     <div class="stat"><b>${acc}</b><span>Bu oturum</span></div>
-    <div class="stat"><b>🔥 ${streak}</b><span>Seri · en iyi ${best}</span></div>`;
+    <div class="stat"><b>🔥 ${streak}</b><span>Seri · en iyi ${best}</span></div>
+    <button class="stat progbtn" onclick="openProg()"><b>📊</b><span>İlerleme</span></button>`;
 }
 function testProg(t){const its=t.groups.flatMap(g=>g.items);return its.filter(i=>learnedIt(i)).length/its.length}
 function drawScope(){
@@ -1502,8 +1600,9 @@ function bindChips(){
   });
 }
 function drawFoot(){
-  $('#foot').innerHTML=(STORAGE_OK?'💾 İlerlemen bu cihazın tarayıcısında saklanıyor':'<span style="color:var(--warn)">⚠️ Bu görünümde tarayıcı kaydı kapalı; ilerleme sayfa kapanınca silinir</span>')+
-    ' · <button id="resetBtn" onclick="resetProg(this)">İlerlemeyi sıfırla</button>';
+  const ok=STORAGE_OK&&saveOK;
+  $('#foot').innerHTML=(ok?'💾 İlerlemen bu cihazın tarayıcısında saklanıyor':'<span style="color:var(--warn)">⚠️ Tarayıcı kaydı çalışmıyor; ilerleme sayfa kapanınca silinebilir</span>')+
+    ' · <button id="progLink" onclick="openProg()">İlerleme</button> · <button id="resetBtn" onclick="resetProg(this)">İlerlemeyi sıfırla</button>';
 }
 function toView(){
   const v=$('#view');const r=v.getBoundingClientRect();
@@ -1857,8 +1956,66 @@ document.addEventListener('keydown',e=>{
 });
 function resetProg(btn){
   if(!btn.classList.contains('armed')){btn.classList.add('armed');btn.textContent='Emin misin? Tekrar tıkla';setTimeout(()=>{btn.classList.remove('armed');btn.textContent='İlerlemeyi sıfırla'},3000);return}
-  P={};LS.set('ka_prog',P);streak=best=sessionOk=sessionAll=0;btn.classList.remove('armed');btn.textContent='İlerlemeyi sıfırla';F=Q=B=null;render();toast('İlerleme sıfırlandı');
+  P={};dirty=true;saveProg(true);streak=best=sessionOk=sessionAll=0;btn.classList.remove('armed');btn.textContent='İlerlemeyi sıfırla';F=Q=B=null;render();toast('İlerleme sıfırlandı');
 }
+
+function progStats(){
+  let learned=0,learning=0,fresh=0,weak=0,c=0,w=0;
+  items.forEach(it=>{
+    const p=P[it.key];
+    if(learnedIt(it))learned++;else if(p&&p.s>=1)learning++;else fresh++;
+    if(isWeak(it))weak++;
+    if(p){c+=p.c||0;w+=p.w||0}
+  });
+  return {learned,learning,fresh,weak,c,w};
+}
+function goTest(id){
+  const t=tests.find(x=>x.id===id);if(!t)return;
+  S.type=t.type;sel=new Set([id]);S.weak=false;saveS();closeProg();render();
+}
+function studyWeak(){S.type='mix';sel=new Set(tests.map(x=>x.id));S.weak=true;saveS();closeProg();render()}
+function drawProg(){
+  const s=progStats(),N=items.length,pct=N?Math.round(s.learned/N*100):0;
+  const attempts=s.c+s.w,acc=attempts?Math.round(s.c/attempts*100)+'%':'—';
+  const tile=t=>{
+    const its=t.groups.flatMap(g=>g.items);
+    const l=its.filter(learnedIt).length,w=its.filter(i=>!learnedIt(i)&&mast(i)>=1).length;
+    return `<button class="ptile" onclick="goTest('${t.id}')" title="${esc(t.name)}"><b>${t.n}</b><span>${l}/${its.length}</span><i class="pb"><u style="width:${l/its.length*100}%"></u><u class="l" style="width:${w/its.length*100}%"></u></i></button>`;
+  };
+  const weakList=items.filter(isWeak).sort((a,b)=>{const x=P[a.key],y=P[b.key];return (y.w-y.c)-(x.w-x.c)||x.s-y.s}).slice(0,8);
+  $('#progBody').innerHTML=`
+    <div class="phead"><h2>📊 İlerleme</h2><button class="pclose" onclick="closeProg()" aria-label="Kapat">✕</button></div>
+    <div class="pbig">
+      <div class="pring" style="background:conic-gradient(var(--ok) ${pct*3.6}deg,rgba(255,255,255,.08) 0)"><div>%${pct}</div></div>
+      <div class="pnums"><b>${s.learned.toLocaleString('tr-TR')}</b> <span style="color:var(--mute)">/ ${N.toLocaleString('tr-TR')} kelime öğrenildi</span>
+        <small>Öğrenildi sayılması için: kelimenin puanı en az ${LEARN}/${MAXS} olmalı ve testlerde en az bir kez doğru bilinmeli. Kartlarda “bildim” demek tek başına yetmez.</small></div>
+    </div>
+    <div class="pstack"><i class="a" style="width:${s.learned/N*100}%"></i><i class="b" style="width:${s.learning/N*100}%"></i></div>
+    <div class="plegend"><span><em style="background:var(--ok)"></em><b>${s.learned}</b> öğrenildi</span><span><em style="background:var(--warn)"></em><b>${s.learning}</b> çalışılıyor</span><span><em style="background:rgba(255,255,255,.2)"></em><b>${s.fresh}</b> yeni</span></div>
+    <div class="plegend"><span>Toplam deneme <b>${attempts.toLocaleString('tr-TR')}</b></span><span>Genel doğruluk <b>${acc}</b></span><span>Zayıf kelime <b>${s.weak}</b></span></div>
+    <div class="psec"><h3>Adjective testleri</h3><div class="pgrid">${tests.filter(x=>x.type==='adj').map(tile).join('')}</div></div>
+    <div class="psec"><h3>Verb testleri</h3><div class="pgrid">${tests.filter(x=>x.type==='verb').map(tile).join('')}</div></div>
+    <div class="psec"><h3>En çok zorlandığın kelimeler</h3>${weakList.length?`<ul class="pweak">${weakList.map(i=>`<li><b>${esc(i.w)}</b><span>${esc(i.g.tr)}</span></li>`).join('')}</ul><div class="prow"><button class="mini" onclick="studyWeak()">Sadece zayıfları çalış</button></div>`:'<p class="pnote">Henüz zayıf kelime yok.</p>'}</div>`;
+}
+function openProg(){drawProg();$('#progModal').hidden=false;document.body.style.overflow='hidden'}
+function closeProg(){$('#progModal').hidden=true;document.body.style.overflow=''}
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('#progModal').hidden)closeProg()});
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')saveProg()});
+window.addEventListener('pagehide',()=>saveProg());
+window.addEventListener('storage',e=>{
+  if(e.key!==PKEY||!e.newValue)return;
+  try{const d=JSON.parse(e.newValue);if(d&&d.P){P=mergeProg(P,cleanProg(d.P));drawStats()}}catch(x){}
+});
+IDB.open().then(()=>{idbOK=true}).catch(()=>{idbOK=false});
+IDB.get(PKEY).then(v=>{
+  if(!v||!v.P)return;
+  const local=LS.get(PKEY,null);
+  if(!local||(v.t||0)>(local.t||0)){
+    P=mergeProg(P,cleanProg(v.P));dirty=true;saveProg(true);
+    drawStats();try{render()}catch(e){}
+  }
+}).catch(()=>{});
+askPersist();
 const GRAMMAR_ON=false;
 let curRoute=null,lessonReady=false;
 const ROUTES=['home','kelime','gramer','relative-clause'];
