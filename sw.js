@@ -1,9 +1,9 @@
-const V='mv-v1';
-const CORE=['./','index.html','manifest.webmanifest','icon-192.png','icon-512.png'];
+const V='mv-v3';
+const CORE=['./','index.html','manifest.json','icon-192.png','icon-512.png'];
 const FONT_HOSTS=['fonts.googleapis.com','fonts.gstatic.com'];
 
 self.addEventListener('install',e=>{
-  e.waitUntil(caches.open(V).then(c=>c.addAll(CORE)).then(()=>self.skipWaiting()));
+  e.waitUntil(caches.open(V).then(c=>c.addAll(CORE.map(u=>new Request(u,{cache:'reload'})))).then(()=>self.skipWaiting()));
 });
 
 self.addEventListener('activate',e=>{
@@ -16,7 +16,7 @@ self.addEventListener('fetch',e=>{
   const u=new URL(r.url);
   if(r.mode==='navigate'){
     e.respondWith(
-      fetch(r).then(res=>{
+      fetch(r.url,{cache:'no-cache'}).then(res=>{
         if(res.ok){const cp=res.clone();caches.open(V).then(c=>c.put('index.html',cp))}
         return res;
       }).catch(()=>caches.match('index.html'))
