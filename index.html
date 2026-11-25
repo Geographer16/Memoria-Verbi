@@ -63,7 +63,8 @@ button:focus-visible{outline:2px solid var(--a1);outline-offset:2px}
 .backbtn:hover{color:var(--text)}
 .fhome{flex:0 0 auto;width:40px;height:40px;border-radius:12px;background:var(--panel);border:1px solid var(--line);font-size:18px;font-weight:800;color:var(--text)}
 .lessons{display:grid;gap:14px;max-width:760px}
-.brand{cursor:pointer}
+.top .logo{cursor:pointer;position:relative}
+.logo.warn::after{content:"";position:absolute;top:-4px;right:-4px;width:12px;height:12px;border-radius:50%;background:var(--warn);border:2px solid var(--bg)}
 .fbar .logo{cursor:pointer}
 @media (hover:none){.pcard:hover,.lcard:hover{transform:none}.pcard:active,.lcard:active{transform:scale(.98)}}
 .wrap{max-width:1160px;margin:0 auto;overflow-x:clip;padding:calc(22px + env(safe-area-inset-top)) calc(18px + env(safe-area-inset-right)) 80px calc(18px + env(safe-area-inset-left))}
@@ -257,9 +258,6 @@ kbd{font-family:var(--ui);font-size:10px;padding:2px 5px;border-radius:5px;backg
 .missed{display:grid;gap:8px;margin:18px 0;text-align:left}
 .empty{text-align:center;padding:50px 20px;color:var(--mute)}
 .empty b{display:block;font-family:var(--disp);font-size:24px;color:var(--text);margin-bottom:6px}
-.foot{margin-top:40px;text-align:center;font-size:12px;color:var(--mute)}
-.foot button{color:var(--mute);text-decoration:underline;font-size:12px}
-.foot button.armed{color:var(--bad);font-weight:800}
 .fbar{display:none;align-items:center;gap:8px;margin-bottom:12px}
 .fbar .logo{width:34px;height:34px;font-size:17px;border-radius:11px;flex:0 0 auto;box-shadow:none}
 .fscope{flex:1;min-width:0;display:flex;justify-content:space-between;align-items:center;gap:8px;padding:9px 12px;border-radius:12px;background:var(--panel);border:1px solid var(--line);font-size:13px;color:var(--mute);text-align:left}
@@ -272,7 +270,7 @@ kbd{font-family:var(--ui);font-size:10px;padding:2px 5px;border-radius:5px;backg
 .chev.up{transform:rotate(180deg)}
 .scopebody{margin-top:12px;animation:up .25s ease}
 .tab .s{display:none}
-.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom));z-index:40;transform:translateX(-50%) translateY(20px);opacity:0;background:#1d1a30;border:1px solid var(--line);padding:10px 16px;border-radius:12px;font-weight:700;font-size:13px;transition:.3s;pointer-events:none;z-index:9}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom));z-index:60;transform:translateX(-50%) translateY(20px);opacity:0;background:#1d1a30;border:1px solid var(--line);padding:10px 16px;border-radius:12px;font-weight:700;font-size:13px;transition:.3s;pointer-events:none}
 .toast.show{opacity:1;transform:translateX(-50%)}
 @media (hover:none){
   .gcard:hover{transform:none;border-color:var(--line)}
@@ -381,6 +379,20 @@ kbd{font-family:var(--ui);font-size:10px;padding:2px 5px;border-radius:5px;backg
 .pweak li span{color:var(--mute);font-size:12px;text-align:right}
 .prow{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
 .pnote{font-size:12px;color:var(--mute);line-height:1.5;margin:8px 0 0}
+.ptransfer{margin-top:22px;border-top:1px solid var(--line);padding-top:14px}
+.ptransfer summary{cursor:pointer;font-size:13px;color:var(--mute);list-style:none}
+.ptransfer summary::-webkit-details-marker{display:none}
+.ptransfer summary::before{content:"▸ "}
+.ptransfer[open] summary::before{content:"▾ "}
+.ptext{width:100%;margin-top:10px;padding:10px 12px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid var(--line);color:var(--text);font:12px/1.4 ui-monospace,monospace;resize:vertical}
+.psheet.sm{max-width:420px}
+.sstate{margin:0 0 14px;font-size:13px;color:var(--mute);line-height:1.5}
+.sstate.bad{color:var(--warn)}
+.srow{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:12px 0;border-top:1px solid var(--line)}
+.srow b{display:block;font-size:14px}
+.srow small{color:var(--mute);font-size:12px}
+.srow button{white-space:nowrap}
+.srow button.armed{color:var(--bad);border-color:var(--bad);font-weight:800}
 </style>
 </head>
 <body class="adj">
@@ -524,7 +536,7 @@ button{font:inherit;cursor:pointer}
 .stepper .ttl::before{content:"▶ "}
 .stepper .st{display:none;position:relative;padding:10px 0 10px 18px;border-left:2px dashed color-mix(in srgb,var(--purple) 35%,transparent);margin-left:10px}
 .stepper .st.show{display:block;animation:fade .4s ease}
-.stepper .sn{display:inline-block;font-size:11.5px;font-weight:700;color:#fff;background:var(--grad);border-radius:999px;padding:2px 10px;margin-right:8px;position:relative;left:-30px;margin-right:-22px;box-shadow:0 0 0 4px var(--card)}
+.stepper .sn{display:inline-block;font-size:11.5px;font-weight:700;color:#fff;background:var(--grad);border-radius:999px;padding:2px 10px;position:relative;left:-30px;margin-right:-22px;box-shadow:0 0 0 4px var(--card)}
 .stepper .s{font-size:16.5px}
 .stepper .c{font-size:14px;color:var(--muted);margin-top:3px}
 .stepper .ctrl{display:flex;gap:8px;margin-top:12px}
@@ -1033,7 +1045,7 @@ nav a.back{color:var(--ink);border-color:var(--line);background:var(--card)}
 <div class="wrap page" id="pg-kelime" hidden>
   <div class="top">
     <div class="brand">
-      <div class="logo">M</div>
+      <div class="logo" role="button" tabindex="0" aria-label="Ayarlar" onclick="openSettings()" onkeydown="if(event.key==='Enter')openSettings()">M</div>
       <h1>Memoria Verbi</h1>
     </div>
     <div class="stats" id="stats"></div>
@@ -1042,10 +1054,10 @@ nav a.back{color:var(--ink);border-color:var(--line);background:var(--card)}
   <section class="panel" id="scope"></section>
   <nav class="tabs" id="tabs"></nav>
   <main id="view"></main>
-  <div class="foot" id="foot"></div>
 </div>
 <div class="toast" id="toast"></div>
 <div class="pmodal" id="progModal" hidden onclick="if(event.target===this)closeProg()"><div class="psheet" id="progBody"></div></div>
+<div class="pmodal" id="setModal" hidden onclick="if(event.target===this)closeSettings()"><div class="psheet sm" id="setBody"></div></div>
 
 <script>
 const RAW = `
@@ -1442,7 +1454,7 @@ function wordRelatedToGroup(it,g){for(const og of byKey.get(it.k)) if(related(og
 const LS={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v));return true}catch(e){return false}}};
 const STORAGE_OK=(()=>{try{localStorage.setItem('__ka','1');localStorage.removeItem('__ka');return true}catch(e){return false}})();
 const PKEY='ka_prog3';
-let dirty=false,saveOK=true;
+let dirty=false,saveOK=true,warned=false;
 const IDB={
   db:null,
   open(){return this.db||(this.db=new Promise((res,rej)=>{try{const r=indexedDB.open('memoria-verbi',1);r.onupgradeneeded=()=>r.result.createObjectStore('kv');r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error);r.onblocked=()=>rej(new Error('blocked'))}catch(e){rej(e)}}))},
@@ -1505,6 +1517,7 @@ function saveProg(force){
   const payload={v:3,t:Date.now(),P};
   saveOK=LS.set(PKEY,payload);
   dirty=false;
+  markStorage();
   IDB.set(PKEY,payload).catch(()=>{});
 }
 function askPersist(){
@@ -1609,10 +1622,11 @@ function bindChips(){
     b.addEventListener('contextmenu',e=>e.preventDefault());
   });
 }
-function drawFoot(){
-  const ok=STORAGE_OK&&saveOK;
-  $('#foot').innerHTML=(ok?'💾 İlerlemen bu cihazın tarayıcısında saklanıyor':'<span style="color:var(--warn)">⚠️ Tarayıcı kaydı çalışmıyor; ilerleme sayfa kapanınca silinebilir</span>')+
-    ' · <button onclick="openProg()">İlerleme</button> · <button onclick="resetProg(this)">İlerlemeyi sıfırla</button>';
+function markStorage(){
+  const bad=!(STORAGE_OK&&saveOK);
+  const l=document.querySelector('.top .logo');
+  if(l)l.classList.toggle('warn',bad);
+  if(bad&&!warned){warned=true;toast('⚠️ Tarayıcı kaydı çalışmıyor, ilerleme kaybolabilir')}
 }
 function toView(){
   const v=$('#view');const r=v.getBoundingClientRect();
@@ -1624,7 +1638,7 @@ function drawTabs(){
 }
 function render(){
   document.body.className=S.type+(S.mode!=='list'?' study':'')+(scopeSheet?' showscope':'');
-  drawStats();drawScope();drawTabs();drawFoot();
+  drawStats();drawScope();drawTabs();markStorage();
   ({list:viewList,flash:viewFlash,meaning:()=>viewQuiz('meaning'),syn:()=>viewQuiz('syn'),odd:()=>viewQuiz('odd'),build:viewBuild})[S.mode]();
 }
 function setType(t){S.type=t;sel=new Set(tests.filter(x=>t==='mix'||x.type===t).map(x=>x.id));saveS();render()}
@@ -1951,7 +1965,7 @@ function checkB(){
 function nextB(){B.i++;if(B.i<BN)B.cur=genBuild();drawBuild();drawScope();toView()}
 
 document.addEventListener('keydown',e=>{
-  if(curRoute!=='kelime'||!$('#progModal').hidden)return;
+  if(curRoute!=='kelime'||modalOpen())return;
   if(e.target.tagName==='INPUT')return;
   if(S.mode==='flash'&&F&&F.i<F.deck.length){
     if(e.code==='Space'||e.key==='Enter'){e.preventDefault();flip()}
@@ -1965,8 +1979,9 @@ document.addEventListener('keydown',e=>{
   }else if(S.mode==='build'&&B&&B.cur&&B.i<BN&&e.key==='Enter'){e.preventDefault();B.cur.checked?nextB():checkB()}
 });
 function resetProg(btn){
-  if(!btn.classList.contains('armed')){btn.classList.add('armed');btn.textContent='Emin misin? Tekrar tıkla';setTimeout(()=>{btn.classList.remove('armed');btn.textContent='İlerlemeyi sıfırla'},3000);return}
-  P={};dirty=true;saveProg(true);streak=best=0;btn.classList.remove('armed');btn.textContent='İlerlemeyi sıfırla';F=Q=B=null;render();toast('İlerleme sıfırlandı');
+  const label=btn.dataset.t||(btn.dataset.t=btn.textContent);
+  if(!btn.classList.contains('armed')){btn.classList.add('armed');btn.textContent='Emin misin? Tekrar tıkla';setTimeout(()=>{btn.classList.remove('armed');btn.textContent=label},3000);return}
+  P={};dirty=true;saveProg(true);streak=best=0;btn.classList.remove('armed');btn.textContent=label;F=Q=B=null;closeSettings();render();toast('İlerleme sıfırlandı');
 }
 
 function progStats(){
@@ -1984,6 +1999,54 @@ function goTest(id){
   S.type=t.type;sel=new Set([id]);S.weak=false;saveS();closeProg();render();
 }
 function studyWeak(){S.type='mix';sel=new Set(tests.map(x=>x.id));S.weak=true;saveS();closeProg();render()}
+async function packProg(){
+  let bytes=new TextEncoder().encode(JSON.stringify({app:'memoria-verbi',v:3,t:Date.now(),P})),tag='MV3:';
+  if(window.CompressionStream){
+    try{
+      const z=new Blob([bytes]).stream().pipeThrough(new CompressionStream('gzip'));
+      bytes=new Uint8Array(await new Response(z).arrayBuffer());tag='MV3Z:';
+    }catch(e){}
+  }
+  let t='';
+  for(let i=0;i<bytes.length;i+=8192)t+=String.fromCharCode.apply(null,bytes.subarray(i,i+8192));
+  return tag+btoa(t);
+}
+async function unpackProg(code){
+  const m=String(code).replace(/\s+/g,'').match(/^(MV[23]Z?):(.+)$/);
+  if(!m)throw new Error('bad');
+  let bytes=Uint8Array.from(atob(m[2]),c=>c.charCodeAt(0));
+  if(m[1].endsWith('Z')){
+    const z=new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip'));
+    bytes=new Uint8Array(await new Response(z).arrayBuffer());
+  }
+  const d=JSON.parse(new TextDecoder().decode(bytes));
+  if(!d||!d.P||typeof d.P!=='object')throw new Error('bad');
+  return cleanProg(d.v===2?fromLabelKeys(d.P):d.P);
+}
+function fillTransfer(){packProg().then(c=>{const o=$('#progOut');if(o)o.value=c}).catch(()=>{})}
+function copyProg(){
+  const o=$('#progOut');
+  if(!o||!o.value){toast('Kod hazırlanıyor, tekrar dene');return}
+  const fb=()=>{o.select();let ok=false;try{ok=document.execCommand('copy')}catch(e){}toast(ok?'Kod kopyalandı':'Kutudaki kodu elle kopyala')};
+  if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(o.value).then(()=>toast('Kod kopyalandı')).catch(fb);else fb();
+}
+async function pasteProg(){
+  const v=$('#progIn').value;
+  if(!v.trim()){toast('Önce kodu yapıştır');return}
+  try{
+    P=mergeProg(P,await unpackProg(v));dirty=true;saveProg(true);
+    render();drawProg();toast('İlerleme aktarıldı')
+  }catch(e){toast('Kod okunamadı')}
+}
+async function checkUpdate(btn){
+  btn.disabled=true;
+  try{
+    const reg='serviceWorker' in navigator?await navigator.serviceWorker.getRegistration():null;
+    if(reg)await reg.update();else if(!navigator.onLine)throw new Error('offline');
+    saveProg();toast('Yenileniyor…');
+    setTimeout(()=>location.reload(),300);
+  }catch(e){toast('Güncellenemedi, internet bağlantını kontrol et');btn.disabled=false}
+}
 function drawProg(){
   const s=progStats(),N=items.length,pct=N?Math.round(s.learned/N*100):0;
   const attempts=s.c+s.w,acc=attempts?Math.round(s.c/attempts*100)+'%':'—';
@@ -2005,11 +2068,33 @@ function drawProg(){
     <div class="plegend"><span>Toplam deneme <b>${attempts.toLocaleString('tr-TR')}</b></span><span>Genel doğruluk <b>${acc}</b></span><span>Zayıf kelime <b>${s.weak}</b></span></div>
     <div class="psec"><h3>Adjective testleri</h3><div class="pgrid">${tests.filter(x=>x.type==='adj').map(tile).join('')}</div></div>
     <div class="psec"><h3>Verb testleri</h3><div class="pgrid">${tests.filter(x=>x.type==='verb').map(tile).join('')}</div></div>
-    <div class="psec"><h3>En çok zorlandığın kelimeler</h3>${weakList.length?`<ul class="pweak">${weakList.map(i=>`<li><b>${esc(i.w)}</b><span>${esc(i.g.tr)}</span></li>`).join('')}</ul><div class="prow"><button class="mini" onclick="studyWeak()">Sadece zayıfları çalış</button></div>`:'<p class="pnote">Henüz zayıf kelime yok.</p>'}</div>`;
+    <div class="psec"><h3>En çok zorlandığın kelimeler</h3>${weakList.length?`<ul class="pweak">${weakList.map(i=>`<li><b>${esc(i.w)}</b><span>${esc(i.g.tr)}</span></li>`).join('')}</ul><div class="prow"><button class="mini" onclick="studyWeak()">Sadece zayıfları çalış</button></div>`:'<p class="pnote">Henüz zayıf kelime yok.</p>'}</div>
+    <details class="ptransfer" ontoggle="if(this.open)fillTransfer()">
+      <summary>İlerlemeyi başka yere aktar</summary>
+      <p class="pnote">İlerlemeni başka bir tarayıcıya ya da uygulamaya taşımak için burada kodu kopyala, diğer yerde bu bölümü açıp kodu yapıştır. Mevcut ilerlemeyle birleşir, hiçbir şey silinmez.</p>
+      <textarea id="progOut" class="ptext" rows="2" readonly onclick="this.select()"></textarea>
+      <div class="prow"><button class="mini" onclick="copyProg()">Kodu kopyala</button></div>
+      <textarea id="progIn" class="ptext" rows="2" placeholder="Başka yerden kopyaladığın kodu buraya yapıştır" spellcheck="false"></textarea>
+      <div class="prow"><button class="mini" onclick="pasteProg()">Yükle</button></div>
+    </details>`;
 }
 function openProg(){drawProg();$('#progModal').hidden=false;document.body.style.overflow='hidden'}
 function closeProg(){$('#progModal').hidden=true;document.body.style.overflow=''}
-document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('#progModal').hidden)closeProg()});
+const modalOpen=()=>!$('#progModal').hidden||!$('#setModal').hidden;
+function drawSettings(){
+  const bad=!(STORAGE_OK&&saveOK);
+  $('#setBody').innerHTML=`
+    <div class="phead"><h2>Ayarlar</h2><button class="pclose" onclick="closeSettings()" aria-label="Kapat">✕</button></div>
+    <p class="sstate${bad?' bad':''}">${bad?'⚠️ Tarayıcı kaydı çalışmıyor; ilerleme sayfa kapanınca silinebilir.':'💾 İlerlemen bu cihazın tarayıcısında saklanıyor.'}</p>
+    <div class="srow"><div><b>Uygulamayı güncelle</b><small>İnternetten son sürümü yükler.</small></div><button class="mini" onclick="checkUpdate(this)">Güncelle</button></div>
+    <div class="srow"><div><b>İlerlemeyi sıfırla</b><small>Tüm ilerleme silinir, geri alınamaz.</small></div><button class="mini" onclick="resetProg(this)">Sıfırla</button></div>`;
+}
+function openSettings(){drawSettings();$('#setModal').hidden=false;document.body.style.overflow='hidden'}
+function closeSettings(){$('#setModal').hidden=true;document.body.style.overflow=''}
+document.addEventListener('keydown',e=>{
+  if(e.key!=='Escape')return;
+  if(!$('#setModal').hidden)closeSettings();else if(!$('#progModal').hidden)closeProg();
+});
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')saveProg()});
 window.addEventListener('pagehide',()=>saveProg());
 window.addEventListener('storage',e=>{
